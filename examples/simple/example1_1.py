@@ -1,0 +1,1 @@
+NavigationInfo.find({})
