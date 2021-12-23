@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module model</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>model</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/asaf/Workspace/python/thesis-api/api/v1/model.py">/Users/asaf/Workspace/python/thesis-api/api/v1/model.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="model.html#Model">Model</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Model">class <strong>Model</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Abstract&nbsp;class&nbsp;that&nbsp;handles&nbsp;data&nbsp;and&nbsp;commands.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Model-create"><strong>create</strong></a>(self, params: 'EntityDescriptor') -&gt; 'Entity'</dt><dd><tt>Creates&nbsp;a&nbsp;model&nbsp;entity<br>
+&nbsp;<br>
+params:<br>
+params&nbsp;(EntityDescriptor):&nbsp;An&nbsp;entity&nbsp;descriptor&nbsp;that&nbsp;defines&nbsp;the&nbsp;entity<br>
+&nbsp;<br>
+returns:<br>
+A&nbsp;new&nbsp;entity</tt></dd></dl>
+
+<dl><dt><a name="Model-filter"><strong>filter</strong></a>(self, iterable: 'Iterable[Entity]', f: 'FilterFunc' = None) -&gt; 'Iterable[Entity]'</dt><dd><tt>This&nbsp;method&nbsp;returns&nbsp;the&nbsp;entities&nbsp;of&nbsp;iterable&nbsp;where&nbsp;filter&nbsp;function&nbsp;f&nbsp;returns&nbsp;True.&nbsp;Upon&nbsp;providing&nbsp;this&nbsp;method&nbsp;with<br>
+an&nbsp;empty&nbsp;filter&nbsp;function&nbsp;values,&nbsp;the&nbsp;natural&nbsp;filter&nbsp;is&nbsp;used&nbsp;(refer&nbsp;to&nbsp;get_default_filter).<br>
+&nbsp;<br>
+params:<br>
+iterable&nbsp;(Iterable[Entity]):&nbsp;An&nbsp;iterable&nbsp;of&nbsp;entities&nbsp;to&nbsp;be&nbsp;filtered<br>
+f&nbsp;(FilterFunc):&nbsp;A&nbsp;filter&nbsp;function&nbsp;of&nbsp;one&nbsp;argument&nbsp;that&nbsp;is&nbsp;used&nbsp;to&nbsp;filter&nbsp;each&nbsp;element&nbsp;in&nbsp;the&nbsp;iterable.&nbsp;<br>
+&nbsp;<br>
+retuns:&nbsp;<br>
+Filtered&nbsp;iterable.</tt></dd></dl>
+
+<dl><dt><a name="Model-get_default_filter"><strong>get_default_filter</strong></a>(self) -&gt; 'FilterFunc'</dt><dd><tt>An&nbsp;abstract&nbsp;method&nbsp;that&nbsp;should&nbsp;return&nbsp;the&nbsp;default&nbsp;filter&nbsp;for&nbsp;the&nbsp;model.&nbsp;For&nbsp;example,&nbsp;for&nbsp;weather&nbsp;model&nbsp;the&nbsp;default&nbsp;filter<br>
+should&nbsp;return&nbsp;the&nbsp;current&nbsp;local&nbsp;weather.<br>
+&nbsp;<br>
+params:&nbsp;<br>
+N/A<br>
+&nbsp;<br>
+returns:<br>
+A&nbsp;filter&nbsp;function</tt></dd></dl>
+
+<dl><dt><a name="Model-get_intent"><strong>get_intent</strong></a>(self, query: 'Query') -&gt; 'Intent'</dt><dd><tt>A&nbsp;class&nbsp;abstract&nbsp;method&nbsp;that&nbsp;takes&nbsp;and&nbsp;identifier&nbsp;and&nbsp;returns&nbsp;an&nbsp;intent&nbsp;<br>
+&nbsp;<br>
+params:<br>
+query&nbsp;(Query):&nbsp;A&nbsp;user&nbsp;query<br>
+&nbsp;<br>
+returns:<br>
+An&nbsp;intent&nbsp;class</tt></dd></dl>
+
+<dl><dt><a name="Model-get_natural_sort_key"><strong>get_natural_sort_key</strong></a>(self) -&gt; 'FilterFunc'</dt><dd><tt>An&nbsp;abstract&nbsp;method&nbsp;that&nbsp;should&nbsp;return&nbsp;the&nbsp;natural&nbsp;sort&nbsp;key&nbsp;for&nbsp;the&nbsp;model.&nbsp;For&nbsp;example,&nbsp;with&nbsp;messages&nbsp;this&nbsp;method<br>
+should&nbsp;return&nbsp;the&nbsp;timestamp&nbsp;of&nbsp;a&nbsp;message&nbsp;as&nbsp;a&nbsp;sort&nbsp;key.<br>
+&nbsp;<br>
+params:<br>
+N/A<br>
+&nbsp;<br>
+returns:<br>
+The&nbsp;natural&nbsp;sort&nbsp;key</tt></dd></dl>
+
+<dl><dt><a name="Model-get_property"><strong>get_property</strong></a>(self, query: 'Query') -&gt; 'EntityProperty'</dt><dd><tt>An&nbsp;abstract&nbsp;method&nbsp;that&nbsp;should&nbsp;be&nbsp;implemented&nbsp;to&nbsp;return&nbsp;a&nbsp;property&nbsp;within&nbsp;the&nbsp;model&nbsp;that&nbsp;is&nbsp;associated&nbsp;with&nbsp;the&nbsp;given&nbsp;<br>
+input&nbsp;Query&nbsp;<a href="builtins.html#object">object</a>.<br>
+&nbsp;<br>
+params:<br>
+query&nbsp;(Query):&nbsp;A&nbsp;user&nbsp;query<br>
+&nbsp;<br>
+returns:<br>
+An&nbsp;EntityProperty&nbsp;<a href="builtins.html#object">object</a></tt></dd></dl>
+
+<dl><dt><a name="Model-get_sort_key"><strong>get_sort_key</strong></a>(self, keys: 'EntityProperty | list[EntityProperty]') -&gt; 'SortKey'</dt><dd><tt>An&nbsp;abstract&nbsp;method&nbsp;that&nbsp;returns&nbsp;the&nbsp;model's&nbsp;sort&nbsp;keye,&nbsp;which&nbsp;is&nbsp;associate&nbsp;with&nbsp;the&nbsp;given&nbsp;input&nbsp;entity&nbsp;properties.<br>
+When&nbsp;provided&nbsp;with&nbsp;empty&nbsp;keys&nbsp;value&nbsp;this&nbsp;method&nbsp;should&nbsp;return&nbsp;the&nbsp;natural&nbsp;sorting&nbsp;keys&nbsp;for&nbsp;this&nbsp;model.&nbsp;<br>
+For&nbsp;example,&nbsp;the&nbsp;natural&nbsp;sort&nbsp;key&nbsp;for&nbsp;messages&nbsp;is&nbsp;the&nbsp;date&nbsp;and&nbsp;time&nbsp;field.<br>
+&nbsp;<br>
+params:<br>
+keys&nbsp;(EntityProperty|list[EntityProperty])):&nbsp;A&nbsp;property&nbsp;(or&nbsp;a&nbsp;list&nbsp;of&nbsp;properties)&nbsp;property&nbsp;that&nbsp;should&nbsp;be&nbsp;used&nbsp;as&nbsp;the&nbsp;sort&nbsp;key<br>
+&nbsp;<br>
+returns:<br>
+A&nbsp;sort&nbsp;function&nbsp;of&nbsp;one&nbsp;argument&nbsp;that&nbsp;is&nbsp;used&nbsp;to&nbsp;extract&nbsp;a&nbsp;comparison&nbsp;key&nbsp;from&nbsp;each&nbsp;entity&nbsp;in&nbsp;iterable</tt></dd></dl>
+
+<dl><dt><a name="Model-iter"><strong>iter</strong></a>(self) -&gt; 'Iterable[Entity]'</dt><dd><tt>Fetches&nbsp;a&nbsp;model&nbsp;specific&nbsp;iterable<br>
+&nbsp;<br>
+params:<br>
+N/A<br>
+&nbsp;<br>
+retruns:<br>
+An&nbsp;iterable&nbsp;<a href="builtins.html#object">object</a>&nbsp;of&nbsp;Entity&nbsp;instances</tt></dd></dl>
+
+<dl><dt><a name="Model-sort"><strong>sort</strong></a>(self, iterable: 'Iterable[Entity]', key: 'SortKey' = None, reverse: 'bool' = False) -&gt; 'Iterable[Entity]'</dt><dd><tt>An&nbsp;abstract&nbsp;method&nbsp;that&nbsp;should&nbsp;return&nbsp;the&nbsp;default&nbsp;filter&nbsp;for&nbsp;the&nbsp;model.&nbsp;For&nbsp;example,&nbsp;with&nbsp;weather&nbsp;the&nbsp;default&nbsp;filter<br>
+is&nbsp;the&nbsp;current&nbsp;local&nbsp;weather.&nbsp;When&nbsp;this&nbsp;method&nbsp;is&nbsp;called&nbsp;without&nbsp;a&nbsp;sort&nbsp;key&nbsp;(or&nbsp;None&nbsp;value)&nbsp;it&nbsp;should&nbsp;use&nbsp;the&nbsp;natural&nbsp;<br>
+sort&nbsp;key<br>
+&nbsp;<br>
+params:<br>
+iterable&nbsp;(Iterable[Entity]):&nbsp;An&nbsp;iterable&nbsp;of&nbsp;entities&nbsp;to&nbsp;be&nbsp;sorted<br>
+key&nbsp;(SortKey):&nbsp;A&nbsp;sort&nbsp;function&nbsp;of&nbsp;one&nbsp;argument&nbsp;that&nbsp;is&nbsp;used&nbsp;to&nbsp;extract&nbsp;a&nbsp;comparison&nbsp;key&nbsp;from&nbsp;each&nbsp;entity&nbsp;in&nbsp;iterable.&nbsp;&nbsp;<br>
+reverse&nbsp;(bool):&nbsp;&nbsp;is&nbsp;a&nbsp;boolean&nbsp;value.&nbsp;If&nbsp;set&nbsp;to&nbsp;True,&nbsp;then&nbsp;the&nbsp;list&nbsp;elements&nbsp;are&nbsp;sorted&nbsp;as&nbsp;if&nbsp;each&nbsp;comparison&nbsp;were&nbsp;reversed.&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Defauls&nbsp;to&nbsp;False&nbsp;value.<br>
+&nbsp;<br>
+returns:<br>
+A&nbsp;sorted&nbsp;iterable</tt></dd></dl>
+
+<hr>
+Class methods defined here:<br>
+<dl><dt><a name="Model-get_model"><strong>get_model</strong></a>(query: 'Query') -&gt; 'Model'<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>A&nbsp;class&nbsp;abstract&nbsp;method&nbsp;that&nbsp;takes&nbsp;a&nbsp;&lt;a&nbsp;href='query.html&gt;Query&lt;/a&gt;&nbsp;that&nbsp;shold&nbsp;yield&nbsp;the&nbsp;concretized&nbsp;model&nbsp;instance.<br>
+&nbsp;<br>
+params:<br>
+query&nbsp;(Query):&nbsp;A&nbsp;user&nbsp;query&nbsp;<br>
+&nbsp;<br>
+returns:<br>
+A&nbsp;model&nbsp;instance</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>Iterable</strong> = typing.Iterable<br>
+<strong>annotations</strong> = _Feature((3, 7, 0, 'beta', 1), (3, 10, 0, 'alpha', 0), 16777216)</td></tr></table>
+</body></html>
