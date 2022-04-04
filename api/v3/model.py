@@ -1,8 +1,7 @@
 from __future__ import annotations
-from abc import abstractclassmethod, abstractmethod
+from abc import abstractmethod
 from typing import Callable, Iterable
 from entity import Entity, EntityDescriptor
-from intent import Intent
 from operators import ComparisonOperator
 from query import Query
 
@@ -35,20 +34,6 @@ class Model:
         An iterable object of Entity instances
         """
         pass
-        
-    
-    @abstractmethod
-    def get_intent(self, doc: Doc) -> Intent:
-        """
-        A class abstract method that takes and identifier and returns an intent 
-        
-        params:
-        query (Query): A user query
-        
-        returns:
-        An intent class
-        """
-        pass
     
     @abstractmethod
     def create(self, params: EntityDescriptor) -> Entity:
@@ -64,17 +49,18 @@ class Model:
         pass
     
     @abstractmethod
-    def get_predicate(self, doc: Doc, op: ComparisonOperator) -> Callable[[Entity], bool]:
+    def get_predicate(self, doc: Doc,  slot_type: SlotType, entity: Entity|Iterable[Entity], op: ComparisonOperator) -> Callable[[Entity], bool]:
         """
-        An abstract method that takes a query and a comparison operator and return a callable (function) that takes as its
+        An abstract method that takes a query and a comparison operator and returns a callable (function) that takes as its
         sole input an entity object and return a boolean based on the given comparison operator and the predicate that is applied
         on the entity.
-        Fopr example, this method can passed as an argument within Python's built-in filter function. It takes the iterable and apply 
+        For example, this method can passed as an argument within Python's built-in filter function. It takes the iterable and apply 
         the predicate together with the comparison operator to judge its participation post applying the filter
         
         params:
         query (Query): A user query
-        op (ComparisonOperator): A comparison operator
+        entity (Entity|Iterable[Entity]): Optional parameter to compare the results of the predicate with
+        op (ComparisonOperator): Optional comparison operator. Defaults to op.eq
         
         returns:
         A callable object that takes an entity as its input and return a boolean

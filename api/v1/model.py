@@ -13,7 +13,7 @@ class Model:
     """
     
     @abstractclassmethod
-    def get_model(cls, query: Query) -> Model:
+    def get_model(cls, doc: Doc) -> Model:
         """
         A class abstract method that takes a <a href='query.html>Query</a> that shold yield the concretized model instance.
         
@@ -26,7 +26,7 @@ class Model:
         pass
     
     @abstractmethod
-    def get_intent(self, query: Query) -> Intent:
+    def get_intent(self, doc: Doc) -> Intent:
         """
         A class abstract method that takes and identifier and returns an intent 
         
@@ -65,7 +65,7 @@ class Model:
         pass
     
     @abstractmethod
-    def get_property(self, query: Query) -> EntityProperty:
+    def get_property(self, doc: Doc) -> EntityProperty:
         """
         An abstract method that should be implemented to return a property within the model that is associated with the given 
         input Query object.
