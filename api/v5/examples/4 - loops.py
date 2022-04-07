@@ -88,8 +88,9 @@ week = DateTime.resolve_from_text("the week")
 cal = CalendarName.resolve_from_text("my calendar")
 meetings = calendar.get_calendar_events(date_time=week, calendar=cal)
 
-meeting_days = list(set(map(lambda x: day_of_the_week(x.date_time), meetings)))
-for day in meeting_days:
+meetings_days = map(lambda x: day_of_the_week(x.date_time), meetings)
+days = list(set(meetings_days))
+for day in days:
     daily_meetings = filter(lambda x: day_of_the_week(x.date_time), meetings)
     first_meeting = first(daily_meetings)
     last_meeting = last(daily_meetings) if len(list(daily_meetings)) > 1 else None
