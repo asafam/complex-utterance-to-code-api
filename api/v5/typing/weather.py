@@ -1,15 +1,15 @@
 from __future__ import annotations
 from abc import abstractclassmethod
-from resolveable import Resolveable
+from exceptions.resolvable import Resolvable
 from typing.generic import Entity, DateTime, Location
 from typing import Callable, Optional
 
 
-class WeatherCondition(Entity, Resolveable):
+class WeatherCondition(Entity, Resolvable):
     pass
 
 
-class WeatherTemperature(Entity, Resolveable):
+class WeatherTemperature(Entity, Resolvable):
     pass
 
 

@@ -1,18 +1,18 @@
 from __future__ import annotations
 from abc import abstractclassmethod
-from typing.generic import Contact, DateTime, Location, Resolveable, Entity
+from typing.generic import Contact, DateTime, Location, Resolvable, Entity
 from typing import Callable, Optional
 
 
-class CalendarEventCategory(Entity, Resolveable):
+class CalendarEventCategory(Entity, Resolvable):
     pass
 
 
-class CalendarEventName(Entity, Resolveable):
+class CalendarEventName(Entity, Resolvable):
     pass
 
 
-class CalendarName(Entity, Resolveable):
+class CalendarName(Entity, Resolvable):
     pass
 
 

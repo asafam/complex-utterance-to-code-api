@@ -1,24 +1,26 @@
-from api.v5.typing.weather import WeatherForecast
 from typing.generic import Contact, DateTime, Location
 from typing.navigation import NavigationRoute
-from typing.weather import WeatherCondition
+from typing.weather import WeatherCondition, WeatherForecast
 from typing.calendar import CalendarEventName
-from queries import calendar, messages, navigation, weather
-from commands import reminders as reminders_command
-from commands import responder as responder_command
-from commands import timer as timer_command
+from queries.navigation import NavigationQuery
+from queries.weather import WeatherQuery
+from queries.messages import MessagesQuery
+from queries.calendar import CalendarQuery
+from commands.reminders import RemindersCommand
+from commands.responder import ResponderCommand
+from commands.timer import TimerCommand
 from data_utils import first, last
 
 
 """
 Example: "Directions from Monteray to San Francisco"
 """
-monteray = Location.resolve_from_text("Monteray")
-san_francisco = Location.resolve_from_text("San Francisco")
+source = Location.resolve_from_text("Monteray")
+destination = Location.resolve_from_text("San Francisco")
 
-directions = navigation.get_directions(source=monteray, destination=san_francisco)
+directions = NavigationQuery.get_directions(source=source, destination=destination)
 
-responder_command.default_responder(response=directions)
+ResponderCommand.default_responder(response=directions)
 
 
 """
@@ -26,9 +28,9 @@ Example: "Tell me the weather in Fairlawn, New Jersey"
 """
 location = Location.resolve_from_text("Fairlawn, New Jersey")
 
-weather_forecasts = weather.get_weather_forecasts(location=location)
+weather_forecasts = WeatherQuery.get_weather_forecasts(location=location)
 
-responder_command.default_responder(response=weather_forecasts)
+ResponderCommand.default_responder(response=weather_forecasts)
 
 
 """
@@ -36,18 +38,18 @@ Example: "Check the last message that Kathy sent"
 """
 contact = Contact.resolve_from_text("Kathy")
 
-messages = messages.get_messages(sender=contact)
+messages = MessagesQuery.get_messages(sender=contact)
 message = last(messages)
 
-responder_command.default_responder(response=message)
+ResponderCommand.default_responder(response=message)
 
 
 """
 Example: ”Tell me the weather even though it is early”
 """
-weather_forcasts = weather.get_weather_forecasts()
+weather_forcasts = WeatherQuery.get_weather_forecasts()
 
-responder_command.default_responder(response=weather_forcasts)
+ResponderCommand.default_responder(response=weather_forcasts)
 
 
 """
@@ -55,39 +57,41 @@ Example: "If I take 290 what time will I be in Johnson City?"
 """
 route = NavigationRoute.resolve_from_text("290")
 location = Location.resolve_from_text("Johnson City")
-estimated_arrival = navigation.get_estimated_arrival(destination=location, route=route)
-responder_command.default_responder(response=estimated_arrival)
+estimated_arrival = NavigationQuery.get_estimated_arrival(
+    destination=location, route=route
+)
+ResponderCommand.default_responder(response=estimated_arrival)
 
 
 """
 Example: "When I need to leave for class to be there at 8 am"
 """
-class_event = CalendarEventName.resolve_from_text("class")
-events = calendar.get_calendar_events(event_name=class_event)
-event = first(events)
-location = event.location
+event_name = CalendarEventName.resolve_from_text("class")
+results = CalendarQuery.get_calendar_events(event_name=event_name)
+first_result = first(results)
+location = first_result.location
 
 date_time = DateTime.resolve_from_text("8 am")
 
-estimated_departure = navigation.get_estimated_departure(
+estimated_departure = NavigationQuery.get_estimated_departure(
     destination=location, arrival_date_time=date_time
 )
 
-responder_command.default_responder(response=estimated_departure)
+ResponderCommand.default_responder(response=estimated_departure)
 
 
 """
 Example: ”Will it be mostly raining this weekend?”
 """
 date_time = DateTime.resolve_from_text("this weekend")
-weekend_weather = weather.get_weather_forecasts(date_time=date_time)
+weather_forecasts = WeatherQuery.get_weather_forecasts(date_time=date_time)
 
-raining_weekend_weather = filter(
+weather_forecasts2 = filter(
     WeatherForecast.get_predicate(
         weather_condition=WeatherCondition.resolve_from_text("raining")
     ),
-    weekend_weather,
+    weather_forecasts,
 )
 
-mostly_raining = (len(list(raining_weekend_weather)) / len(list(weekend_weather))) > 0.5
-responder_command.default_responder(response=mostly_raining)
+result = (len(list(weather_forecasts2)) / len(list(weather_forecasts))) > 0.5
+ResponderCommand.default_responder(response=result)

@@ -1,21 +1,29 @@
+from abc import abstractclassmethod
 from typing import Iterable, Union, Optional
+from api.v5.exceptions.resolvable import Resolvable
 from typing.generic import Entity
 from typing.timer import Timer
 
 
-def pause(
-    timer: Optional[Timer] = None,
-) -> bool:
-    raise NotImplementedError
+class TimerCommand(Resolvable):
+    
+    @abstractclassmethod
+    def pause(
+        cls,
+        timer: Optional[Timer] = None,
+    ) -> bool:
+        raise NotImplementedError
 
+    @abstractclassmethod    
+    def restart(
+        cls,
+        timer: Optional[Timer] = None,
+    ) -> bool:
+        raise NotImplementedError
 
-def restart(
-    timer: Optional[Timer] = None,
-) -> bool:
-    raise NotImplementedError
-
-
-def stop(
-    timer: Optional[Timer] = None,
-) -> bool:
-    raise NotImplementedError
+    @abstractclassmethod
+    def stop(
+        cls,
+        timer: Optional[Timer] = None,
+    ) -> bool:
+        raise NotImplementedError

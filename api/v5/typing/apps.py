@@ -1,10 +1,10 @@
 from __future__ import annotations
 from abc import abstractclassmethod
-from typing.generic import Contact, DateTime, Location, Resolveable, Entity
+from typing.generic import Contact, DateTime, Location, Resolvable, Entity
 from typing import Callable, Optional
 
 
-class AppName(Entity, Resolveable):
+class AppName(Entity, Resolvable):
     pass
 
 
