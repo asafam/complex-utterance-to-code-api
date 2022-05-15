@@ -74,19 +74,17 @@ Example: "Text mom and dad about the Saturday brunch and the matinee"
 contact1 = Contact.resolve_from_text("mom")
 contact2 = Contact.resolve_from_text("dad")
 
-brunch = CalendarEventName.resolve_from_text("Saturday brunch")
+cal_event_name = CalendarEventName.resolve_from_text("brunch")
 saturday = DateTime.resolve_from_text("Saturday")
-calendar_events = CalendarQuery.get_calendar_events(
-    date_time=saturday, event_name=brunch
+calendar_events1 = CalendarQuery.get_calendar_events(
+    date_time=saturday, event_name=cal_event_name
 )
-event1 = first(calendar_events)
 
-matinee = CalendarEventName.resolve_from_text("the matinee")
-calendar_events = CalendarQuery.get_calendar_events(event_name=matinee)
-event2 = first(calendar_events)
+cal_event_name = CalendarEventName.resolve_from_text("matinee")
+calendar_events2 = CalendarQuery.get_calendar_events(event_name=cal_event_name)
 
 for contact in [contact1, contact2]:
-    for event in [event1, event2]:
+    for event in [calendar_events1, calendar_events2]:
         MessagesCommand.send_message(recipient=contact, exact_content=event)
 
 

@@ -25,7 +25,9 @@ class DateTime(Entity, Resolvable):
 
     @classmethod
     def resolve_from_text(
-        cls, text: str, recovered_text: Optional[List[str]] = None
+        cls, 
+        text: str, 
+        recovered_text: Optional[List[str]] = None
     ) -> DateTime:
         value = None  # replace with actual implementation of inferring the date time from the given input text
 

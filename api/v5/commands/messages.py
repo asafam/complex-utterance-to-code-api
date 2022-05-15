@@ -9,7 +9,15 @@ class MessagesCommand(Resolvable):
     @abstractclassmethod
     def send_message(
         cls,
-        recipient: Optional[Contact] = None,
-        exact_content: Optional[Content] = None,
+        recipient: Contact,
+        exact_content: Content,
+        date_time: Optional[DateTime] = None
+    ) -> Message:
+        raise NotImplementedError
+    
+    @abstractclassmethod
+    def delete_messages(
+        cls,
+        messages: Union[Message, Iterable[Message]]
     ) -> Message:
         raise NotImplementedError

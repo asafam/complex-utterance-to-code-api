@@ -86,10 +86,9 @@ Example: ”Will it be mostly raining this weekend?”
 date_time = DateTime.resolve_from_text("this weekend")
 weather_forecasts = WeatherQuery.get_weather_forecasts(date_time=date_time)
 
+weather_condition = WeatherCondition.resolve_from_text("raining")
 weather_forecasts2 = filter(
-    WeatherForecast.get_predicate(
-        weather_condition=WeatherCondition.resolve_from_text("raining")
-    ),
+    WeatherForecast.get_predicate(weather_condition=weather_condition),
     weather_forecasts,
 )
 

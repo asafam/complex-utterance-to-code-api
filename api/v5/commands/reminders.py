@@ -34,6 +34,7 @@ class RemindersCommand(Resolvable):
 
     @abstractclassmethod
     def delete_reminders(
-        cls, reminders: Optional[Union[Reminder, Iterable[Reminder]]] = None
+        cls, 
+        reminders: Union[Reminder, Iterable[Reminder]]
     ) -> bool:
         raise NotImplementedError
