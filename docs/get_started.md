@@ -194,7 +194,7 @@ weather_forecasts = Weather.find_weather_forecasts(
     date_time=date_time, 
     weather_attribute=weather_attribute
 )
-expr = weather_forecasts.size() > 0
+expr = len(weather_forecasts) > 0
 if expr:
     person_reminded = Contact.resolve_from_text("me")
     content = Content.resolve_from_text("Bring an umbrella")
