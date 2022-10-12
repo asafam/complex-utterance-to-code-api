@@ -9,7 +9,7 @@ from typing.generic import Contact, DateTime, Location
 from typing.message import Content
 from typing.navigation import TrafficCondition
 from typing.reminders import Content
-from typing.weather import WeatherCondition, WeatherTemperature
+from typing.weather import WeatherAttribute, WeatherTemperature
 from queries.apps import AppsQuery
 from queries.navigation import NavigationQuery
 from queries.weather import WeatherQuery
@@ -39,16 +39,17 @@ Example: "Tell me every stand up show tonight in the city at 8 pm"
 """
 
 event_category = CalendarEventCategory.resolve_from_text("stand up show")
-date_time = DateTime.resolve_from_text("tonight")
+date_time = DateTime.resolve_from_text("tonight in the city at 8 pm")
 location = Location.resolve_from_text("in the city")
-date_time2 = DateTime.resolve_from_text("at 8 pm")
 
 calendar_events = CalendarQuery.get_calendar_events(
-    location=location, date_time=date_time, category=event_category
+    location=location, date_time=date_time, event_category=event_category
 )
-calendar_events = filter(
-    CalendarEvent.get_predicate(date_time=date_time2), calendar_events
-)
+
+# date_time2 = DateTime.resolve_from_text("at 8 pm")
+# calendar_events = filter(
+#     CalendarEvent.get_predicate(date_time=date_time2), calendar_events
+# )
 
 ResponderCommand.default_responder(response=calendar_events)
 
@@ -71,42 +72,44 @@ for x in reminders:
 """
 Example: "Text mom and dad about the Saturday brunch and the matinee"
 """
-contact1 = Contact.resolve_from_text("mom")
-contact2 = Contact.resolve_from_text("dad")
+recipient1 = Contact.resolve_from_text("mom")
+recipient2 = Contact.resolve_from_text("dad")
 
-cal_event_name = CalendarEventName.resolve_from_text("brunch")
-saturday = DateTime.resolve_from_text("Saturday")
+event_name = CalendarEventName.resolve_from_text("brunch")
+date_time = DateTime.resolve_from_text("Saturday")
 calendar_events1 = CalendarQuery.get_calendar_events(
-    date_time=saturday, event_name=cal_event_name
+    date_time=date_time, event_name=event_name
 )
+calendar_event1 = first(calendar_events1)
 
 cal_event_name = CalendarEventName.resolve_from_text("matinee")
 calendar_events2 = CalendarQuery.get_calendar_events(event_name=cal_event_name)
+calendar_event2 = first(calendar_events2)
 
-for contact in [contact1, contact2]:
-    for event in [calendar_events1, calendar_events2]:
-        MessagesCommand.send_message(recipient=contact, exact_content=event)
+for recipient in [recipient1, recipient2]:
+    for exact_content in [calendar_event1, calendar_event2]:
+        MessagesCommand.send_message(recipient=recipient, exact_content=exact_content)
 
 
 """
 Example: "Text your mom and my dad about the Saturday brunch and the matinee"
 """
-contact1 = Contact.resolve_from_text("your mom")
-contact2 = Contact.resolve_from_text("my dad")
-event_name = CalendarEventName.resolve_from_text("Saturday brunch")
+recipient1 = Contact.resolve_from_text("your mom")
+recipient2 = Contact.resolve_from_text("my dad")
+event_name1 = CalendarEventName.resolve_from_text("Saturday brunch")
 date_time = DateTime.resolve_from_text("Saturday")
-calendar_events = CalendarQuery.get_calendar_events(
-    date_time=date_time, event_name=event_name
+calendar_events1 = CalendarQuery.get_calendar_events(
+    date_time=date_time, event_name=event_name1
 )
-event1 = first(calendar_events)
+calendar_event1 = first(calendar_events1)
 
-event_name = CalendarEventName.resolve_from_text("the matinee")
-calendar_events = CalendarQuery.get_calendar_events(event_name=matinee)
-event2 = first(calendar_events)
+event_name2 = CalendarEventName.resolve_from_text("the matinee")
+calendar_events = CalendarQuery.get_calendar_events(event_name=event_name2)
+calendar_event2 = first(calendar_events2)
 
-for contact in [contact1, contact2]:
-    for event in [event1, event2]:
-        MessagesCommand.send_message(recipient=contact, exact_content=event)
+for recipient in [recipient1, recipient2]:
+    for exact_content in [calendar_event1, calendar_event2]:
+        MessagesCommand.send_message(recipient=recipient, exact_content=exact_content)
 
 
 """

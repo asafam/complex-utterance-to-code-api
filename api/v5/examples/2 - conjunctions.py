@@ -1,7 +1,7 @@
 from ctypes import util
 from typing.generic import Contact, DateTime, Location
 from typing.navigation import NavigationRoute
-from typing.weather import WeatherCondition
+from typing.weather import WeatherAttribute
 from typing.calendar import CalendarEventName
 from typing.timer import Timer
 from queries.navigation import NavigationQuery

@@ -9,8 +9,11 @@ from typing.generic import Contact, DateTime, Location
 from typing.message import Content
 from typing.navigation import TrafficCondition
 from typing.reminders import Content
-from typing.weather import WeatherCondition, WeatherTemperature
+from typing.weather import WeatherAttribute, WeatherTemperature
 from queries import calendar, messages, navigation, reminders, weather
+from queries.calendar import CalendarQuery
+from queries.navigation import NavigationQuery
+from queries.weather import WeatherQuery
 from commands.calendar import CalendarCommand
 from commands.messages import MessagesCommand
 from commands.reminders import RemindersCommand
@@ -22,9 +25,11 @@ from exceptions.exceptions import NoSuchValueException
 Execution exception example: Cancel all my meetings on February 30
 """
 try:
-    d = DateTime.resolve_from_text("February 30")  # <- should raise recovery exception
-    meetings = CalendarQuery.get_calendar_events(date_time=d)
-    CalendarCommand.delete_calendar_events(events=meetings)
+    date_time = DateTime.resolve_from_text(
+        "February 30"
+    )  # <- should raise recovery exception
+    events = CalendarQuery.get_calendar_events(date_time=date_time)
+    CalendarCommand.delete_calendar_events(events=events)
 except NoSuchValueException as e:
     pass
 
@@ -32,10 +37,10 @@ except NoSuchValueException as e:
 Execution exception example: Provided that it rains tomorrow set a reminder
 """
 
-rains = WeatherCondition.resolve_from_text("rains")
-tomorrow = DateTime.resolve_from_text("tomorrow")
+weather_attribute = WeatherAttribute.resolve_from_text("rains")
+date_time = DateTime.resolve_from_text("tomorrow")
 weather_rains = WeatherQuery.get_weather_forecasts(
-    date_time=tomorrow, weather_condition=rains
+    date_time=date_time, weather_attribute=weather_attribute
 )
 
 if weather_rains:
@@ -45,12 +50,12 @@ if weather_rains:
 Example: "If there is traffic tell Mary that I will be late"
 """
 
-traffic = TrafficCondition.resolve_from_text("traffic")
+traffic_condition = TrafficCondition.resolve_from_text("traffic")
 traffic_info = NavigationQuery.get_traffic_info(
-    traffic_condition=traffic
+    traffic_condition=traffic_condition
 )  # <- should raise recovery exception
 
 if traffic_info:
-    mary = Contact.resolve_from_text("Mary")
-    message_content = Content.resolve_from_text("I will be late")
-    MessagesCommand.send_message(exact_content=message_content, recipient=mary)
+    recipient = Contact.resolve_from_text("Mary")
+    exact_content = Content.resolve_from_text("I will be late")
+    MessagesCommand.send_message(exact_content=exact_content, recipient=recipient)

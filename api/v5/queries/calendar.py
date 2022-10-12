@@ -16,7 +16,7 @@ class CalendarQuery():
         date_time: Optional[DateTime] = None,
         location: Optional[Location] = None,
         event_name: Optional[CalendarEventName] = None,
-        category: Optional[CalendarEventCategory] = None,
+        event_category: Optional[CalendarEventCategory] = None,
         calendar: Optional[CalendarName] = None,
     ) -> Iterable[CalendarEvent]:
         raise NotImplementedError

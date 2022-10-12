@@ -5,7 +5,7 @@ from typing.generic import Entity, DateTime, Location
 from typing import Callable, Optional
 
 
-class WeatherCondition(Entity, Resolvable):
+class WeatherAttribute(Entity, Resolvable):
     pass
 
 
@@ -17,7 +17,7 @@ class WeatherForecast(Entity):
     date_time: DateTime
     location: Location
     temperature: WeatherTemperature
-    weather_condition: WeatherCondition
+    weather_attribute: WeatherAttribute
     
     @abstractclassmethod
     def get_predicate(
@@ -25,7 +25,7 @@ class WeatherForecast(Entity):
         date_time: Optional[DateTime] = None, 
         location: Optional[Location] = None,
         temperature: Optional[WeatherTemperature] = None,
-        weather_condition: Optional[WeatherCondition] = None
+        weather_attribute: Optional[WeatherAttribute] = None
     ) -> Callable[[WeatherForecast], bool]:
         raise NotImplementedError
     

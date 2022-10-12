@@ -1,6 +1,6 @@
 from typing.generic import Contact, DateTime, Location
 from typing.navigation import NavigationRoute
-from typing.weather import WeatherCondition, WeatherForecast
+from typing.weather import WeatherAttribute, WeatherForecast
 from typing.calendar import CalendarEventName
 from queries.navigation import NavigationQuery
 from queries.weather import WeatherQuery
@@ -36,9 +36,9 @@ ResponderCommand.default_responder(response=weather_forecasts)
 """
 Example: "Check the last message that Kathy sent"
 """
-contact = Contact.resolve_from_text("Kathy")
+sender = Contact.resolve_from_text("Kathy")
 
-messages = MessagesQuery.get_messages(sender=contact)
+messages = MessagesQuery.get_messages(sender=sender)
 message = last(messages)
 
 ResponderCommand.default_responder(response=message)
@@ -56,9 +56,9 @@ ResponderCommand.default_responder(response=weather_forcasts)
 Example: "If I take 290 what time will I be in Johnson City?"
 """
 route = NavigationRoute.resolve_from_text("290")
-location = Location.resolve_from_text("Johnson City")
+destination = Location.resolve_from_text("Johnson City")
 estimated_arrival = NavigationQuery.get_estimated_arrival(
-    destination=location, route=route
+    destination=destination, route=route
 )
 ResponderCommand.default_responder(response=estimated_arrival)
 
@@ -69,12 +69,12 @@ Example: "When I need to leave for class to be there at 8 am"
 event_name = CalendarEventName.resolve_from_text("class")
 results = CalendarQuery.get_calendar_events(event_name=event_name)
 first_result = first(results)
-location = first_result.location
+destination = first_result.location
 
 date_time = DateTime.resolve_from_text("8 am")
 
 estimated_departure = NavigationQuery.get_estimated_departure(
-    destination=location, arrival_date_time=date_time
+    destination=destination, arrival_date_time=date_time
 )
 
 ResponderCommand.default_responder(response=estimated_departure)
@@ -86,11 +86,43 @@ Example: ”Will it be mostly raining this weekend?”
 date_time = DateTime.resolve_from_text("this weekend")
 weather_forecasts = WeatherQuery.get_weather_forecasts(date_time=date_time)
 
-weather_condition = WeatherCondition.resolve_from_text("raining")
-weather_forecasts2 = filter(
-    WeatherForecast.get_predicate(weather_condition=weather_condition),
-    weather_forecasts,
+weather_attribute = WeatherAttribute.resolve_from_text("raining")
+# weather_forecasts2 = filter(
+#     WeatherForecast.get_predicate(weather_attribute=weather_attribute),
+#     weather_forecasts,
+# )
+
+# result = (len(list(weather_forecasts2)) / len(list(weather_forecasts))) > 0.5
+result = weather_forecasts.most(weather_attribute=weather_attribute)
+response = result
+ResponderCommand.default_responder(response=response)
+
+
+"""
+Example: ”Is it going to rain this weekend?”
+"""
+date_time = DateTime.resolve_from_text("this weekend")
+weather_attribute = WeatherAttribute.resolve_from_text("rain")
+weather_forecasts = WeatherQuery.get_weather_forecasts(
+    date_time=date_time,
+    weather_attribute=weather_attribute
 )
 
-result = (len(list(weather_forecasts2)) / len(list(weather_forecasts))) > 0.5
+response = weather_forecasts
 ResponderCommand.default_responder(response=result)
+def testIter(self):
+    data=List()
+    data.append(Weather(
+        date_time=datetime("2022/10/08"), 
+        high_temp=12, 
+        low_temp=4, 
+        weather_attribute=WeatherAttributes.RAIN
+    ))
+    data.append(Weather(
+        date_time=datetime("2022/10/08"), 
+        high_temp=11, 
+        low_temp=2, 
+        weather_attribute=WeatherAttributes.RAIN
+    ))
+
+    self.assertEqual(sum(1 for e in weather_forecasts), 2)
