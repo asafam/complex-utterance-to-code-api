@@ -6,7 +6,7 @@ Examples may show higher level of complexity. In this section we present best pr
 
 This section also offers some utility methods that you can use in your code. We encourage you to use these methods to create a shorter code with better readability. These method wraps generic operations and include the boilercode to perform these operations.
 
-### Length
+### Size
 
 Use the python `len()` function to return how many items are in the list.
 
@@ -169,24 +169,25 @@ Parameters:
     **kwargs:
         Arguments list according to the action API `find_` function arguments.
 
-{==
+!!! example
+    {==
 
-Is it going to be mostly rainy over this weekend?
+    Is it going to be mostly rainy over this weekend?
 
-==}
+    ==}
 
-``` py
-weather_attribute = WeatherAttribute.reolve_from_text("rainy")
-date_time = DateTime.resolve_from_text("this weekend")
-weather_forecasts = Weather.find_weather_forecasts(
-    date_time=date_time
-)
-result = utils.most(
-    weather_forecasts,
-    weather_attribute=weather_attribute
-)
-Responder.respond(response=result)
-```
+    ``` py
+    weather_attribute = WeatherAttribute.reolve_from_text("rainy")
+    date_time = DateTime.resolve_from_text("this weekend")
+    weather_forecasts = Weather.find_weather_forecasts(
+        date_time=date_time
+    )
+    result = utils.most(
+        weather_forecasts,
+        weather_attribute=weather_attribute
+    )
+    Responder.respond(response=result)
+    ```
 
 ### `filter`
 

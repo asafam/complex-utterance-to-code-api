@@ -21,7 +21,7 @@ nav:
           - MessageStatus: reference/types/message_status.md
           - NavRoadCondition: reference/types/nav_road_condition.md
           - NavTravelMethod: reference/types/nav_travel_method.md
-          - Person: reference/types/person.md
+          - Contact: reference/types/contact.md
           - Resource: reference/types/resource.md
           - WeatherAttribute: reference/types/weather_attribute.md
           - WeatherTemperatureUnit: reference/types/weather_temperature_unit.md
