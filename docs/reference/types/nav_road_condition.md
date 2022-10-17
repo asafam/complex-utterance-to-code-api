@@ -7,7 +7,7 @@ This API allows us to resolve a road condition out of navigation related queries
 ``` py
 NavRoadCondition.resolve_from_text(
     text: str
-) : NavRoadCondition
+) : NavRoadCondition | List[NavRoadCondition]
 ```
 
 **Arguments**
@@ -20,7 +20,7 @@ NavRoadCondition.resolve_from_text(
 
 | Type          | Description       |
 | ------------- | ----------------- |
-| `NavRoadCondition`    | `NavRoadCondition` object |
+| `NavRoadCondition | List[NavRoadCondition]`    | `NavRoadCondition` object or a list of `NavRoadCondition` objects based on the `text` parameter to this function. |
 
 **Example**
 

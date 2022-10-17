@@ -2,12 +2,12 @@
 
 ## `Contact.resolve_from_text`
 
-This API allows us to resolve a Contact from a given user input, for example, a recipient of a message or a contact to create a reminder to.
+This API allows us to resolve a `Contact` or a list of `Contact` objects from a given user input. For example, a recipient of a message or a contact to create a reminder for.
 
 ``` py
 Contact.resolve_from_text(
     text: str
-) : Contact
+) : Contact | List[Contact]
 ```
 
 **Arguments**
@@ -20,7 +20,7 @@ Contact.resolve_from_text(
 
 | Type          | Description       |
 | ------------- | ----------------- |
-| `Contact`    | `Contact` object |
+| `Contact | List[Contact]`    | `Contact` object or a list of `Contact` objects based on the `text` parameter to this function. |
 
 **Example**
 

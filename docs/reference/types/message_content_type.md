@@ -4,10 +4,12 @@
 
 This API allows us to resolve the message type that should be sent. Commonly we may find the textual decription for message content type like "audio" or "voice" .
 
+It is possible that a user will specify a content type that should be interpreted as multiple content types. In that case, the API will return a list of `MessageContentType` objects.
+
 ``` py
 MessageContentType.resolve_from_text(
     text: str
-) : MessageContentType
+) : MessageContentType | List[MessageContentType]
 ```
 
 **Arguments**
@@ -20,7 +22,7 @@ MessageContentType.resolve_from_text(
 
 | Type          | Description       |
 | ------------- | ----------------- |
-| `MessageContentType`    | `MessageContentType` object |
+| `MessageContentType | List[MessageContentType]`    | `MessageContentType` object or a list of `MessageContentType` objects based on the `text` parameter to this function. |
 
 **Example**
 

@@ -22,7 +22,7 @@ Navigation.find_directions(
 | `destination` | `Location`    | Yes         | Destination object                       |
 | `departure_date_time`   | `DateTime`    | Yes        | Required Date/time for departure    |
 | `avoid_nav_road_condition` | `NavRoadCondition` | Yes | Navigation road condition to avoid |
-| `nav_travel_method` | `NavTravelMethod` | Yes | Navigation method |
+| `nav_travel_method` | `NavTravelMethod` | Yes | Navigation travel method. Defaults to car driving, so use it only in case the travel of method is not a car. |
 
 **Returns**
 

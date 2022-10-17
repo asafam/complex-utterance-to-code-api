@@ -7,7 +7,7 @@ This API allows us to resolve a date or time decription from a given text.
 ``` py
 DateTime.resolve_from_text(
     text: str
-) : DateTime
+) : DateTime | List[DateTime]
 ```
 
 **Arguments**
@@ -20,7 +20,7 @@ DateTime.resolve_from_text(
 
 | Type          | Description       |
 | ------------- | ----------------- |
-| `DateTime`    | `DateTime` object |
+| `DateTime | List[DateTime]`    | `DateTime` object or a list of `DateTime` objects based on the `text` parameter to this function. |
 
 **Example**
 
@@ -38,19 +38,25 @@ date_time = DateTime.resolve_from_text("now")
 
 ## `DateTime.resolve_from_entity`
 
-This API allows us to resolve a DateTime from a given entity.
+This API allows us to resolve a DateTime from a given entity or list of entities, usually the result of a previous `resolve_from_text()` operation.
+
+``` py
+DateTime.resolve_from_entity(
+    entity: Entity | List[Entity]
+) : DateTime | List[DateTime]
+```
 
 **Arguments**
 
 | Name          | Type          | Optional  | Description                                   |
 | ------------- | ------------- | --------- | --------------------------------------------- |
-| `entity`      | `Entity`      | No        | An `Entity` object to be transformed to a `DateTime` |
+| `entity`      | `Entity | List[Entity]`      | No        | An `Entity` object to be transformed to a `DateTime` |
 
 **Returns**
 
 | Type          | Description       |
 | ------------- | ----------------- |
-| `DateTime`    | A DateTime object |
+| `DateTime | List[DateTime]`    | A DateTime object or a list of `DateTime` objects based on the `text` parameter to this function. |
 
 **Example**
 

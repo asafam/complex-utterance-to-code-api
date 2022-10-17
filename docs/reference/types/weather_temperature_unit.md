@@ -2,12 +2,14 @@
 
 ## `WeatherTemperatureUnit.resolve_from_text`
 
-This API allows us to resolve a requested temperature unit (like celsius or fahrenheit) .
+This API allows us to resolve a requested temperature unit (like celsius or fahrenheit).
+
+Despite the fact that this function may return `WeatherTemperatureUnit` it is highly unlikely to find an example where a list would be returned.
 
 ``` py
 WeatherTemperatureUnit.resolve_from_text(
     text: str
-) : WeatherTemperatureUnit
+) : WeatherTemperatureUnit : List[WeatherTemperatureUnit]
 ```
 
 !!! note
@@ -23,7 +25,7 @@ WeatherTemperatureUnit.resolve_from_text(
 
 | Type          | Description       |
 | ------------- | ----------------- |
-| `WeatherTemperatureUnit`    | `WeatherTemperatureUnit` object |
+| `WeatherTemperatureUnit | List[WeatherTemperatureUnit]`    | `WeatherTemperatureUnit` object or a list of `WeatherTemperatureUnit` objects based on the `text` parameter to this function. |
 
 **Example**
 

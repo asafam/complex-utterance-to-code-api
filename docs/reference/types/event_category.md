@@ -7,7 +7,7 @@ This API allows us to resolve an event category from a given user input.
 ``` py
 EventCategory.resolve_from_text(
     text: str
-) : EventCategory
+) : EventCategory | List[EventCategory]
 ```
 
 **Arguments**
@@ -20,7 +20,7 @@ EventCategory.resolve_from_text(
 
 | Type          | Description       |
 | ------------- | ----------------- |
-| `EventCategory`    | `EventCategory` object |
+| `EventCategory | List[EventCategory]` | `EventCategory` object or a list of `EventCategory` objects based on the `text` parameter to this function. |
 
 **Example**
 

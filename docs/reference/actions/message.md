@@ -153,7 +153,7 @@ This API provides us the functionality to delete specific message or a group of 
 
 ``` py
 Message.reply_messages(
-    message: MessageEntity|Iterable[MessageEntity]
+    message: MessageEntity|List[MessageEntity]
 ) : None
 ```
 
@@ -161,7 +161,7 @@ Message.reply_messages(
 
 | Name          | Type          | Optional  | Description                              |
 | ------------- | --------------| --------- | ---------------------------------------- |
-| `messages`        | `MessageEntity|Iterable[MessageEntity]`  | No        | A specific message to delete or an iterable that upon iteration - deletes every message       |
+| `messages`        | `MessageEntity|List[MessageEntity]`  | No        | A specific message or a list of messages to delete      |
 
 **Returns**
 

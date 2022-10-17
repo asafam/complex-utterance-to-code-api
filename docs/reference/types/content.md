@@ -20,7 +20,7 @@ Content.resolve_from_text(
 
 | Type          | Description       |
 | ------------- | ----------------- |
-| `Content`    | `Content` object |
+| `Content | List[Content]` | A `Content` object or a list of `Content` objects based on the `text` parameter to this function. |
 
 **Example**
 
@@ -41,19 +41,25 @@ content = Content.resolve_from_text("postpone my dentist appointment")
 
 ## `Content.resolve_from_entity`
 
-This API allows us to resolve a Content from a given entity.
+This API allows us to resolve a Content from a given entity or list of entities, usually the result of a previous `resolve_from_text()` operation.
+
+``` py
+Content.resolve_from_entity(
+    entity: Entity | List[Entity]
+) : DateTime | List[DateTime]
+```
 
 **Arguments**
 
 | Name          | Type          | Optional  | Description                                   |
 | ------------- | ------------- | --------- | --------------------------------------------- |
-| `entity`      | `Entity`      | No        | An `Entity` object to be transformed to a `Content` |
+| `entity`      | `Entity | List[Entity]`      | No        | An `Entity` object to be transformed to a `Content` |
 
 **Returns**
 
 | Type          | Description       |
 | ------------- | ----------------- |
-| `Content`    | A Content object |
+| `Content | List[Content]` | A `Content` object or a list of `Content` objects based on the `text` parameter to this function. |
 
 **Example**
 

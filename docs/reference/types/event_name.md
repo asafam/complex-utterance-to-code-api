@@ -7,7 +7,7 @@ This API allows us to resolve a calendar event name from a given user input.
 ``` py
 EventName.resolve_from_text(
     text: str
-) : EventName
+) : EventName | List[EventName]
 ```
 
 **Arguments**
@@ -20,7 +20,7 @@ EventName.resolve_from_text(
 
 | Type          | Description       |
 | ------------- | ----------------- |
-| `EventName`    | `EventName` object |
+| `EventName | List[EventName]`    | `EventName` object or a list of `EventName` objects based on the `text` parameter to this function. |
 
 **Example**
 

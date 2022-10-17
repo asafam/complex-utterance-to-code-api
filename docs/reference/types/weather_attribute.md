@@ -4,12 +4,12 @@
 
 This API allows us to resolve a weather attribute or condition from a user input. For example, "stormy", "rain" or "cold" are all weather attributes.
 
-Weather temperature are also a weather attribute. For example, "80 degrees" or "below 60s", should be resolved using this component.
+This method can possibly return a list of `WeatherAttribute` objects given a text input that expresses multiple weather attributes. For example, "any winter weather".
 
 ``` py
 WeatherAttribute.resolve_from_text(
     text: str
-) : WeatherAttribute
+) : WeatherAttribute | List[WeatherAttribute]
 ```
 
 !!! note
@@ -25,7 +25,7 @@ WeatherAttribute.resolve_from_text(
 
 | Type          | Description       |
 | ------------- | ----------------- |
-| `WeatherAttribute`    | `WeatherAttribute` object |
+| `WeatherAttribute | List[WeatherAttribute]`    | `WeatherAttribute` object or a list of `WeatherAttribute` objects based on the `text` parameter to this function. |
 
 **Example**
 

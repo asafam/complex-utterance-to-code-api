@@ -2,12 +2,12 @@
 
 ## `NavTravelMethod.resolve_from_text`
 
-This API allows us to resolve a navigation method for travelling.
+This API allows us to resolve a navigation method for travelling. Driving a car or riding a bicycle are both method of travel that can appear in a user command.
 
 ``` py
 NavTravelMethod.resolve_from_text(
     text: str
-) : NavTravelMethod
+) : NavTravelMethod | List[NavTravelMethod]
 ```
 
 **Arguments**
@@ -26,10 +26,10 @@ NavTravelMethod.resolve_from_text(
 
 {==
 
-how long is the drive to SF on the PCH
+how long is the road to SF on the PCH riding a bicycle
 
 ==}
 
 ``` py
-nav_travel_method = NavTravelMethod.resolve_from_text("drive")
+nav_travel_method = NavTravelMethod.resolve_from_text("riding a bicycle")
 ```

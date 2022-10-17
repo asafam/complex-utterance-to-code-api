@@ -59,3 +59,19 @@ Read me my new emails in my mailbox and archive them once they are read.
 I need you to give me directions to a place where I can rent the cheapest tux in town, and then directions from there to the wedding reception event I have scheduled.
 
 ==}
+
+```py
+product = Product.resolve_from_text("tux")
+location = Location.resolve_from_text("in town")
+stores = Commerce.find_stores(
+    product=product,
+    location=location
+)
+stores = utils.filter(stores, "cheapest")
+destinations = Location.resolve_from_entity(stores)
+response = []
+for destination in destinations:
+    navigation_directions = Navigation.find_directions(destination=destination)
+    response.append(navigation_directions)
+Responder.respond(response=response)
+```

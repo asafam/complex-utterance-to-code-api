@@ -7,7 +7,7 @@ This API allows us to resolve a calendar name listing an event from a given user
 ``` py
 EventCalendar.resolve_from_text(
     text: str
-) : EventCalendar
+) : EventCalendar | List[EventCalendar]
 ```
 
 **Arguments**
@@ -20,7 +20,7 @@ EventCalendar.resolve_from_text(
 
 | Type          | Description       |
 | ------------- | ----------------- |
-| `EventCalendar`    | `EventCalendar` object |
+| `EventCalendar | List[EventCalendar]`    | `EventCalendar` object or a list of `EventCalendar` objects based on the `text` parameter to this function. |
 
 **Example**
 

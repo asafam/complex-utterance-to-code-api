@@ -4,10 +4,12 @@
 
 This API allows us to resolve a location from a given text.
 
+A text can also refer to multiple locations. For example, the text "every drug store in my area" should yield a list of `Location` objects.
+
 ``` py
 Location.resolve_from_text(
     text: str
-) : Location
+) : Location | List[Location]
 ```
 
 **Arguments**
@@ -20,7 +22,7 @@ Location.resolve_from_text(
 
 | Type          | Description       |
 | ------------- | ----------------- |
-| `Location`    | `Location` object |
+| `Location | List[Location]`    | `Location` object or a list of `Location` objects based on the `text` parameter to this function. |
 
 **Example**
 
@@ -50,19 +52,25 @@ location = Location.resolve_from_text("at home")
 
 ## `Location.resolve_from_entity`
 
-This API allows us to resolve a location from a given entity.
+This API allows us to resolve a location from a given entity or list of entities, usually the result of a previous `resolve_from_text()` operation.
+
+``` py
+Content.resolve_from_entity(
+    entity: Entity | List[Entity]
+) : Location | List[Location]
+```
 
 **Arguments**
 
 | Name          | Type          | Optional  | Description                                   |
 | ------------- | ------------- | --------- | --------------------------------------------- |
-| `entity`      | `Entity`      | No        | An `Entity` object to be transformed to a `Location` |
+| `entity`      | `Entity | List[Entity]`      | No        | An `Entity` object to be transformed to a `Location` |
 
 **Returns**
 
 | Type          | Description       |
 | ------------- | ----------------- |
-| `Location`    | A location object |
+| `Location | List[Location]`    | A location object or a list of `Location` objects based on the `text` parameter to this function. |
 
 **Example**
 
