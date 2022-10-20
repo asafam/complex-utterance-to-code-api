@@ -90,7 +90,7 @@ Parameters:
     ``` py
     sender = Contact.reolve_from_text("Henry")
     messages = Message.get_message(sender=sender)
-    messages = last(messages, 2)
+    messages = utils.last(messages, 2)
     Message.delete_messages(messages=messages)
     ```
 

@@ -7,7 +7,7 @@ Shopping
 This API allows us to find stores according to specific criteria, like the products sold in these stores, or when these stores are open.
 
 ``` py
-Shopping.find_store(
+Shopping.find_stores(
     date_time: Optional[DateTime],
     location: Optional[Location],
     product: Optional[Product],

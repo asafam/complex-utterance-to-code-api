@@ -58,6 +58,6 @@ events = Event.find(
     event_category=event_category,
     event_calendar=event_calendar
 )
-events = events.first()
+events = utils.first(events)
 Responder.respond(response=events)
 ```

@@ -1,11 +1,11 @@
 # Message
 
-## `Message.get_messages`
+## `Message.find_messages`
 
 This API provides us the messages in our mobile device.
 
 ``` py
-Message.get_messages(
+Message.find_messages(
     date_time: Optional[DateTime],
     sender: Optional[Contact],
     recipient: Optional[Contact],
@@ -13,7 +13,7 @@ Message.get_messages(
     message_status: Optional[MessageStatus],
     message_content_type: Optional[MessageContentType],
     resource: Optional[Resurce]
-) : Iterable[MessageEntity]
+) : List[MessageEntity]
 ```
 
 **Arguments**
@@ -32,7 +32,7 @@ Message.get_messages(
 
 | Type          | Description       |
 | ------------- | ----------------- |
-| `Iterable[MessageEntity]`    | Iterable of `MessageEntity` objects |
+| `List[MessageEntity]`    | List of `MessageEntity` objects |
 
 **Example**
 
@@ -45,10 +45,10 @@ Read the last message from aunt Bessy
 ``` py
 contact = Contact.resolve_from_text("aunt Bessy")
 sender = contact
-messages = Message.get_messages(
+messages = Message.find_messages(
     sender=sender
 )
-message = messages.last()
+message = utils.last(messages)
 response = message
 Responder.respond(response=response)
 ```
@@ -176,7 +176,7 @@ Delete the last 2 messages
 ==}
 
 ``` py
-messages = Message.get_messages()
-messages = messages.last(2)
+messages = Message.find_messages()
+messages = utils.last(messages, 2)
 Message.delete_messages(messages=messages)
 ```

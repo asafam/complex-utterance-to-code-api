@@ -1,16 +1,16 @@
 # Reminder
 
-## `Reminder.get_reminders`
+## `Reminder.find_reminders`
 
 This API provides us the reminders in our mobile device.
 
 ``` py
-Reminder.get_reminders(
+Reminder.find_reminders(
     date_time: Optional[DateTime],
     person_reminded: Optional[Contact],
     content: Optional[Content],
     resource: Optional[Resurce]
-) : Iterable[ReminderEntity]
+) : List[ReminderEntity]
 ```
 
 **Arguments**
@@ -26,7 +26,7 @@ Reminder.get_reminders(
 
 | Type          | Description       |
 | ------------- | ----------------- |
-| `Iterable[ReminderEntity]`    | Iterable of `ReminderEntity` objects |
+| `List[ReminderEntity]`    | List of `ReminderEntity` objects |
 
 **Example**
 
@@ -40,7 +40,7 @@ What reminders do I have on next friday?
 contact = Contact.resolve_from_text("I")
 person_reminded = contact
 date_time = DateTime.resolve_from_text("on next friday")
-reminders = Reminder.get_reminders(
+reminders = Reminder.find_reminders(
     sender=sender,
     date_time=date_time
 )
@@ -158,7 +158,7 @@ This API provides us the functionality to delete specific reminder or a group of
 
 ``` py
 Reminder.reply_reminders(
-    reminder: ReminderEntity|Iterable[ReminderEntity]
+    reminder: ReminderEntity|List[ReminderEntity]
 ) : None
 ```
 
@@ -166,7 +166,7 @@ Reminder.reply_reminders(
 
 | Name          | Type          | Optional  | Description                              |
 | ------------- | --------------| --------- | ---------------------------------------- |
-| `reminders`        | `ReminderEntity|Iterable[ReminderEntity]`  | No        | A specific reminder to delete or an iterable that upon iteration - deletes every reminder       |
+| `reminders`        | `ReminderEntity|List[ReminderEntity]`  | No        | A specific reminder to delete or an iterable that upon iteration - deletes every reminder       |
 
 **Returns**
 
@@ -183,7 +183,7 @@ Cancel the reminder on the 31st that the library summer reading program shop clo
 ``` py
 content = Content.resolve_from_text("the library summer reading program shop closes")
 date_time = DateTime.resolve_from_text("on the 31st")
-reminders = Reminder.get_reminders(
+reminders = Reminder.find_reminders(
     content=content,
     date_time=date_time
 )

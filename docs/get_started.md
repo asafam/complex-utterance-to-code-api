@@ -44,7 +44,7 @@ Likewise, we then create the destination `Location` object and name it with the 
 
 Next, we plug the `origin` and `destination` parameters into the `Navigation.find_directions` function call. This function will return a list of navigation directions.
 
-Last, we report back the result to the user using the `Responder.respond(response: Entity|Iterable[Entity])` API. As the `response` we set the `navigation_directions` result from the previous step.
+Last, we report back the result to the user using the `Responder.respond(response: Entity|List[Entity])` API. As the `response` we set the `navigation_directions` result from the previous step.
 
 ### Another simple command example
 

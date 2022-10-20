@@ -10,7 +10,7 @@ Weather.find_weather_forecasts(
     location: Optional[Location],
     weather_attribute: Optional[WeatherAttribute],
     weather_temperature_unit: Optional[WeatherTemperatureUnit]
-) : Iterable[WeatherEntity]
+) : List[WeatherEntity]
 ```
 
 **Arguments**
@@ -26,7 +26,7 @@ Weather.find_weather_forecasts(
 
 | Type          | Description       |
 | ------------- | ----------------- |
-| `Iterable[WeatherEntity]`    | Iterable of `WeatherEntity` objects. Each `WeatherEntity` provides the requested weather forecast for a time frame (e.g. for each day). |
+| `List[WeatherEntity]`    | List of `WeatherEntity` objects. Each `WeatherEntity` provides the requested weather forecast for a time frame (e.g. for each day). |
 
 **Example**
 
