@@ -149,11 +149,11 @@ messages = Message.reply_message(
 
 ## `Message.delete_messages`
 
-This API provides us the functionality to delete specific message or a group of messages.
+This API provides us the functionality to delete a specific message or a group of messages.
 
 ``` py
-Message.reply_messages(
-    message: MessageEntity|List[MessageEntity]
+Message.delete_messages(
+    messages: MessageEntity|List[MessageEntity]
 ) : None
 ```
 
@@ -179,4 +179,42 @@ Delete the last 2 messages
 messages = Message.find_messages()
 messages = utils.last(messages, 2)
 Message.delete_messages(messages=messages)
+```
+
+## `Message.archive_messages`
+
+This API provides us the functionality to archive a specific message or a group of messages.
+
+``` py
+Message.archive_messages(
+    messages: MessageEntity|List[MessageEntity]
+) : None
+```
+
+**Arguments**
+
+| Name          | Type          | Optional  | Description                              |
+| ------------- | --------------| --------- | ---------------------------------------- |
+| `messages`        | `MessageEntity|List[MessageEntity]`  | No        | A specific message or a list of messages to archive      |
+
+**Returns**
+
+This function does not return.
+
+**Example**
+
+{==
+
+Archive the messages that are marked as read from Debby.
+
+==}
+
+``` py
+sender = Contact.resolve_from_entity("Debby")
+message_status = MessageStatus.resolve_from_text("marked as read")
+messages = Message.find_messages(
+    sender=sender,
+    message_status=message_status
+)
+Message.archive_messages(messages=messages)
 ```
