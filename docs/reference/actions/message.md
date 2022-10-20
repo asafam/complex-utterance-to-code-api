@@ -1,5 +1,7 @@
 # Message
 
+Messages can be emails or direct message apps (like Whatsapp). By default, the API will assume emails are requested. In cast another app shuld be used, the API provides the `resource` parameter to serve that.
+
 ## `Message.find_messages`
 
 This API provides us the messages in our mobile device.

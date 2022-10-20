@@ -88,7 +88,7 @@ Parameters:
     ==}
 
     ``` py
-    sender = Contact.reolve_from_text("Henry")
+    sender = Contact.resolve_from_text("Henry")
     messages = Message.get_message(sender=sender)
     messages = utils.last(messages, 2)
     Message.delete_messages(messages=messages)
@@ -177,7 +177,7 @@ Parameters:
     ==}
 
     ``` py
-    weather_attribute = WeatherAttribute.reolve_from_text("rainy")
+    weather_attribute = WeatherAttribute.resolve_from_text("rainy")
     date_time = DateTime.resolve_from_text("this weekend")
     weather_forecasts = Weather.find_weather_forecasts(
         date_time=date_time
