@@ -9,7 +9,7 @@ Reminder.find_reminders(
     date_time: Optional[DateTime],
     person_reminded: Optional[Contact],
     content: Optional[Content],
-    resource: Optional[Resurce]
+    app: Optional[Resurce]
 ) : List[ReminderEntity]
 ```
 
@@ -20,7 +20,7 @@ Reminder.find_reminders(
 | `date_time`        | `DateTime`  | Yes        | Date and time the reminder was recieved        |
 | `person_reminded`        | `Contact`  | Yes        | Reminder contact reminded        |
 | `content`        | `Content`  | Yes        | Content within the reminder        |
-| `resource`        | `Resource`  | Yes        | The reminder resource application |
+| `app`        | `App`  | Yes        | The reminder app application |
 
 **Returns**
 
@@ -57,7 +57,7 @@ Reminder.create_reminder(
     date_time: Optional[DateTime],
     person_reminded: Optional[Contact],
     content: Optional[Content],
-    resource: Optional[Resurce]
+    app: Optional[Resurce]
 ) : ReminderEntity
 ```
 
@@ -68,7 +68,7 @@ Reminder.create_reminder(
 | `date_time`        | `DateTime`  | Yes        | Date and time the reminder was recieved        |
 | `person_reminded`        | `Contact`  | Yes        | Reminder contact reminded        |
 | `content`        | `Content`  | Yes        | Content within the reminder        |
-| `resource`        | `Resource`  | Yes        | The reminder resource application |
+| `app`        | `App`  | Yes        | The reminder app application |
 
 **Returns**
 
@@ -106,8 +106,8 @@ Reminder.update_reminder(
     new_person_reminded: Optional[Contact],
     content: Optional[Content],
     new_content: Optional[Content],
-    resource: Optional[Resurce],
-    new_resource: Optional[Resurce]
+    app: Optional[Resurce],
+    new_app: Optional[Resurce]
 ) : ReminderEntity
 ```
 
@@ -121,8 +121,8 @@ Reminder.update_reminder(
 | `new_person_reminded`        | `Contact`  | Yes        | Reminder to a new contact reminded        |
 | `content`        | `Content`  | Yes        | Content within the reminder        |
 | `new_content`        | `Content`  | Yes        | New content within the reminder        |
-| `resource`        | `Resource`  | Yes        | The reminder resource application |
-| `new_resource`        | `Resource`  | Yes        | A new reminder resource application |
+| `app`        | `App`  | Yes        | The reminder app application |
+| `new_app`        | `App`  | Yes        | A new reminder app application |
 
 **Returns**
 

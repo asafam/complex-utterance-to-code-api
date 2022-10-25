@@ -6,7 +6,7 @@ This API provides us the weather forecasts.
 
 ``` py
 Weather.find_weather_forecasts(
-    date_time: Optional[DateTime],
+    date_time: Optional[DateTime] | List[DateTime],
     location: Optional[Location],
     weather_attribute: Optional[WeatherAttribute],
     weather_temperature_unit: Optional[WeatherTemperatureUnit]
@@ -17,7 +17,7 @@ Weather.find_weather_forecasts(
 
 | Name          | Type          | Optional  | Description                              |
 | ------------- | --------------| --------- | ---------------------------------------- |
-| `date_time`        | `DateTime`  | Yes        | Date and time for the weather        |
+| `date_time`        | `DateTime | List[DateTime]`  | Yes        | Date and time for the weather. An input of         |
 | `location`        | `Location`  | Yes        | Location for the weather        |
 | `weather_attribute`        | `WeatherAttribute`  | Yes        | Weather attribute to look for in the weather forecasts        |
 | `weather_temperature_unit`        | `WeatherTemperatureUnit`  | Yes        | Weather temperature unit to be used in the weather query        |

@@ -1,6 +1,6 @@
 # Message
 
-Messages can be emails or direct message apps (like Whatsapp). By default, the API will assume emails are requested. In cast another app shuld be used, the API provides the `resource` parameter to serve that.
+Messages can be emails or direct message apps (like Whatsapp). By default, the API will assume emails are requested. In cast another app shuld be used, the API provides the `app` parameter to serve that.
 
 ## `Message.find_messages`
 
@@ -14,7 +14,7 @@ Message.find_messages(
     content: Optional[Content],
     message_status: Optional[MessageStatus],
     message_content_type: Optional[MessageContentType],
-    resource: Optional[Resurce]
+    app: Optional[App]
 ) : List[MessageEntity]
 ```
 
@@ -28,7 +28,7 @@ Message.find_messages(
 | `content`        | `Content`  | Yes        | Content within the message        |
 | `message_status`        | `MessageStatus`  | Yes        | The message status. For example, "unread" or "new" |
 | `message_content_type`        | `MessageContentType`  | Yes        | The message content type |
-| `resource`        | `Resource`  | Yes        | The message resource application |
+| `app`        | `App`  | Yes        | The message app application |
 
 **Returns**
 
@@ -40,19 +40,19 @@ Message.find_messages(
 
 {==
 
-Read the last message from aunt Bessy
+Read the last unread message from aunt Bessy
 
 ==}
 
 ``` py
-contact = Contact.resolve_from_text("aunt Bessy")
-sender = contact
+sender = Contact.resolve_from_text("aunt Bessy")
+message_status = MessageStatus.resolve_from_text("unread")
 messages = Message.find_messages(
-    sender=sender
+    sender=sender,
+    message_status=message_status
 )
 message = utils.last(messages)
-response = message
-Responder.respond(response=response)
+Responder.respond(response=message)
 ```
 
 ## `Message.send_message`
@@ -64,7 +64,7 @@ Message.send_message(
     recipient: Optional[Contact],
     content: Optional[Content],
     message_content_type: Optional[MessageContentType],
-    resource: Optional[Resurce]
+    app: Optional[Resurce]
 ) : MessageEntity
 ```
 
@@ -75,7 +75,7 @@ Message.send_message(
 | `recipient`        | `Contact`  | Yes        | Message recipient        |
 | `content`        | `Content`  | Yes        | Content within the message        |
 | `message_content_type`        | `MessageContentType`  | Yes        | The message content type |
-| `resource`        | `Resource`  | Yes        | The message resource application |
+| `app`        | `App`  | Yes        | The message app application |
 
 **Returns**
 
@@ -110,7 +110,7 @@ Message.reply_message(
     recipient: Optional[Contact],
     content: Optional[Content],
     message_content_type: Optional[MessageContentType],
-    resource: Optional[Resurce]
+    app: Optional[Resurce]
 ) : MessageEntity
 ```
 
@@ -121,7 +121,7 @@ Message.reply_message(
 | `recipient`        | `Contact`  | Yes        | Message recipient        |
 | `content`        | `Content`  | Yes        | Content within the message        |
 | `message_content_type`        | `MessageContentType`  | Yes        | The message content type |
-| `resource`        | `Resource`  | Yes        | The message resource application |
+| `app`        | `App`  | Yes        | The message app application |
 
 **Returns**
 
@@ -141,11 +141,11 @@ Reply with a voice message to Stephanie on Whatsapp
 contact = Contact.resolve_from_text("Stephanie")
 sender = contact
 message_content_type = MessageContentType.resolve_from_text("voice")
-resource = Resource.resolve_from_text("Whatsapp")
+app = App.resolve_from_text("Whatsapp")
 messages = Message.reply_message(
     sender=sender,
     message_content_type=message_content_type,
-    resource=resource
+    app=app
 )
 ```
 

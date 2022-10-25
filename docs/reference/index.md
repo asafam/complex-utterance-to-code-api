@@ -25,6 +25,8 @@ Data types support the resolution of information from the user requests to be us
 
 The following datat types are available:
 
+- [App]
+- [Contact]
 - [Content]
 - [DateTime]
 - [EventCalendar]
@@ -35,10 +37,11 @@ The following datat types are available:
 - [MessageStatus]
 - [NavRoadCondition]
 - [NavTravelMethod]
-- [Contact]
 - [WeatherAttribute]
 - [WeatherTemperatureUnit]
 
+[App]: types/app
+[Contact]: types/contact
 [Content]: types/content
 [DateTime]: types/date_time
 [EventCalendar]: types/event_calendar
@@ -49,6 +52,5 @@ The following datat types are available:
 [MessageStatus]: types/message_status
 [NavRoadCondition]: types/nav_road_condition
 [NavTravelMethod]: types/nav_travel_method
-[Contact]: types/contact
 [WeatherAttribute]: types/weather_attribute
 [WeatherTemperatureUnit]: types/weather_temperature_unit

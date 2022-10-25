@@ -12,7 +12,7 @@ Event.find_events(
     location: Optional[Location],
     event_name: Optional[EventName],
     event_calendar: Optional[EventCalendar],
-    resource: Optional[Resurce]
+    app: Optional[Resurce]
 ) : List[EventEntity]
 ```
 
@@ -25,7 +25,7 @@ Event.find_events(
 | `event_category`        | `EventCategory`  | Yes        | The event name        |
 | `event_name`        | `EventName`  | Yes        | The event name        |
 | `event_calendar`        | `EventCalendar`  | Yes        | The calendar name where the event should be listed |
-| `resource`        | `Resource`  | Yes        | The event resource application |
+| `app`        | `App`  | Yes        | The event app application |
 
 **Returns**
 

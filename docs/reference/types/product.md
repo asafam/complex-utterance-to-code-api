@@ -35,5 +35,5 @@ Where can I find a store cheapest price for the new Lego knights castle that has
 ==}
 
 ``` py
-resource = Product.resolve_from_text("the new Lego knights castle")
+product = Product.resolve_from_text("the new Lego knights castle")
 ```
