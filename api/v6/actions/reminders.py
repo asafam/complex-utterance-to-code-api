@@ -2,7 +2,7 @@ from abc import abstractclassmethod, abstractmethod
 from typing import Any, Iterable, Mapping, Union, Optional
 from api.v6.entities.resolvable import Resolvable
 from entities.generic import Contact, DateTime, Entity
-from entities.reminders import Content, Reminder
+from entities.reminder import Content, Reminder
 from entities.calendar import CalendarEvent
 from exceptions.exceptions import UnderspecificationException
 
@@ -30,6 +30,16 @@ class RemindersCommand(Resolvable):
                 recovery_prompt="What should be reminded?",
                 message="exact_content argument is missing",
             )
+        raise NotImplementedError
+    
+    @exception_handler
+    @abstractclassmethod
+    def find_reminders(
+        cls,
+        person_reminded: Optional[Contact] = None,
+        date_time: Optional[DateTime] = None,
+        exact_content: Optional[Content] = None,
+    ) -> Iterable[Reminder]:
         raise NotImplementedError
 
     @abstractclassmethod

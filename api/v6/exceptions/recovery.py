@@ -1,7 +1,5 @@
-from typing import Iterable, Union
-from entities.generic import Entity
-from user_response import UserResponse
+from typing import Any
 
 
-def recover_prompter(prompt: str) -> UserResponse:
+def recover_prompter(prompt: str) -> Any:
     raise NotImplementedError

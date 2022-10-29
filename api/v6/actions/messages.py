@@ -3,6 +3,7 @@ from typing import Iterable, Union, Optional
 from api.v6.entities.resolvable import Resolvable
 from entities.generic import *
 from entities.message import *
+from entities.app import App
 
 
 class MessagesCommand(Resolvable):
@@ -16,7 +17,7 @@ class MessagesCommand(Resolvable):
         content: Optional[Content],
         message_status: Optional[MessageStatus],
         message_content_type: Optional[MessageContentType],
-        resource: Optional[Resource]
+        app: Optional[App]
     ) -> List[MessageEntity]:
         raise NotImplementedError
     
@@ -26,12 +27,12 @@ class MessagesCommand(Resolvable):
         recipient: Contact,
         exact_content: Content,
         date_time: Optional[DateTime] = None
-    ) -> Message:
+    ) -> MessageEntity:
         raise NotImplementedError
     
     @abstractclassmethod
     def delete_messages(
         cls,
-        messages: Union[Message, Iterable[Message]]
-    ) -> Message:
+        messages: Union[MessageEntity, Iterable[MessageEntity]]
+    ) -> None:
         raise NotImplementedError

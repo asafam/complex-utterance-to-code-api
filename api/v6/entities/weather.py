@@ -1,7 +1,8 @@
 from __future__ import annotations
 from abc import abstractclassmethod
-from exceptions.resolvable import Resolvable
-from entities.generic import Entity, DateTime, Location
+from entities.entity import Entity
+from entities.resolvable import Resolvable
+from entities.generic import DateTime, Location
 from typing import Callable, Optional
 
 

@@ -2,10 +2,10 @@ from abc import abstractclassmethod
 from typing import Iterable, Union, Optional
 from api.v6.entities.resolvable import Resolvable
 from entities.generic import Entity
-from typing.apps import App
+from entities.app import App
 
 
-class AppsCommand(Resolvable):
+class App(Resolvable):
     
     @abstractclassmethod
     def open(

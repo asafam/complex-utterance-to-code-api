@@ -1,5 +1,5 @@
-from exceptions.resolvable import Resolvable
-from entities.generic import Entity
+from entities.resolvable import Resolvable
+from entities.entity import Entity
 
 
 class Timer(Entity, Resolvable):

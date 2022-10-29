@@ -1,11 +1,11 @@
 from abc import abstractclassmethod
 from typing import Iterable, Union, Optional
 from api.v6.entities.resolvable import Resolvable
-from entities.generic import Contact, DateTime, Location
-from typing.calendar import CalendarEvent, CalendarEventCategory, CalendarEventName, CalendarName
+from entities.generic import *
+from entities.calendar import *
 
 
-class CalendarCommand(Resolvable):
+class Calendar(Resolvable):
     
     @abstractclassmethod
     def create_calendar_event(
@@ -22,4 +22,15 @@ class CalendarCommand(Resolvable):
     def delete_calendar_events(
         cls, events: Optional[Union[CalendarEvent, Iterable[CalendarEvent]]] = None
     ) -> bool:
+        raise NotImplementedError
+    
+    @abstractclassmethod
+    def find_calendar_events(
+        cls,
+        date_time: Optional[DateTime] = None,
+        location: Optional[Location] = None,
+        event_name: Optional[CalendarEventName] = None,
+        event_category: Optional[CalendarEventCategory] = None,
+        calendar: Optional[CalendarName] = None,
+    ) -> Iterable[CalendarEvent]:
         raise NotImplementedError

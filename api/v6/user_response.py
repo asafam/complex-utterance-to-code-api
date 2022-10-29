@@ -1,4 +1,0 @@
-
-
-class UserResponse():
-    payload: dict

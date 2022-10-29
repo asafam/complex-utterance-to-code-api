@@ -1,4 +1,4 @@
-from commands import recovery as recovery_commands
+from exceptions import recovery as recovery_commands
 
 
 def exception_handler(func):
