@@ -5,7 +5,7 @@ from entities.navigation import *
 from typing import Iterable, Optional
 
 
-class NavigationEstimation():
+class Navigation():
     duration: TimeDuration
     source: Location
     destination: Location

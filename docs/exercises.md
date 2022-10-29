@@ -15,17 +15,15 @@ What will the weather be in two hours, and remind me to go running then.
 ??? question "Solution"
 
     ``` python
-    date_time = DateTime.resolveFromText("in two hours")
-    weather_forecast = WeatherQuery.find_weather_forecasts(
+    date_time = DateTime.resolve_from_text("in two hours")
+    weather_forecast = Weather.find_weather_forecasts(
         date_time=date_time
     )
-    response = weather_forecast
-    Responder.respond(response=response)
+    Responder.respond(response=weather_forecast)
 
     content = Content.resolve_from_text("go running")
-    contact = Contact.resolve_from_text("me")
-    person_reminded = contact
-    create_reminder(
+    person_reminded = Contact.resolve_from_text("me")
+    Reminders.create_reminder(
         content=content, 
         person_reminded=person_reminded, 
         date_time=date_time

@@ -7,7 +7,7 @@ from entities.calendar import CalendarEvent
 from exceptions.exceptions import UnderspecificationException
 
 
-class RemindersCommand(Resolvable):
+class Reminders(Resolvable):
     @classmethod
     def create_reminder(
         cls,

@@ -40,11 +40,12 @@ def test_simple():
         weather_attribute=weather_attribute
     )
 
-
     assert len(list(weather_forecasts)) == 2
     
-    
-def test_complex():
+
+    """
+    What will the weather be in two hours, and remind me to go running then.
+    """
     DataModel.append(DateTime(
         text="this weekend",
         value=datetime(2022, 10, 8)

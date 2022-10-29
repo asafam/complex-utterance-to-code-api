@@ -6,7 +6,7 @@ from entities.message import *
 from entities.app import App
 
 
-class MessagesCommand(Resolvable):
+class Messages(Resolvable):
     
     @abstractclassmethod
     def find_messages(
