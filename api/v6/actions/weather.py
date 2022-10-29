@@ -17,11 +17,12 @@ class Weather():
         data = DataModel.get_data(WeatherForecastEntity)
         if date_time:
             if type(date_time) == list:
-                data = [x for x in data if x.data.get('date_time') in map(lambda a: a.data.get('value'), date_time)]
+                data = [x for x in data if x.data.get('date_time') in date_time]
             else:
-                data = [x for x in data if x.data.get('date_time') == date_time.data.get('value')]
+                data = [x for x in data if x.data.get('date_time') == date_time]
+                
         if location:
-            data = [x for x in data if x.data.get('location') == location.data.get('value')]
+            data = [x for x in data if x.data.get('location') == location]
             
         
         return data

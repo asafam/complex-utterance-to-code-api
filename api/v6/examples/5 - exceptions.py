@@ -57,5 +57,5 @@ traffic_info = NavigationQuery.get_traffic_info(
 
 if traffic_info:
     recipient = Contact.resolve_from_text("Mary")
-    exact_content = Content.resolve_from_text("I will be late")
-    MessagesCommand.send_message(exact_content=exact_content, recipient=recipient)
+    content = Content.resolve_from_text("I will be late")
+    MessagesCommand.send_message(content=content, recipient=recipient)

@@ -1,12 +1,12 @@
 from __future__ import annotations
 from abc import abstractclassmethod
-from generic import Contact, Content, DateTime, Location
+from entities.generic import Contact, Content, DateTime, Location
 from entities.entity import Entity
 from entities.resolvable import Resolvable
 from typing import Callable, Optional
 
 
-class Reminder(Entity):
+class ReminderEntity(Entity):
     date_time: DateTime
     person_reminded: Contact
-    exact_content: Content
+    content: Content

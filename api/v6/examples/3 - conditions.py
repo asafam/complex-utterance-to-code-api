@@ -28,8 +28,8 @@ weather_forecasts = WeatherQuery.get_weather_forecasts(weather_attribute=weather
 condition = len(list(weather_forecasts)) > 0
 if condition:
     person_reminded = Contact.resolve_from_text("me")
-    exact_content = Content.resolve_from_text("to bring a coat")
-    RemindersCommand.create_reminder(person_reminded=person_reminded, exact_content=exact_content)
+    content = Content.resolve_from_text("to bring a coat")
+    RemindersCommand.create_reminder(person_reminded=person_reminded, content=content)
 
 
 """
@@ -41,8 +41,8 @@ date_time = DateTime.resolve_from_text("tomorrow")
 weather_forecasts = WeatherQuery.get_weather_forecasts(date_time=date_time, weather_attribute=weather_attribute)
 condition = len(list(weather_forecasts)) > 0
 if condition:
-    exact_content = Content.resolve_from_text("to leave 15 minutes earlier")
-    RemindersCommand.create_reminder(exact_content=exact_content)
+    content = Content.resolve_from_text("to leave 15 minutes earlier")
+    RemindersCommand.create_reminder(content=content)
 
 
 """
@@ -59,8 +59,8 @@ if condition:
     if condition:
         person_reminded = Contact.resolve_from_text("me")
         date_time = DateTime.resolve_from_text("tonight")
-        exact_content = Content.resolve_from_text("to leave 15 minutes earlier")
-        RemindersCommand.create_reminder(date_time=date_time, person_reminded=person_reminded, exact_content=exact_content)
+        content = Content.resolve_from_text("to leave 15 minutes earlier")
+        RemindersCommand.create_reminder(date_time=date_time, person_reminded=person_reminded, content=content)
 
 
 
@@ -74,12 +74,12 @@ traffic_info = NavigationQuery.get_traffic_info(location=location, traffic_condi
 condition = len(list(traffic_info)) > 0
 if condition:
     recipient = Contact.resolve_from_text("Mary")
-    exact_content = Content.resolve_from_text("I will be late")
-    MessagesCommand.send_message(exact_content=exact_content, recipient=recipient)
+    content = Content.resolve_from_text("I will be late")
+    MessagesCommand.send_message(content=content, recipient=recipient)
 else:
     contact = Contact.resolve_from_text("her")
     content = Content.resolve_from_text("I will be on time")
-    MessagesCommand.send_message(exact_content=content, recipient=contact)
+    MessagesCommand.send_message(content=content, recipient=contact)
 
 
 """

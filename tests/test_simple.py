@@ -8,75 +8,55 @@ def test_simple():
     """
     Utterance: Is it going to drizzle this weekend?
     """
-    DataModel.append(DateTime(
+    # test data
+    data_date_time1 = DateTime(
         text="this weekend",
-        value=datetime(2022, 10, 8)
-    ))
-    DataModel.append(DateTime(
+        value=datetime(2022, 10, 8, 0, 0)
+    )
+    data_date_time2 = DateTime(
         text="this weekend",
-        value=datetime(2022, 10, 9)
-    ))
-    DataModel.append(WeatherAttribute(
+        value=datetime(2022, 10, 9, 0, 0)
+    )
+    data_date_time3 = DateTime(
+        text="this weekend",
+        value=datetime(2022, 10, 10, 0, 0)
+    )
+    DataModel.append(data_date_time1)
+    DataModel.append(data_date_time2)
+    data_weather_attribute = WeatherAttribute(
         text="drizzle",
         value="rain"
+    )
+    data_weather_attribute_x = WeatherAttribute(
+        text="cloudy",
+        value="cloudy"
+    )
+    DataModel.append(data_weather_attribute)
+    DataModel.append(WeatherForecastEntity(
+        date_time=data_date_time1,
+        weather_attribute=data_weather_attribute
     ))
     DataModel.append(WeatherForecastEntity(
-        date_time=datetime(2022, 10, 8),
-        weather_attribute="rain"
+        date_time=data_date_time2,
+        weather_attribute=data_weather_attribute
     ))
     DataModel.append(WeatherForecastEntity(
-        date_time=datetime(2022, 10, 9),
-        weather_attribute="rain"
-    ))
-    DataModel.append(WeatherForecastEntity(
-        date_time=datetime(2022, 10, 10),
-        weather_attribute="rain"
+        date_time=data_date_time3,
+        weather_attribute=data_weather_attribute_x
     ))
 
-    date_time = DateTime.resolve_from_text("this weekend")
+    # tested code block
+    date_time = DateTime.resolve_many_from_text("this weekend")
     weather_attribute = WeatherAttribute.resolve_from_text("drizzle")
     weather_forecasts = Weather.find_weather_forecasts(
         date_time=date_time,
         weather_attribute=weather_attribute
     )
 
+    #  assertion tests
     assert len(list(weather_forecasts)) == 2
+    assert list(weather_forecasts)[0].data.get('date_time') == data_date_time1
+    assert list(weather_forecasts)[0].data.get('weather_attribute') == data_weather_attribute
+    assert list(weather_forecasts)[1].data.get('date_time') == data_date_time2
+    assert list(weather_forecasts)[1].data.get('weather_attribute') == data_weather_attribute
     
-
-    """
-    What will the weather be in two hours, and remind me to go running then.
-    """
-    DataModel.append(DateTime(
-        text="this weekend",
-        value=datetime(2022, 10, 8)
-    ))
-    DataModel.append(DateTime(
-        text="this weekend",
-        value=datetime(2022, 10, 9)
-    ))
-    DataModel.append(WeatherAttribute(
-        text="drizzle",
-        value="rain"
-    ))
-    DataModel.append(WeatherForecastEntity(
-        date_time=datetime(2022, 10, 8),
-        weather_attribute="rain"
-    ))
-    DataModel.append(WeatherForecastEntity(
-        date_time=datetime(2022, 10, 9),
-        weather_attribute="rain"
-    ))
-    DataModel.append(WeatherForecastEntity(
-        date_time=datetime(2022, 10, 10),
-        weather_attribute="rain"
-    ))
-
-    date_time = DateTime.resolve_from_text("this weekend")
-    weather_attribute = WeatherAttribute.resolve_from_text("drizzle")
-    weather_forecasts = Weather.find_weather_forecasts(
-        date_time=date_time,
-        weather_attribute=weather_attribute
-    )
-
-
-    assert len(list(weather_forecasts)) == 2

@@ -7,7 +7,6 @@ from entities.app import App
 
 
 class Messages(Resolvable):
-    
     @abstractclassmethod
     def find_messages(
         cls,
@@ -17,22 +16,18 @@ class Messages(Resolvable):
         content: Optional[Content],
         message_status: Optional[MessageStatus],
         message_content_type: Optional[MessageContentType],
-        app: Optional[App]
+        app: Optional[App],
     ) -> List[MessageEntity]:
         raise NotImplementedError
-    
+
     @abstractclassmethod
     def send_message(
-        cls,
-        recipient: Contact,
-        exact_content: Content,
-        date_time: Optional[DateTime] = None
+        cls, recipient: Contact, content: Content, date_time: Optional[DateTime] = None
     ) -> MessageEntity:
         raise NotImplementedError
-    
+
     @abstractclassmethod
     def delete_messages(
-        cls,
-        messages: Union[MessageEntity, Iterable[MessageEntity]]
+        cls, messages: Union[MessageEntity, Iterable[MessageEntity]]
     ) -> None:
         raise NotImplementedError

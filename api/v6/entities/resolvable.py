@@ -15,17 +15,35 @@ class Resolvable(Generic[T]):
 
     # @exception_handler
     @classmethod
-    def resolve_from_text(cls, text: str, recovered_text: Optional[str] = None) -> T | List[T]:
-        data = DataModel.get_data(cls)
+    def resolve_from_text(
+        T, text: str, recovered_text: Optional[str] = None
+    ) -> T:
+        data = DataModel.get_data(T)
         if data is None:
             raise NotImplementedError()
-        
-        items = [x for x in data if x.data.get('text') == text]
-        
+
+        items = [x for x in data if x.data.get("text") == text]
+
         if len(items) == 0:
             raise ValueError()
         else:
-            result = items[0] if len(items) == 1 else items
+            result = items[0]
+            return result
+        
+    @classmethod
+    def resolve_many_from_text(
+        T, text: str, recovered_text: Optional[str] = None
+    ) -> List[T]:
+        data = DataModel.get_data(T)
+        if data is None:
+            raise NotImplementedError()
+
+        items = [x for x in data if x.data.get("text") == text]
+
+        if len(items) == 0:
+            raise ValueError()
+        else:
+            result = items
             return result
 
     @exception_handler

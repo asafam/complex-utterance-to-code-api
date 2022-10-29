@@ -87,8 +87,8 @@ calendar_events2 = CalendarQuery.get_calendar_events(event_name=cal_event_name)
 calendar_event2 = first(calendar_events2)
 
 for recipient in [recipient1, recipient2]:
-    for exact_content in [calendar_event1, calendar_event2]:
-        MessagesCommand.send_message(recipient=recipient, exact_content=exact_content)
+    for content in [calendar_event1, calendar_event2]:
+        MessagesCommand.send_message(recipient=recipient, content=content)
 
 
 """
@@ -108,8 +108,8 @@ calendar_events = CalendarQuery.get_calendar_events(event_name=event_name2)
 calendar_event2 = first(calendar_events2)
 
 for recipient in [recipient1, recipient2]:
-    for exact_content in [calendar_event1, calendar_event2]:
-        MessagesCommand.send_message(recipient=recipient, exact_content=exact_content)
+    for content in [calendar_event1, calendar_event2]:
+        MessagesCommand.send_message(recipient=recipient, content=content)
 
 
 """
