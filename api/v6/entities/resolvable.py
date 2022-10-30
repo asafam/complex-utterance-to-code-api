@@ -46,11 +46,21 @@ class Resolvable(Generic[T]):
             result = items
             return result
 
-    @exception_handler
-    @abstractclassmethod
+    # @exception_handler
+    @classmethod
     def resolve_from_entity(
         T,
         entity: Union[T, List[T]],
         recovered_entity: Optional[Union[T, List[T]]] = None,
     ) -> T:
-        raise NotImplementedError
+        data = DataModel.get_data(T)
+        if data is None:
+            raise NotImplementedError()
+
+        items = [x for x in data if x.data.get("value") == entity]
+
+        if len(items) == 0:
+            raise ValueError()
+        else:
+            result = items[0]
+            return result

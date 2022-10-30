@@ -1,5 +1,5 @@
-from abc import abstractclassmethod
 from __future__ import annotations
+from abc import abstractclassmethod
 from entities.entity import Entity
 from entities.resolvable import Resolvable
 from entities.generic import Contact, Content, DateTime, Location
@@ -18,4 +18,3 @@ class MessageStatus(Entity, Resolvable):
 
 class MessageContentType(Entity, Resolvable):
     pass
-

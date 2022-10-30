@@ -9,7 +9,7 @@ A text can also refer to multiple locations. For example, the text "every drug s
 ``` py
 Location.resolve_from_text(
     text: str
-) : Location | List[Location]
+) : Location
 ```
 
 **Arguments**
@@ -22,7 +22,55 @@ Location.resolve_from_text(
 
 | Type          | Description       |
 | ------------- | ----------------- |
-| `Location | List[Location]`    | `Location` object or a list of `Location` objects based on the `text` parameter to this function. |
+| `Location`    | `Location` object based on the `text` parameter to this function. |
+
+**Example**
+
+A `Location` can be an address, a city or a country name, or any publicly known place (for example, Times Square).
+
+{==
+
+If I leave now will I get to 37 Spring St by 12:30 pm?
+
+==}
+
+``` py
+location = Location.resolve_from_text("37 Spring St")
+```
+
+A `Location` can be also be private to the user. It is in the API responsibility to infer a user specific location.
+
+{==
+
+Is it currently raining at home?
+
+==}
+
+``` py
+location = Location.resolve_from_text("at home")
+```
+
+## `Location.resolve_many_from_text`
+
+This API allows us to resolve multiple locations from a given text. For example, the text "every drug store in my area" should yield a list of `Location` objects.
+
+``` py
+Location.resolve_many_from_text(
+    text: str
+) : List[Location]
+```
+
+**Arguments**
+
+| Name          | Type          | Optional  | Description                              |
+| ------------- | --------------| --------- | ---------------------------------------- |
+| `text`        | `str`         | No        | Textual decription of a location         |
+
+**Returns**
+
+| Type          | Description       |
+| ------------- | ----------------- |
+| `List[Location]`    | A list of `Location` objects based on the `text` parameter to this function. |
 
 **Example**
 

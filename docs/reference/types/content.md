@@ -20,7 +20,7 @@ Content.resolve_from_text(
 
 | Type          | Description       |
 | ------------- | ----------------- |
-| `Content | List[Content]` | A `Content` object or a list of `Content` objects based on the `text` parameter to this function. |
+| `Content` | A `Content` object based on the `text` parameter to this function. |
 
 **Example**
 

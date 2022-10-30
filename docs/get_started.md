@@ -123,7 +123,7 @@ The final code should look like this:
 
 ``` py
 origin = Location.resolve_from_text("Disneyland")
-detination = Location.resolve_from_text("my house")
+destination = Location.resolve_from_text("my house")
 navigation_direction = Navigation.find_directions(
     origin=origin, 
     destination=destination
@@ -131,7 +131,7 @@ navigation_direction = Navigation.find_directions(
 
 recipient = Location.resolve_from_text("Robert")
 content = Content.resolve_from_entity(navigation_direction)
-Messages.send_message(
+message = Messages.send_message(
     recipient=recipient, 
     content=content
 )
@@ -201,8 +201,8 @@ weather_forecasts = Weather.find_weather_forecasts(
 expr = len(weather_forecasts) > 0
 if expr:
     person_reminded = Contact.resolve_from_text("me")
-    content = Content.resolve_from_text("Bring an umbrella")
-    Reminder.create_reminder(
+    content = Content.resolve_from_text("bring an umbrella")
+    reminder = Reminders.create_reminder(
         person_reminded=person_reminded, 
         content=content
     )
@@ -247,15 +247,16 @@ Show me the traffic to each Whole Food branch in a 10 miles radius.
 Traffic information is acquired using the `Navigation.find_traffic_info(destination: Optional[Location])` API in the [Navigation] API.
 
 ```py
-destinations = Location.resolve_from_text("each Whole Food branch in a 10 miles radius")
+destinations = Location.resolve_many_from_text("each Whole Food branch in a 10 miles radius")
 response = []
-for detination in destinations:
+for destination in destinations:
     traffic_info = Navigation.find_traffic_info(destination=destination)
-    response.append(weather_forecasts))
+    if traffic_info:
+        response.append(traffic_info)
 Responder.respond(response=response)
 ```
 
-While in previous examples we saw specific location names (e.g. Disneyland, my house), in this example we are looking at a group of locations. The function `Location.resolve_from_text` is aware if it should return a single `Location` object or a list of `Location` objects (like in this case) according to the text argument it is called with.
+While in previous examples we saw specific location names (e.g. Disneyland, my house), in this example we are looking at a group of locations. The function `Location.resolve_many_from_text` should be used to return a list of `Location` objects (like in this case) according to the text argument it is called with.
 
 We get a list of `Location` using `Location.resolve_from_text`. The full text describing the location should be provided to it: `each Whole Food branch in a 10 miles radius`.
 

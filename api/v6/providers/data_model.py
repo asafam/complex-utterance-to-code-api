@@ -11,6 +11,10 @@ class DataModel:
         pass
     
     @classmethod
+    def initialize(cls) -> None:
+        cls.data = []
+    
+    @classmethod
     def set_data(cls, data):
         cls.data = data
         

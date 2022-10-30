@@ -7,7 +7,7 @@ This API allows us to resolve a date or time decription from a given text.
 ``` py
 DateTime.resolve_from_text(
     text: str
-) : DateTime | List[DateTime]
+) : DateTime
 ```
 
 **Arguments**
@@ -20,7 +20,7 @@ DateTime.resolve_from_text(
 
 | Type          | Description       |
 | ------------- | ----------------- |
-| `DateTime | List[DateTime]`    | `DateTime` object or a list of `DateTime` objects based on the `text` parameter to this function. |
+| `DateTime`    | `DateTime` object based on the `text` parameter to this function. |
 
 **Example**
 
@@ -34,6 +34,42 @@ If I leave now will I get to 37 Spring St by 12:30 pm?
 
 ``` py
 date_time = DateTime.resolve_from_text("now")
+```
+
+## `DateTime.resolve_many_from_text`
+
+This API allows us to resolve multiple dates or times from a given text.
+
+``` py
+DateTime.resolve_many_from_text(
+    text: str
+) : List[DateTime]
+```
+
+**Arguments**
+
+| Name          | Type          | Optional  | Description                              |
+| ------------- | --------------| --------- | ---------------------------------------- |
+| `text`        | `str`         | No        | Textual decription of a time description         |
+
+**Returns**
+
+| Type          | Description       |
+| ------------- | ----------------- |
+| `List[DateTime]`    | A list of `DateTime` objects based on the `text` parameter to this function. |
+
+**Example**
+
+A `DateTime` can be a logical name for multiple days (for example, the weeekend), or a domain knowledge (public o personal) for a group of times (e.g., the weeks we will be on vacation).
+
+{==
+
+What will be the weather during the weekend?
+
+==}
+
+``` py
+date_times = DateTime.resolve_many_from_text("the weekend")
 ```
 
 ## `DateTime.resolve_from_entity`

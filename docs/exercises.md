@@ -21,8 +21,8 @@ What will the weather be in two hours, and remind me then to go running.
     )
     Responder.respond(response=weather_forecast)
 
-    content = Content.resolve_from_text("go running")
     person_reminded = Contact.resolve_from_text("me")
+    content = Content.resolve_from_text("go running")
     reminder = Reminders.create_reminder(
         person_reminded=person_reminded, 
         date_time=date_time

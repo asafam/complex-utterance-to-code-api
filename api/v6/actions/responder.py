@@ -6,6 +6,6 @@ from entities.generic import Entity
 
 class Responder(Resolvable):
     
-    @abstractclassmethod
+    @classmethod
     def respond(cls, response: Union[Iterable[Entity], Entity]):
-        raise NotImplementedError
+        pass

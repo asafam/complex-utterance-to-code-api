@@ -22,7 +22,6 @@ Event.find_events(
 | ------------- | --------------| --------- | ---------------------------------------- |
 | `date_time`        | `DateTime`  | Yes        | Date and time of the event        |
 | `location`        | `Location`  | Yes        | Event location        |
-| `event_category`        | `EventCategory`  | Yes        | The event name        |
 | `event_name`        | `EventName`  | Yes        | The event name        |
 | `event_calendar`        | `EventCalendar`  | Yes        | The calendar name where the event should be listed |
 | `app`        | `App`  | Yes        | The event app application |
@@ -43,15 +42,12 @@ When is the Eagles concert with Chris Stapleton coming to Dallas?
 
 ``` py
 event_name = EventName.resolve_from_text("Eagles concert with Chris Stapleton")
-event_category = EventCategory.resolve_from_text("concert")
 location = Location.resolve_from_text("Dallas")
 events = Event.find_events(
     event_name=event_name,
-    event_category=event_category,
     location=location
 )
-response = events
-Responder.respond(response=response)
+Responder.respond(response=events)
 ```
 
 **Example**
@@ -63,13 +59,12 @@ Show me my next meeting on my work calendar.
 ==}
 
 ``` py
-event_category = EventCategory.resolve_from_text("meeting")
+event_name = EventName.resolve_from_text("next meeting")
 event_calendar = EventCalendar.resolve_from_text("my work calendar")
 events = Event.find_events(
     event_category=event_category,
     event_calendar=event_calendar
 )
 events = utils.first(events)
-response = events
-Responder.respond(response=response)
+Responder.respond(response=events)
 ```

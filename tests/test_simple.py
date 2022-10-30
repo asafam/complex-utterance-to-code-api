@@ -1,5 +1,6 @@
 from entities.weather import WeatherAttribute, WeatherForecastEntity
 from actions.weather import Weather
+from actions.responder import Responder
 from providers.data_model import DataModel
 from entities.generic import *
 from datetime import datetime
@@ -9,6 +10,7 @@ def test_simple():
     Utterance: Is it going to drizzle this weekend?
     """
     # test data
+    DataModel.initialize()
     data_date_time1 = DateTime(
         text="this weekend",
         value=datetime(2022, 10, 8, 0, 0)
@@ -45,13 +47,14 @@ def test_simple():
         weather_attribute=data_weather_attribute_x
     ))
 
-    # tested code block
+    # code block to test
     date_time = DateTime.resolve_many_from_text("this weekend")
     weather_attribute = WeatherAttribute.resolve_from_text("drizzle")
     weather_forecasts = Weather.find_weather_forecasts(
         date_time=date_time,
         weather_attribute=weather_attribute
     )
+    Responder.respond(response=weather_forecasts)
 
     #  assertion tests
     assert len(list(weather_forecasts)) == 2

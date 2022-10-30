@@ -24,5 +24,10 @@ class Weather():
         if location:
             data = [x for x in data if x.data.get('location') == location]
             
+        if weather_attribute:
+            data = [x for x in data if x.data.get('weather_attribute') == weather_attribute]
+            
+        if weather_temperature_unit:
+            data = [x for x in data if x.data.get('weather_temperature_unit') == weather_temperature_unit]
         
         return data

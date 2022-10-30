@@ -1,9 +1,10 @@
 from abc import abstractclassmethod
 from typing import Iterable, Union, Optional
-from api.v6.entities.resolvable import Resolvable
+from entities.resolvable import Resolvable
 from entities.generic import *
 from entities.message import *
 from entities.app import App
+from providers.data_model import DataModel
 
 
 class Messages(Resolvable):
@@ -20,11 +21,17 @@ class Messages(Resolvable):
     ) -> List[MessageEntity]:
         raise NotImplementedError
 
-    @abstractclassmethod
+    @classmethod
     def send_message(
         cls, recipient: Contact, content: Content, date_time: Optional[DateTime] = None
     ) -> MessageEntity:
-        raise NotImplementedError
+        message = MessageEntity(
+            date_time=date_time,
+            recipient=recipient,
+            content=content,
+        )
+        DataModel.append(message)
+        return message
 
     @abstractclassmethod
     def delete_messages(

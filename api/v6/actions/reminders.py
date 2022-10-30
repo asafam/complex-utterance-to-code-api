@@ -2,12 +2,14 @@ from abc import abstractclassmethod, abstractmethod
 from typing import Any, Iterable, Mapping, Union, Optional
 from entities.resolvable import Resolvable
 from entities.generic import *
-from entities.reminder import Content, Reminder
+from entities.reminder import Content, ReminderEntity
 from entities.calendar import CalendarEvent
 from exceptions.exceptions import UnderspecificationException
+from providers.data_model import DataModel
 
 
 class Reminders(Resolvable):
+    
     @classmethod
     def create_reminder(
         cls,
@@ -16,7 +18,7 @@ class Reminders(Resolvable):
         date_time: Optional[DateTime] = None,
         calendar_event: Optional[CalendarEvent] = None,
         recovered_args: Optional[Mapping[str, Any]] = None,
-    ) -> Reminder:
+    ) -> ReminderEntity:
         if not content:
             payload = {
                 "date_time": date_time,
@@ -30,7 +32,14 @@ class Reminders(Resolvable):
                 recovery_prompt="What should be reminded?",
                 message="content argument is missing",
             )
-        raise NotImplementedError
+        reminder = ReminderEntity(
+            date_time=date_time,
+            person_reminded=person_reminded,
+            content=content,
+        )
+        DataModel.append(reminder)
+        return reminder
+        
 
     # @exception_handler
     @abstractclassmethod
@@ -39,11 +48,11 @@ class Reminders(Resolvable):
         person_reminded: Optional[Contact] = None,
         date_time: Optional[DateTime] = None,
         content: Optional[Content] = None,
-    ) -> Iterable[Reminder]:
+    ) -> Iterable[ReminderEntity]:
         raise NotImplementedError
 
     @abstractclassmethod
-    def delete_reminders(cls, reminders: Union[Reminder, Iterable[Reminder]]) -> bool:
+    def delete_reminders(cls, reminders: Union[ReminderEntity, Iterable[ReminderEntity]]) -> bool:
         data = []
 
         raise NotImplementedError

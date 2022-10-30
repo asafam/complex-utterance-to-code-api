@@ -30,7 +30,6 @@ The following datat types are available:
 - [Content]
 - [DateTime]
 - [EventCalendar]
-- [EventCategory]
 - [EventName]
 - [Location]
 - [MessageContentType]
@@ -45,7 +44,6 @@ The following datat types are available:
 [Content]: types/content
 [DateTime]: types/date_time
 [EventCalendar]: types/event_calendar
-[EventCategory]: types/event_category
 [EventName]: types/event_name
 [Location]: types/location
 [MessageContentType]: types/message_content_type
