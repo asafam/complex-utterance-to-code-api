@@ -68,9 +68,9 @@ We provide a convenient method to return the first (or last) `N` elements (defau
 
 Prefer using this method over Pyton slicing, if you are familiar with it.
 
-```py
-utils.first(items: List[Entity], n: int): List[Entity]
-```
+    ```py
+    utils.first(items: List[Entity], n: int): List[Entity]
+    ```
 
 Parameters:
 
@@ -100,9 +100,9 @@ Return whether every element is True or equivalent (e.g. non-zero or non-empty).
 
 Returns False in case there is at least one element within a series or along a Dataframe axis that is True or equivalent.
 
-```py
-utils.all(items: List[Entity], **kwargs)
-```
+    ```py
+    utils.all(items: List[Entity], **kwargs)
+    ```
 
 Parameters:
 
@@ -140,23 +140,23 @@ Get directions to the nearest pharmacy.
 
 ==}
 
-```py
-destinations = Location.resolve_from_text("pharmacy")
-destinations = utils.sort(destinations, "nearest")
-destination = utils.first(destinations)
-navigation_directions = Navigation.find_directions(
-    destination=destination
-)
-Responder.respond(response=navigation_directions)
-```
+    ```py
+    destinations = Location.resolve_from_text("pharmacy")
+    destinations = utils.sort(destinations, "nearest")
+    destination = utils.first(destinations)
+    navigation_directions = Navigation.find_directions(
+        destination=destination
+    )
+    Responder.respond(response=navigation_directions)
+    ```
 
 ### `most`
 
 Return True whether the majority of items in a list are matching a given criteria.
 
-```py
-utils.most(items: List[Entity], **kwargs): List[Entity]
-```
+    ```py
+    utils.most(items: List[Entity], **kwargs): List[Entity]
+    ```
 
 Parameters:
 
@@ -192,9 +192,9 @@ Some user requests will require additional filtering on the actions results.
 
 This method subsets the data according to specified data types resolved from the text.
 
-```py
-utils.filter(items: List[Entity], **kwargs): List[Entity]
-```
+    ```py
+    utils.filter(items: List[Entity], **kwargs): List[Entity]
+    ```
 
 Parameters:
 
@@ -244,9 +244,9 @@ This method applies a function returns a value to every item of a list according
 
 The `map` function is usually used to extract values on a fetched list of items.
 
-```py
-utils.map(items: List[Entity], text: str): List[Entity]
-```
+    ```py
+    utils.map(items: List[Entity], text: str): List[Entity]
+    ```
 
 Parameters:
 

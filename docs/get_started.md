@@ -247,7 +247,8 @@ Show me the traffic to each Whole Food branch in a 10 miles radius.
 Traffic information is acquired using the `Navigation.find_traffic_info(destination: Optional[Location])` API in the [Navigation] API.
 
 ```py
-destinations = Location.resolve_many_from_text("each Whole Food branch in a 10 miles radius")
+destinations = Location.resolve_many_from_text("each Whole Food branch")
+destinations = utils.filter()
 response = []
 for destination in destinations:
     traffic_info = Navigation.find_traffic_info(destination=destination)
