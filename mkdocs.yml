@@ -29,6 +29,7 @@ nav:
           - WeatherAttribute: reference/types/weather_attribute.md
           - WeatherTemperatureUnit: reference/types/weather_temperature_unit.md
   - Exercises: exercises.md
+  - Tests: tests.md
 theme:
   name: material
   custom_dir: public/material

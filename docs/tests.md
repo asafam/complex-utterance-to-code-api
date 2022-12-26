@@ -23,7 +23,8 @@ The API tests are located in the `tests` directory.
 Throughout this tutorial we will walk you through the creation of a basic Python code for given virtual agent user commands.
 
 !!! note
-Without the generated code we are nto able to run the tests. Yet, we can still write tham in isolation of the generated code. The tests are dependant from the actual generated code.
+
+    Without the generated code we are nto able to run the tests. Yet, we can still write tham in isolation of the generated code. The tests are dependant from the actual generated code.
 
 ### Prerequisites
 
@@ -138,7 +139,8 @@ We then get the first `NavigationDirectionEntity` element from the data model. I
 We then assert that the `origin` attribute of each of the `NavigationDirectionEntity` objects is equal to the `data_origin` object. We also assert that the `destination` attribute of each of the `NavigationDirectionEntity` object is equal to the `data_destination` object.
 
 !!! note
-The `NavigationDirectionEntity` object is an object that we created to seed the test data for the generated code. It is **not** what is returned in `data_model.get_data(NavigationDirectionEntity)`. The objects that are returned are expected to be created in the generated code.
+
+    The `NavigationDirectionEntity` object is an object that we created to seed the test data for the generated code. It is **not** what is returned in `data_model.get_data(NavigationDirectionEntity)`. The objects that are returned are expected to be created in the generated code.
 
 Voila! We have written our second test.
 
@@ -146,7 +148,7 @@ Voila! We have written our second test.
 
 Complex commands allow you to combine multiple simple commands into a single request for your virtual assistant. These commands can be performed in a specific sequence, include conditional statements, or be executed multiple times.
 
-Now let's look at a complex command  where commands are executed in a sequence.
+Now let's look at a complex command where commands are executed in a sequence.
 
 {==
 
@@ -256,6 +258,7 @@ We start by creating a `DataModel` object and setting the `reset` attribute to `
 We then seed the data for the first command. We create a `Contact` object and set the `text` attribute to the contact name. We then append the object to the data model. We do the same for the reminder content. We then seed the data for the condition command. We create a `WeatherAttribute` object and set the `text` attribute to the weather attribute. We then append the object to the data model. We do the same for the `DateTime` object with the date and time. We then append a `WeatherEntity` object to the data model. This object will be used to test the generated code.
 
 !!! note
+
     The `WeatherEntity` object is a special case. It is not an entity that should be created like `MessageEntity` or `ReminderEndity`. It is something the generated code expects to fetch so we create it for that.
 
 We can now write our conditional complex command test.
@@ -314,3 +317,67 @@ Now let's look at a complex command with a loop.
 
 {==
 
+Remind me to walk the dog every day this week.
+
+==}
+
+Seeding the data for a complex command with a loop is a bit more complex than for a simple command. We need to seed the data for the what we will be looping on. In this case, we will be looping on the `DateTime` objects for the days of the week.
+
+```py
+from entities.generic import DateTime
+
+data_model = DataModel(reset=True)
+data_person_reminded = Contact(text="me")
+data_model.append(data_person_reminded)
+data_content = Content(text="walk the dog")
+data_model.append(data_content)
+# seed data for the looping predicate
+data_date_time_monday = DateTime(text="every day this week", value=datetime(2022, 12, 26))
+data_model.append(data_date_time_monday)
+data_date_time_tuesday = DateTime(text="every day this week", value=datetime(2022, 12, 27))
+data_model.append(data_date_time_tuesday)
+data_date_time_wednesday = DateTime(text="every day this week", value=datetime(2022, 12, 28))
+data_model.append(data_date_time_wednesday)
+data_date_time_thursday = DateTime(text="every day this week", value=datetime(2022, 12, 29))
+data_model.append(data_date_time_thursday)
+data_date_time_friday = DateTime(text="every day this week", value=datetime(2022, 12, 30))
+data_model.append(data_date_time_friday)
+data_date_time_saturday = DateTime(text="every day this week", value=datetime(2022, 12, 31))
+data_model.append(data_date_time_saturday)
+data_date_time_sunday = DateTime(text="every day this week", value=datetime(2023, 1, 1))
+data_model.append(data_date_time_sunday)
+```
+
+Like always, we start by creating a `DataModel` object and setting the `reset` attribute to `True`.
+
+We then seed the data for the `Contact` object for the person to be reminded. We create a `Contact` object and set the `text` attribute to the text description of the contact. We then seed the data for the `Content` object for the content of the reminder. We create a `Content` object and set the `text` attribute to the text description of the content. We then append the objects to the data model.
+
+We then seed the data for the `DateTime` objects for the days of the week. We create a `DateTime` object and set the `text` attribute to the text description of the date and time. We then set the `value` attribute to the actual date and time. We then append the object to the data model. We do the same for the other days of the week.
+
+!!! note
+
+    In cases we have multiple objects with the same `text` attribute, we need to set the `value` attribute to a different value for each object. This is because the `text` attribute is used to identify the object. If we have multiple objects with the same `text` attribute, the generated code will not be able to identify the object.
+    The `text` attribute of the `DateTime` objects is the same. This is because the text description of the command is the same for all the days of the week. The `value` attribute is different for each day of the week. This is because the actual date and time is different for each day of the week.
+
+Testing the complex command with a loop is similar to testing a simple command. We test the expected generated objects.
+
+```py
+data_messages = data_model.get_data(ReminderEntity)
+assert len(data_messages) == 7
+data_date_times = [
+    data_date_time_monday,
+    data_date_time_tuesday,
+    data_date_time_wednesday,
+    data_date_time_thursday,
+    data_date_time_friday,
+    data_date_time_saturday,
+    data_date_time_sunday
+]
+for i in range(7):
+    data_message = data_messages[i]
+    assert data_message.data.get("person_reminded") == data_person_reminded
+    assert data_message.data.get("content") == data_content
+    assert data_message.data.get("date_time") == data_date_times[i]
+```
+
+You are now ready to write the test for a complex command with a loop.

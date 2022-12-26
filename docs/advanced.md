@@ -11,7 +11,8 @@ This section also offers some utility methods that you can use in your code. We 
 Use the python `len()` function to return how many items are in the list.
 
 !!! example
-{==
+
+    {==
 
     If I have exactly one meeting on Friday send a message to mom saying that I will be free.
 
@@ -38,7 +39,8 @@ Use the python `len()` function to return how many items are in the list.
 Oftentimes, we will use the `len()` function to verify a certain condition expression is true.
 
 !!! example
-{==
+
+    {==
 
     If I didn't get any message from Louie yesterday text him to call me.
 
@@ -81,7 +83,8 @@ Parameters:
         Number of items to fetch in the list.
 
 !!! example
-{==
+
+    {==
 
     Delete the last 2 messages from Henry.
 
@@ -113,7 +116,8 @@ Parameters:
         Arguments list according to the action API `find_` function arguments.
 
 !!! example
-{==
+
+    {==
 
     Will it rain every day this weekend?
 
@@ -134,11 +138,13 @@ Parameters:
 
 Sort by a specific type.
 
-{==
+!!! example
 
-Get directions to the nearest pharmacy.
+    {==
 
-==}
+    Get directions to the nearest pharmacy.
+
+    ==}
 
     ```py
     destinations = Location.resolve_from_text("pharmacy")
@@ -167,7 +173,8 @@ Parameters:
         Arguments list according to the action API `find_` function arguments.
 
 !!! example
-{==
+
+    {==
 
     Is it going to be mostly rainy over this weekend?
 
@@ -205,25 +212,21 @@ Parameters:
         Arguments list according to the action API `find_` function arguments.
 
 !!! example
-{==
 
-    Route to my office, and if the road is icy then text John to expect traffic.
+    {==
+
+If the road to my office is icy then text John to expect traffic.
 
     ==}
 
     ```py
     destination = Location.resolve_from_text("my office")
-    navigation_directions = Navigation.find_directions(
-        destination=destination
-    )
-    Responder.respond(response=navigation_directions)
-
     nav_road_conditions = NavigationRoadConditions.resolve_from_text("icy")
-    navigation_directions2 = utils.filter(
-        navigation_directions,
+    navigation_directions = Navigation.find_directions(
+        destination=destination,
         nav_road_conditions=nav_road_conditions
     )
-    expr = len(navigation_directions2) > 0
+    expr = len(navigation_directions) > 0
 
     if expr:
         recipient = Contact.resolve_from_text("John")
@@ -257,7 +260,8 @@ Parameters:
         Text value to map the list items according to.
 
 !!! example
-{==
+
+    {==
 
     Email all attendees on the 9am meeting that I am running late.
 
