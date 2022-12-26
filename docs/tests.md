@@ -16,7 +16,7 @@ We evluate the quality of the text to code model by testing the generated code u
 
 We release a set of API libraries that simulate the functionality of the APIs that are used in the generated code. These libraries are used to test the generated code in isolation. The API libraries and their spec are listed in the [API](/reference/) reference page.
 
-The API tests are located in the `tests` directory.
+The API tests are located in the [`tests` directory](https://github.com/asafbiu/thesis-api/tree/main/tests).
 
 ## Getting started with API tests
 
@@ -33,11 +33,9 @@ Throughout this tutorial we will walk you through the creation of a basic Python
 
 That's it. We are ready to start writing tests.
 
-### Writing tests
+### Simple command
 
 Let's learn by example.
-
-#### Simple command
 
 Simple commands express a single action that the virtual assistant is expected to perform.
 
@@ -81,7 +79,7 @@ We then get the first element from the data list and assert that the `recipient`
 
 That's it. We have written our first test.
 
-#### Another simple command
+### Another simple command
 
 Let's look at another simple command.
 
@@ -144,7 +142,7 @@ We then assert that the `origin` attribute of each of the `NavigationDirectionEn
 
 Voila! We have written our second test.
 
-#### Sequence complex command
+### Sequence complex command
 
 Complex commands allow you to combine multiple simple commands into a single request for your virtual assistant. These commands can be performed in a specific sequence, include conditional statements, or be executed multiple times.
 
@@ -212,7 +210,7 @@ We test the expected generated objects for the first command. We then test the e
 
 Congratulations! You have now written your first test for a complex command.
 
-#### Conditional complex command
+### Conditional complex command
 
 Conditional complex commands allow you to condition the execution of one command by checking the result of another command. This is useful when you want to execute a command only if a previous command was successful (or not).
 
@@ -309,7 +307,7 @@ We test that no `ReminderEntity` objects were generated. This is because the gen
 
 Congratulations! You have now written the test for a conditional complex command.
 
-#### Complex command with a loop
+### Complex command with a loop
 
 Complex commands with a loop allow you to execute a command multiple times. This is useful when you want to execute a command multiple times with different data. The text description of the commands expresses the multiple executions of the command.
 
