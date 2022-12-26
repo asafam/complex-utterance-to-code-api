@@ -2,5 +2,9 @@ from entities.resolvable import Resolvable
 from entities.entity import Entity
 
 
-class Timer(Entity, Resolvable):
+class TimerEntity(Entity, Resolvable):
+    pass
+
+
+class AlarmEntity(Entity, Resolvable):
     pass

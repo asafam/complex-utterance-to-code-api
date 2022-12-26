@@ -1,30 +1,59 @@
-from typing import TypeVar, List
+from typing import Optional, TypeVar, List
 
 
 T = TypeVar("T")
 
 class DataModel:
     
-    data = []
+    _data : List = []
+    _output : List = []
     
-    def __init__(self, data) -> None:
-        pass
-    
-    @classmethod
-    def initialize(cls) -> None:
-        cls.data = []
-    
-    @classmethod
-    def set_data(cls, data):
-        cls.data = data
+    def __new__(cls, reset = False):
+        if not hasattr(cls, '_instance'):
+            cls._instance = super(DataModel, cls).__new__(cls)
         
-    @classmethod
-    def get_data(cls, T) -> List:
-        private_data = [x for x in cls.data if type(x) == T]
-        return private_data
+        if reset:
+            cls._instance.reset()
+            
+        return cls._instance
     
-    @classmethod
-    def append(cls, item: T) -> None:
-        cls.data.append(item)
+    def append(self, item: T) -> None:
+        self._data.append(item)
+        
+    def append_output_data(self, result, context = None) -> None:
+        self._output.append(result)
+    
+    def delete(self, T) -> None:
+        self._data = [x for x in self._data if x != T]
+        return
+    
+    def initialize(self) -> None:
+        self._data = []
+        self._output = []
+        
+    def get_data(self, T) -> List:
+        items = [x for x in self._data if type(x) == T]
+        return items
+    
+    def get_response(self, T) -> List[T]:
+        if type(T) == list:
+            items = [
+                x for x 
+                in self._output 
+                if type(x) == type(T) 
+                     and len(T) > 0 
+                     and len(x) > 0 
+                     and type(x[0]) == T[0]
+            ]
+        else:
+            items = [x for x in self._output if type(x) == T]
+        return items
+    
+    def reset(self):
+        self._data = []
+        self._output = []
+    
+    def set_data(self, data):
+        self._data = data
         
     

@@ -20,8 +20,8 @@ class Navigation:
         avoid_nav_road_condition: Optional[NavigationRoadCondition] = None,
         nav_travel_method: Optional[NavigationTravelMethod] = None,
     ) -> Iterable[NavigationDirectionEntity]:
-
-        data = DataModel.get_data(NavigationDirectionEntity)
+        data_model = DataModel()
+        data = data_model.get_data(NavigationDirectionEntity)
         if destination:
             data = [x for x in data if x.data.get("destination") == destination]
 
@@ -76,7 +76,7 @@ class Navigation:
         cls,
         origin: Optional[Location] = None,
         destination: Optional[Location] = None,
-        departure_date_time: Optional[DateTime] = None,
+        arrival_date_time: Optional[DateTime] = None,
         avoid_nav_road_condition: Optional[NavigationRoadCondition] = None,
         nav_travel_method: Optional[NavigationTravelMethod] = None,
     ) -> Iterable[NavigationEstimatedArrivalEntity]:
@@ -105,7 +105,8 @@ class Navigation:
         avoid_nav_road_condition: Optional[NavigationRoadCondition] = None,
         nav_travel_method: Optional[NavigationTravelMethod] = None,
     ) -> Iterable[NavigationTrafficInfoEntity]:
-        data = DataModel.get_data(NavigationTrafficInfoEntity)
+        data_model = DataModel()
+        data = data_model.get_data(NavigationTrafficInfoEntity)
         if location:
             data = [x for x in data if x.data.get("location") == location]
 

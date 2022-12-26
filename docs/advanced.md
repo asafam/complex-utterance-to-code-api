@@ -11,7 +11,7 @@ This section also offers some utility methods that you can use in your code. We 
 Use the python `len()` function to return how many items are in the list.
 
 !!! example
-    {==
+{==
 
     If I have exactly one meeting on Friday send a message to mom saying that I will be free.
 
@@ -25,7 +25,7 @@ Use the python `len()` function to return how many items are in the list.
         date_time=date_time
     )
     expr = len(events) == 1
-    
+
     if expr:
         recipient = Contact.resolve_from_text("mom")
         content = Content.resolve_from_text("I will be free")
@@ -38,7 +38,7 @@ Use the python `len()` function to return how many items are in the list.
 Oftentimes, we will use the `len()` function to verify a certain condition expression is true.
 
 !!! example
-    {==
+{==
 
     If I didn't get any message from Louie yesterday text him to call me.
 
@@ -52,7 +52,7 @@ Oftentimes, we will use the `len()` function to verify a certain condition expre
         date_time=date_time
     )
     expr = len(messages) == 0
-    
+
     if expr:
         recipient = sender
         content = Content.resolve_from_text("call me")
@@ -68,7 +68,7 @@ We provide a convenient method to return the first (or last) `N` elements (defau
 
 Prefer using this method over Pyton slicing, if you are familiar with it.
 
-``` py
+```py
 utils.first(items: List[Entity], n: int): List[Entity]
 ```
 
@@ -81,7 +81,7 @@ Parameters:
         Number of items to fetch in the list.
 
 !!! example
-    {==
+{==
 
     Delete the last 2 messages from Henry.
 
@@ -100,7 +100,7 @@ Return whether every element is True or equivalent (e.g. non-zero or non-empty).
 
 Returns False in case there is at least one element within a series or along a Dataframe axis that is True or equivalent.
 
-``` py
+```py
 utils.all(items: List[Entity], **kwargs)
 ```
 
@@ -113,7 +113,7 @@ Parameters:
         Arguments list according to the action API `find_` function arguments.
 
 !!! example
-    {==
+{==
 
     Will it rain every day this weekend?
 
@@ -136,28 +136,25 @@ Sort by a specific type.
 
 {==
 
-Get directions to the closest pharmacy.
+Get directions to the nearest pharmacy.
 
 ==}
 
-``` py
-location = Location.resolve_from_text("pharmacy")
+```py
+destinations = Location.resolve_from_text("pharmacy")
+destinations = utils.sort(destinations, "nearest")
+destination = utils.first(destinations)
 navigation_directions = Navigation.find_directions(
-    location=location
+    destination=destination
 )
-modifier = Modifier.resolve_from_text()
-navigation_directions = utils.sort(navigation_directions, "closest pharmacy")
 Responder.respond(response=navigation_directions)
 ```
-
-!!! note
-    In this example we sort the directions routes by "closest pharmacy" as these are sorted by default by time and not distance.
 
 ### `most`
 
 Return True whether the majority of items in a list are matching a given criteria.
 
-``` py
+```py
 utils.most(items: List[Entity], **kwargs): List[Entity]
 ```
 
@@ -170,7 +167,7 @@ Parameters:
         Arguments list according to the action API `find_` function arguments.
 
 !!! example
-    {==
+{==
 
     Is it going to be mostly rainy over this weekend?
 
@@ -195,7 +192,7 @@ Some user requests will require additional filtering on the actions results.
 
 This method subsets the data according to specified data types resolved from the text.
 
-``` py
+```py
 utils.filter(items: List[Entity], **kwargs): List[Entity]
 ```
 
@@ -208,7 +205,7 @@ Parameters:
         Arguments list according to the action API `find_` function arguments.
 
 !!! example
-    {==
+{==
 
     Route to my office, and if the road is icy then text John to expect traffic.
 
@@ -237,7 +234,7 @@ Parameters:
         )
     ```
 
-We first query for directions to a specific destination ("the office") and show it to the user. 
+We first query for directions to a specific destination ("the office") and show it to the user.
 
 Then, we need to filter the results for any matches to the requested criteria (in this example: road conditions are "icy").
 
@@ -247,7 +244,7 @@ This method applies a function returns a value to every item of a list according
 
 The `map` function is usually used to extract values on a fetched list of items.
 
-``` py
+```py
 utils.map(items: List[Entity], text: str): List[Entity]
 ```
 
@@ -260,7 +257,7 @@ Parameters:
         Text value to map the list items according to.
 
 !!! example
-    {==
+{==
 
     Email all attendees on the 9am meeting that I am running late.
 

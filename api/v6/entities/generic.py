@@ -59,5 +59,9 @@ class Location(Entity, Resolvable):
     pass
 
 
+class Amount(Entity, Resolvable):
+    pass
+
+
 class TimeDuration(Entity, Resolvable):
     pass

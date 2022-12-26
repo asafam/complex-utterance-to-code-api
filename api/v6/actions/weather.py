@@ -6,7 +6,7 @@ from providers.data_model import DataModel
 
 class Weather():
     
-    @abstractclassmethod
+    @classmethod
     def find_weather_forecasts(
         cls,
         date_time: Optional[Union[DateTime, List[DateTime]]] = None,
@@ -14,7 +14,8 @@ class Weather():
         weather_attribute: Optional[WeatherAttribute] = None,
         weather_temperature_unit: Optional[WeatherTemperature] = None
     ) -> Iterable[WeatherForecastEntity]:
-        data = DataModel.get_data(WeatherForecastEntity)
+        data_model = DataModel()
+        data = data_model.get_data(WeatherForecastEntity)
         if date_time:
             if type(date_time) == list:
                 data = [x for x in data if x.data.get('date_time') in date_time]

@@ -9,12 +9,11 @@ from providers.data_model import DataModel
 
 
 class Reminders(Resolvable):
-    
     @classmethod
     def create_reminder(
         cls,
-        person_reminded: Contact,
         content: Content,
+        person_reminded: Optional[Contact] = None,
         date_time: Optional[DateTime] = None,
         calendar_event: Optional[CalendarEvent] = None,
         recovered_args: Optional[Mapping[str, Any]] = None,
@@ -37,9 +36,9 @@ class Reminders(Resolvable):
             person_reminded=person_reminded,
             content=content,
         )
-        DataModel.append(reminder)
+        data_model = DataModel()
+        data_model.append(reminder)
         return reminder
-        
 
     # @exception_handler
     @abstractclassmethod
@@ -52,7 +51,9 @@ class Reminders(Resolvable):
         raise NotImplementedError
 
     @abstractclassmethod
-    def delete_reminders(cls, reminders: Union[ReminderEntity, Iterable[ReminderEntity]]) -> bool:
+    def delete_reminders(
+        cls, reminders: Union[ReminderEntity, Iterable[ReminderEntity]]
+    ) -> bool:
         data = []
 
         raise NotImplementedError

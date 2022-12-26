@@ -1,5 +1,0 @@
-
-
-class Manager():
-    
-    pass

@@ -15,10 +15,9 @@ class Resolvable(Generic[T]):
 
     # @exception_handler
     @classmethod
-    def resolve_from_text(
-        T, text: str, recovered_text: Optional[str] = None
-    ) -> T:
-        data = DataModel.get_data(T)
+    def resolve_from_text(T, text: str, recovered_text: Optional[str] = None) -> T:
+        data_model = DataModel()
+        data = data_model.get_data(T)
         if data is None:
             raise NotImplementedError()
 
@@ -29,12 +28,13 @@ class Resolvable(Generic[T]):
         else:
             result = items[0]
             return result
-        
+
     @classmethod
     def resolve_many_from_text(
         T, text: str, recovered_text: Optional[str] = None
     ) -> List[T]:
-        data = DataModel.get_data(T)
+        data_model = DataModel()
+        data = data_model.get_data(T)
         if data is None:
             raise NotImplementedError()
 
@@ -51,13 +51,19 @@ class Resolvable(Generic[T]):
     def resolve_from_entity(
         T,
         entity: Union[T, List[T]],
+        text: Optional[str] = None,
         recovered_entity: Optional[Union[T, List[T]]] = None,
     ) -> T:
-        data = DataModel.get_data(T)
+        data_model = DataModel()
+        data = data_model.get_data(T)
         if data is None:
             raise NotImplementedError()
 
-        items = [x for x in data if x.data.get("value") == entity]
+        items = [
+            x
+            for x in data
+            if x.data.get("value") == entity and x.data.get("text") == text
+        ]
 
         if len(items) == 0:
             raise ValueError()

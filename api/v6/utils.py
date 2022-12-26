@@ -14,10 +14,5 @@ def last(a: Iterable[T]) -> T:
     return first
 
 
-def sort(a: Iterable[T]) -> Iterable[T]:
-    return a
-
-
-def day_of_the_week(d: DateTime) -> str:
-    # ... add implementation here
-    return ''
+def sort(a: Iterable[T], text: str) -> Iterable[T]:
+    return sorted(a, key=lambda x: x.data.get(text))
