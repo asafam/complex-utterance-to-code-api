@@ -347,37 +347,18 @@ data_model.append(data_person_reminded)
 data_content = Content(text="walk the dog")
 data_model.append(data_content)
 # seed data for the looping predicate
-data_date_time_monday = DateTime(text="every day this week", value=datetime(2022, 12, 26))
-data_model.append(data_date_time_monday)
-data_date_time_tuesday = DateTime(text="every day this week", value=datetime(2022, 12, 27))
-data_model.append(data_date_time_tuesday)
-data_date_time_wednesday = DateTime(text="every day this week", value=datetime(2022, 12, 28))
-data_model.append(data_date_time_wednesday)
-data_date_time_thursday = DateTime(text="every day this week", value=datetime(2022, 12, 29))
-data_model.append(data_date_time_thursday)
-data_date_time_friday = DateTime(text="every day this week", value=datetime(2022, 12, 30))
-data_model.append(data_date_time_friday)
-data_date_time_saturday = DateTime(text="every day this week", value=datetime(2022, 12, 31))
-data_model.append(data_date_time_saturday)
-data_date_time_sunday = DateTime(text="every day this week", value=datetime(2023, 1, 1))
-data_model.append(data_date_time_sunday)
-
-data_date_times = [
-    data_date_time_monday,
-    data_date_time_tuesday,
-    data_date_time_wednesday,
-    data_date_time_thursday,
-    data_date_time_friday,
-    data_date_time_saturday,
-    data_date_time_sunday
-]
+data_date_times = []
+for i in range(7):
+    data_date_time = DateTime(text="every day this week", value=datetime(2022, 12, 26) + timedelta(days=i))
+    data_model.append(data_date_time)
+    data_date_times.append(data_date_time)
 ```
 
 Like always, we start by creating a `DataModel` object and setting the `reset` attribute to `True`.
 
 We then seed the data for the `Contact` object for the person to be reminded. We create a `Contact` object and set the `text` attribute to the text description of the contact. We then seed the data for the `Content` object for the content of the reminder. We create a `Content` object and set the `text` attribute to the text description of the content. We then append the objects to the data model.
 
-We then seed the data for the `DateTime` objects for the days of the week. We create a `DateTime` object and set the `text` attribute to the text description of the date and time. We then set the `value` attribute to the actual date and time. We then append the object to the data model. We do the same for the other days of the week.
+We then seed the data for the `DateTime` objects for the days of the week. In this case we arbitrarily assume `every day this week` will be the 7 days of the week (you can freely set a different amount of consecutive days). We create a `DateTime` object and set the `text` attribute to the text description of the date and time. We then set the `value` attribute to the actual date and time. We then append the object to the data model. We do the same for the other days of the week.
 
 !!! note
 
