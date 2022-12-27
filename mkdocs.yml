@@ -30,6 +30,7 @@ nav:
           - WeatherTemperatureUnit: reference/types/weather_temperature_unit.md
   - Exercises: exercises.md
   - Tests: tests.md
+  - "Excercise writing tests": exercise_writing_tests.md
 theme:
   name: material
   custom_dir: public/material

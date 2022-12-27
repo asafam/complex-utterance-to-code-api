@@ -52,7 +52,9 @@ This command should return an object of [text message](/reference/actions/messag
 Every test should start by seeding the data. In this case we need to seed the data with the `recipient` and `content` attributes. We expect the generated code to create a `MessageEntity` object with the `recipient` and `message` attributes.
 
 ```py
+from providers.data_model import DataModel
 from entities.generic import Contact, Content
+from entities.message import MessageEntity
 
 data_model = DataModel(reset=True)
 data_recipient = Contact(text="Karen")
@@ -61,7 +63,9 @@ data_content = Content(text="I will be late")
 data_model.append(data_content)
 ```
 
-We start with creating a `DataModel` object and setting the `reset` attribute to `True`. This will reset the data model and remove all the data that was seeded before.
+We start by importing the necessary classes. Don't bother yourself too much with it. These are just the classes that will be used to seed the data and the test itself so you can always go back and add them as you write the test.
+
+Next we are creating a `DataModel` object and setting the `reset` attribute to `True`. This will reset the data model and remove all the data that was seeded before.
 
 We then create a `Contact` object and set the `text` attribute to the contact name. We repeat the same process for the `Content` object with the expected message content.
 
@@ -96,6 +100,7 @@ This command should return a list of [navigation directions](/reference/actions/
 We remind you that every test should start by seeding the data. In this case we need to seed the data with the `origin` and `destination` locations. We can do this by creating a `Location` object and setting the `text` attribute to the location name.
 
 ```py
+from providers.data_model import DataModel
 from entities.generic import Location
 from entities.navigation import NavigationDirectionEntity
 
@@ -161,6 +166,7 @@ This command should return a list of [navigation directions](/reference/actions/
 We remind you that every test should start by seeding the data. In this case we need to seed the data with the `origin` and `destination` locations. We also need to seed the data with the `Contact` and `Content` objects.
 
 ```py
+from providers.data_model import DataModel
 from entities.generic import Contact, Content, Location
 from entities.navigation import NavigationDirectionEntity
 
@@ -231,8 +237,10 @@ This command should return a [reminder](/reference/actions/reminder/#remindercre
 Like before, we start by seeding the data. In this case we need to seed the data with the `Content` of the reminder, the `Contact` or the person being reminded, the `WeatherAttribute` and the `DateTime` objects for the weather forecasts.
 
 ```py
+from providers.data_model import DataModel
 from entities.generic import Contact, Content, DateTime
-from entities.weather import WeatherAttribute
+from entities.reminder import ReminderEntity
+from entities.weather import WeatherAttribute, WeatherForecastEntity
 
 data_model = DataModel(reset=True)
 # seed data for the 1st command
@@ -246,14 +254,16 @@ data_model.append(data_weather_attribute)
 data_date_time_tomorrow = DateTime(text="tomorrow")
 data_model.append(data_date_time_tomorrow)
 data_model.append(
-    WeatherEntity(
+    WeatherForecastEntity(
         attribute=data_weather_attribute,
         date_time=data_date_time_tomorrow
     )
 )
 ```
 
-We start by creating a `DataModel` object and setting the `reset` attribute to `True`.
+We start by importing the necessary classes. Don't bother yourself too much with it. These are just the classes that will be used to seed the data and the test itself so you can always go back and add them as you write the test.
+
+Next we are creating a `DataModel` object and setting the `reset` attribute to `True`.
 
 We then seed the data for the first command. We create a `Contact` object and set the `text` attribute to the contact name. We then append the object to the data model. We do the same for the reminder content. We then seed the data for the condition command. We create a `WeatherAttribute` object and set the `text` attribute to the weather attribute. We then append the object to the data model. We do the same for the `DateTime` object with the date and time. We then append a `WeatherEntity` object to the data model. This object will be used to test the generated code.
 
@@ -276,8 +286,10 @@ With conditional complex commands, we only test the expected generated object. T
 We now need to test the scenario where the condition is not met. We will do this by changing the weather attribute to something that is not rainy (any text value other than `rains` will do).
 
 ```py
+from providers.data_model import DataModel
 from entities.generic import Contact, Content, DateTime
-from entities.weather import WeatherAttribute
+from entities.reminder import ReminderEntity
+from entities.weather import WeatherAttribute, WeatherForecastEntity
 
 data_model = DataModel(reset=True)
 # seed data for the 1st command
@@ -291,7 +303,7 @@ data_model.append(data_weather_attribute)
 data_date_time_tomorrow = DateTime(text="tomorrow")
 data_model.append(data_date_time_tomorrow)
 data_model.append(
-    WeatherEntity(
+    WeatherForecastEntity(
         attribute=data_weather_attribute,
         date_time=data_date_time_tomorrow
     )
@@ -324,7 +336,10 @@ Remind me to walk the dog every day this week.
 Seeding the data for a complex command with a loop is a bit more complex than for a simple command. We need to seed the data for the what we will be looping on. In this case, we will be looping on the `DateTime` objects for the days of the week.
 
 ```py
-from entities.generic import DateTime
+from providers.data_model import DataModel
+from entities.generic import DateTime, Contact, Content
+from entities.reminder import ReminderEntity
+from datetime import datetime, timedelta
 
 data_model = DataModel(reset=True)
 data_person_reminded = Contact(text="me")
