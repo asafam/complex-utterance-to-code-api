@@ -361,6 +361,16 @@ data_date_time_saturday = DateTime(text="every day this week", value=datetime(20
 data_model.append(data_date_time_saturday)
 data_date_time_sunday = DateTime(text="every day this week", value=datetime(2023, 1, 1))
 data_model.append(data_date_time_sunday)
+
+data_date_times = [
+    data_date_time_monday,
+    data_date_time_tuesday,
+    data_date_time_wednesday,
+    data_date_time_thursday,
+    data_date_time_friday,
+    data_date_time_saturday,
+    data_date_time_sunday
+]
 ```
 
 Like always, we start by creating a `DataModel` object and setting the `reset` attribute to `True`.
@@ -378,21 +388,16 @@ Testing the complex command with a loop is similar to testing a simple command. 
 
 ```py
 data_reminders = data_model.get_data(ReminderEntity)
-assert len(data_reminders) == 7
-data_date_times = [
-    data_date_time_monday,
-    data_date_time_tuesday,
-    data_date_time_wednesday,
-    data_date_time_thursday,
-    data_date_time_friday,
-    data_date_time_saturday,
-    data_date_time_sunday
-]
-for i in range(7):
-    data_reminder = data_reminders[i]
-    assert test_equal(data_reminder.data.get("person_reminded"), data_person_reminded)
-    assert test_equal(data_reminder.data.get("content"), data_content)
-    assert test_equal(data_reminder.data.get("date_time"), data_date_times[i])
+assert len(data_reminders) == len(data_date_times)
+for data_date_time_day in data_date_times:
+    assert filter(
+        lambda data_reminder: test_equal(data_reminder.data.get("person_reminded"), data_person_reminded)
+            and test_equal(data_reminder.data.get("content"), data_content)
+            and test_equal(data_reminder.data.get("date_time"), data_date_time_day),
+        data_reminders
+    )
 ```
+
+We want to check that a reminder was created for each day, the order does not matter. In the spirit, we get the `ReminderEntity` objects from the data model. We then test that the number of `ReminderEntity` objects is equal to the number of days we seeded in the test data. We then create a list of the `DateTime` objects for the days of the week. We then loop through the list of `DateTime` objects. For each `DateTime` object, we test that there is a `ReminderEntity` object with the same `person_reminded`, `content`, and `date_time` attributes.
 
 You are now ready to write the test for a complex command with a loop.
