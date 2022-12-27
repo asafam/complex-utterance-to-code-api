@@ -37,13 +37,13 @@ Check the weather for the 4th of July and send a text to Grandpa that he should 
     data_weather_forecasts_list = data_model.get_data(WeatherForecast)
     assert len(data_weather_forecasts_list) == 1
     data_weather_forecasts = data_weather_forecasts_list[0]
-    assert data_weather_forecasts[0].data.get("date_time") == data_date_time\
+    assert test_equal(data_weather_forecasts[0].data.get("date_time"), data_date_time)
     # test assertions for the 2nd command
     data_messages = data_model.get_data(MessageEntity)
     assert len(data_messages) == 1
     data_message = data_messages[0]
-    assert data_message.data.get("recipient") == data_recipient
-    assert data_message.data.get("content") == data_content
+    assert test_equal(data_message.data.get("recipient"), data_recipient)
+    assert test_equal(data_message.data.get("content"), data_content)
     ```
 
 ## Exercise 2
@@ -85,8 +85,8 @@ If it rains tomorrow message dad that I will be running late.
     data_messages = data_model.get_data(MessageEntity)
     assert len(data_messages) == 1
     data_message = data_messages[0]
-    assert data_message.data.get("recipient") == data_recipient
-    assert data_message.data.get("content") == data_content
+    assert test_equal(data_message.data.get("recipient"), data_recipient)
+    assert test_equal(data_message.data.get("content"), data_content)
     ```
 
     Additional test for the case the condition is not met:
@@ -153,13 +153,13 @@ Set a timer for one hour and text Stacy that dinner will be ready in one hour.
     data_timers = data_model.get_data(TimerEntity)
     assert len(data_timers) == 1
     data_timer = data_timers[0]
-    assert data_timer.data.get("duration") == data_duration
+    assert test_equal(data_timer.data.get("duration"), data_duration)
 
     data_messages = data_model.get_data(MessageEntity)
     assert len(data_messages) == 1
     data_message = data_messages[0]
-    assert data_message.data.get("recipient") == data_contact
-    assert data_message.data.get("content") == data_content
+    assert test_equal(data_message.data.get("recipient"), data_contact)
+    assert test_equal(data_message.data.get("content"), data_content)
     ```
 
 ## Exercise 4
@@ -189,14 +189,14 @@ Send Tyler a text saying hi and send one to Susan too.
     data_model.append(data_content)
 
     # test assertions
-    data_messages_lists = data_model.get_response([MessageEntity])
-    assert len(data_messages_lists) == 2
-    data_message1 = data_messages_lists[0]
-    assert data_message1.data.get("recipient") == data_contact1
-    assert data_message1.data.get("content") == data_content
-    data_message2 = data_messages_lists[1]
-    assert data_message2.data.get("recipient") == data_contact2
-    assert data_message2.data.get("content") == data_content
+    data_messages = data_model.get_response(MessageEntity)
+    assert len(data_messages) == 2
+    data_message1 = data_messages[0]
+    assert test_equal(data_message1.data.get("recipient"), data_contact1)
+    assert test_equal(data_message1.data.get("content"), data_content)
+    data_message2 = data_messages[1]
+    assert test_equal(data_message2.data.get("recipient"), data_contact2)
+    assert test_equal(data_message2.data.get("content"), data_content)
     ```
 
 ## Exercise 5
@@ -248,8 +248,8 @@ If I don't have anything scheduled on the 20th of this month on my calendar, mes
     data_messages = data_model.get_data(MessageEntity)
     assert len(data_messages) == 1
     data_message = data_messages[0]
-    assert data_message.data.get("recipient") == data_recipient
-    assert data_message.data.get("content") == data_content
+    assert test_equal(data_message.data.get("recipient"), data_recipient)
+    assert test_equal(data_message.data.get("content"), data_content)
     ```
 
     We write another test for the case the condition is not met:

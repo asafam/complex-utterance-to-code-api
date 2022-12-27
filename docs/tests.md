@@ -75,13 +75,13 @@ We can now write the test.
 data_messages = data_model.get_data(MessageEntity)
 assert len(data_messages) == 1
 data_message = data_messages[0]
-assert data_message[0].data.get("recipient") == data_recipient
-assert data_message[0].data.get("message") == data_content
+assert test_equal(data_message[0].data.get("recipient"), data_recipient)
+assert test_equal(data_message[0].data.get("content"), data_content)
 ```
 
 We start by getting the data from the data model. We use the `get_data` method to get the data with the `MessageEntity` type. We then assert that the data list has only one element. We expect our generated code to create only one `MessageEntity` object.
 
-We then get the first element from the data list and assert that the `recipient` attribute is set to the `Contact` object that we seeded before. We also assert that the `message` attribute is set to the `Content` object that we seeded before.
+We then get the first element from the data list and assert that the `recipient` attribute is set to the `Contact` object that we seeded before. We also assert that the `message` attribute is set to the `Content` object that we seeded before. To assert that the attributes are set to the correct objects we use the `test_equal` function. This function is used to compare two objects.
 
 That's it. We have written our first test.
 
@@ -131,10 +131,10 @@ data_navigation_directions_list = data_model.get_data(NavigationDirectionEntity)
 assert len(data_navigation_directions_list) == 1
 data_navigation_directions = data_navigation_directions_list[0]
 assert len(data_navigation_directions) == 2
-assert data_navigation_directions[0].data.get("origin") == data_origin
-assert data_navigation_directions[0].data.get("destination") == data_destination
-assert data_navigation_directions[1].data.get("origin") == data_origin
-assert data_navigation_directions[1].data.get("destination") == data_destination
+assert test_equal(data_navigation_directions[0].data.get("origin"), data_origin)
+assert test_equal(data_navigation_directions[0].data.get("destination"), data_destination)
+assert test_equal(data_navigation_directions[1].data.get("origin"), data_origin)
+assert test_equal(data_navigation_directions[1].data.get("destination"), data_destination)
 ```
 
 We start by getting the data from the data model. We get the data with the `NavigationDirectionEntity` object. We then assert that the length of the data is equal to 1. This means that we have one list of `NavigationDirectionEntity` objects in the data model, and that our generated code is matching the text description and created only a single `NavigationDirectionEntity` list of objects.
@@ -202,16 +202,16 @@ data_navigation_directions_list = data_model.get_data(NavigationDirectionEntity)
 assert len(data_navigation_directions_list) == 1
 data_navigation_directions = data_navigation_directions_list[0]
 assert len(data_navigation_directions) == 2
-assert data_navigation_directions[0].data.get("origin") == data_origin
-assert data_navigation_directions[0].data.get("destination") == data_destination
-assert data_navigation_directions[1].data.get("origin") == data_origin
-assert data_navigation_directions[1].data.get("destination") == data_destination
+assert test_equal(data_navigation_directions[0].data.get("origin"), data_origin)
+assert test_equal(data_navigation_directions[0].data.get("destination"), data_destination)
+assert test_equal(data_navigation_directions[1].data.get("origin"), data_origin)
+assert test_equal(data_navigation_directions[1].data.get("destination"), data_destination)
 
 data_messages = data_model.get_data(MessageEntity)
 assert len(data_messages) == 1
 data_message = data_messages[0]
-assert data_message.data.get("recipient") == data_recipient
-assert data_message.data.get("content") == data_content
+assert test_equal(data_message.data.get("recipient"), data_recipient)
+assert test_equal(data_message.data.get("content"), data_content)
 ```
 
 We test the expected generated objects for the first command. We then test the expected generated objects for the second command. Nothing new here.
@@ -277,8 +277,8 @@ We can now write our conditional complex command test.
 data_messages = data_model.get_data(ReminderEntity)
 assert len(data_messages) == 1
 data_message = data_messages[0]
-assert data_message.data.get("person_reminded") == data_person_reminded
-assert data_message.data.get("content") == data_content
+assert test_equal(data_message.data.get("person_reminded"), data_person_reminded)
+assert test_equal(data_message.data.get("content"), data_content)
 ```
 
 With conditional complex commands, we only test the expected generated object. This is because the generated code will not generate any objects when the condition is not met. We don't test the expected generated objects for the condition.
@@ -377,8 +377,8 @@ We then seed the data for the `DateTime` objects for the days of the week. We cr
 Testing the complex command with a loop is similar to testing a simple command. We test the expected generated objects.
 
 ```py
-data_messages = data_model.get_data(ReminderEntity)
-assert len(data_messages) == 7
+data_reminders = data_model.get_data(ReminderEntity)
+assert len(data_reminders) == 7
 data_date_times = [
     data_date_time_monday,
     data_date_time_tuesday,
@@ -389,10 +389,10 @@ data_date_times = [
     data_date_time_sunday
 ]
 for i in range(7):
-    data_message = data_messages[i]
-    assert data_message.data.get("person_reminded") == data_person_reminded
-    assert data_message.data.get("content") == data_content
-    assert data_message.data.get("date_time") == data_date_times[i]
+    data_reminder = data_reminders[i]
+    assert test_equal(data_reminder.data.get("person_reminded"), data_person_reminded)
+    assert test_equal(data_reminder.data.get("content"), data_content)
+    assert test_equal(data_reminder.data.get("date_time"), data_date_times[i])
 ```
 
 You are now ready to write the test for a complex command with a loop.
