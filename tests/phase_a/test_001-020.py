@@ -66,7 +66,9 @@ def test2_a():
     """
     # test data
     data_model = DataModel(reset=True)
-    data_date_time = DateTime(text="tomorrow morning", value=datetime.now() + timedelta(days=1))
+    data_date_time = DateTime(
+        text="tomorrow morning", value=datetime.now() + timedelta(days=1)
+    )
     data_model.append(data_date_time)
     data_weather_attribute = WeatherAttribute(text="raining", value="rain")
     data_model.append(data_weather_attribute)
@@ -108,7 +110,9 @@ def test2_b():
     """
     # test data
     data_model = DataModel(reset=True)
-    data_date_time = DateTime(text="tomorrow morning", value=datetime.now() + timedelta(days=1))
+    data_date_time = DateTime(
+        text="tomorrow morning", value=datetime.now() + timedelta(days=1)
+    )
     data_model.append(data_date_time)
     data_weather_attribute = WeatherAttribute(text="raining", value="rain")
     data_model.append(data_weather_attribute)
@@ -1059,9 +1063,9 @@ def test_y():
     """
     # test data
     data_model = DataModel(reset=True)
-    data_contact1 = DateTime(text="Tyler", value="Tyler")
+    data_contact1 = Contact(text="Tyler", value="Tyler")
     data_model.append(data_contact1)
-    data_contact2 = DateTime(text="Susan", value="Susan")
+    data_contact2 = Contact(text="Susan", value="Susan")
     data_model.append(data_contact2)
     data_content = Content(text="hi", value="hi")
     data_model.append(data_content)
