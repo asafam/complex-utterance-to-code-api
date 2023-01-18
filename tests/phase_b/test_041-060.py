@@ -20,7 +20,7 @@ from actions.shopping import Shopping
 from actions.weather import Weather
 from providers.data_model import DataModel
 from datetime import datetime, timedelta
-import utils
+from tests.test_utils import *
 
 
 def test41():

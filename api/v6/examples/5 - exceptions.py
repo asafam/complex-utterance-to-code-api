@@ -1,7 +1,7 @@
 from itertools import groupby
 from typing.calendar import (
     CalendarEvent,
-    CalendarEventCategory,
+    CalendarEventType,
     CalendarEventName,
     CalendarName,
 )

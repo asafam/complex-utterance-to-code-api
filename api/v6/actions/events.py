@@ -1,5 +1,5 @@
 from abc import abstractclassmethod
-from typing import Iterable, Optional, List, Union
+from typing import List, Optional, List, Union
 from entities.generic import *
 from entities.events import *
 from providers.data_model import DataModel
@@ -13,8 +13,8 @@ class Events:
         location: Optional[Location] = None,
         event_name: Optional[EventName] = None,
         event_calendar: Optional[EventCalendar] = None,
-        event_category: Optional[EventCategory] = None,
-    ) -> Iterable[EventEntity]:
+        event_category: Optional[EventType] = None,
+    ) -> List[EventEntity]:
         data_model = DataModel()
         data = data_model.get_data(EventEntity)
         if date_time:
@@ -38,9 +38,7 @@ class Events:
         return data
 
     @classmethod
-    def find_events_tickets(
-        cls, events: Iterable[EventEntity]
-    ) -> Iterable[EventTicketEntity]:
+    def find_events_tickets(cls, events: List[EventEntity]) -> List[EventTicketEntity]:
         data_model = DataModel()
         data = data_model.get_data(EventEntity)
         if events:
@@ -57,7 +55,7 @@ class Events:
         date_time: Optional[DateTime] = None,
         location: Optional[Location] = None,
         event_name: Optional[EventName] = None,
-        event_category: Optional[EventCategory] = None,
+        event_category: Optional[EventType] = None,
     ) -> EventEntity:
         event = EventEntity(
             date_time=date_time,
@@ -74,7 +72,7 @@ class Events:
         cls,
         event: EventEntity,
         amount: Optional[Amount] = None,
-    ) -> EventEntity:
+    ) -> EventTicketEntity:
         event_ticket = EventTicketEntity(event=event, amount=amount)
         data_model = DataModel()
         data_model.append(event_ticket)

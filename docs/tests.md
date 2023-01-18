@@ -14,7 +14,7 @@ We evluate the quality of the text to code model by testing the generated code u
 
 ## API tests
 
-We release a set of API libraries that simulate the functionality of the APIs that are used in the generated code. These libraries are used to test the generated code in isolation. The API libraries and their spec are listed in the [API](/reference/) reference page.
+We release a set of API libraries that simulate the functionality of the APIs that are used in the generated code. These libraries are used to test the generated code in isolation. The API libraries and their spec are listed in the [API](reference/index.md) reference page.
 
 The API tests are located in the [`tests` directory](https://github.com/asafbiu/thesis-api/tree/main/tests).
 
@@ -29,7 +29,7 @@ Throughout this tutorial we will walk you through the creation of a basic Python
 ### Prerequisites
 
 - Basic knowledge of Python.
-- Get yourself farmiliar with the API [Getting started](/get_started) and [API](/reference/) reference pages.
+- Get yourself farmiliar with the API [Getting started](get_started.md) and [API](reference/index.md) reference pages.
 
 That's it. We are ready to start writing tests.
 
@@ -47,7 +47,7 @@ Text Karen that I will be late.
 
 ==}
 
-This command should return an object of [text message](/reference/actions/message/#messagesend_message). The generated code for this example can be found in the [Getting started](/get_started) page.
+This command should return an object of [text message](reference/actions/message.md#messagesend_message). The generated code for this example can be found in the [Getting started](get_started.md) page.
 
 Every test should start by seeding the data. In this case we need to seed the data with the `recipient` and `content` attributes. We expect the generated code to create a `MessageEntity` object with the `recipient` and `message` attributes.
 
@@ -95,7 +95,7 @@ Get directions from Disneyland to my house.
 
 ==}
 
-This command should return a list of [navigation directions](/reference/actions/navigation/#navigationfind_directions). The generated code for this example can be found in the [Getting started](/get_started) page.
+This command should return a list of [navigation directions](reference/actions/navigation.md#navigationfind_directions). The generated code for this example can be found in the [Getting started](get_started.md) page.
 
 We remind you that every test should start by seeding the data. In this case we need to seed the data with the `origin` and `destination` locations. We can do this by creating a `Location` object and setting the `text` attribute to the location name.
 
@@ -161,7 +161,7 @@ Get directions from Disneyland to my house and text Karen that I will be late.
 
 ==}
 
-This command should return a list of [navigation directions](/reference/actions/navigation/#navigationfind_directions) **and** a [text message](/reference/actions/message/#messagesend_message). The generated code for this example can be found in the [Getting started](/get_started) page.
+This command should return a list of [navigation directions](reference/actions/navigation.md#navigationfind_directions) **and** a [text message](reference/actions/message.md#messagesend_message). The generated code for this example can be found in the [Getting started](get_started.md) page.
 
 We remind you that every test should start by seeding the data. In this case we need to seed the data with the `origin` and `destination` locations. We also need to seed the data with the `Contact` and `Content` objects.
 
@@ -232,7 +232,7 @@ Remind me to bring an umbrella if it rains tomorrow.
 
 Conditional complex commands are a bit more complex to test. We need to test two scenarios: the condition is met and the condition is not met. We will start by testing the scenario where the condition is met.
 
-This command should return a [reminder](/reference/actions/reminder/#remindercreate_reminder) **only if** the [weather](/reference/actions/weather/#weatherget_weather) is rainy. The generated code for this example can be found in the [Getting started](/get_started) page.
+This command should return a [reminder](reference/actions/reminder.md#remindercreate_reminder) **only if** the [weather](reference/actions/weather.md#weatherget_weather) is rainy. The generated code for this example can be found in the [Getting started](get_started.md) page.
 
 Like before, we start by seeding the data. In this case we need to seed the data with the `Content` of the reminder, the `Contact` or the person being reminded, the `WeatherAttribute` and the `DateTime` objects for the weather forecasts.
 

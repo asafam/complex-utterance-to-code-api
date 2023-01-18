@@ -23,6 +23,7 @@ from actions.weather import Weather
 from providers.data_model import DataModel
 from datetime import datetime, timedelta
 import utils
+from tests.test_utils import *
 
 
 def test21():
@@ -33,10 +34,14 @@ def test21():
     data_model = DataModel(reset=True)
     data_date_time = DateTime(text="6 AM", value="6 AM")
     data_model.append(data_date_time)
-    data_device = HomeDeviceName(text="the bedroom lights", value="the bedroom lights")
-    data_model.append(data_device)
-    data_device_value = HomeDeviceValue(text="turn on", value="turn on")
-    data_model.append(data_device_value)
+    data_home_device_action = HomeDeviceAction(text="turn on", value="turn on")
+    data_model.append(data_home_device_action)
+    data_home_device_name = HomeDeviceName(
+        text="the bedroom lights", value="the bedroom lights"
+    )
+    data_model.append(data_home_device_name)
+    data_home_device_value = HomeDeviceValue(text="turn on")
+    data_model.append(data_home_device_value)
     data_date_time2 = DateTime(text="at 6 AM", value="at 6 AM")
     data_model.append(data_date_time2)
 
@@ -44,14 +49,15 @@ def test21():
     data_alarms = data_model.get_data(AlarmEntity)
     assert len(data_alarms) == 1
     data_alarm = data_alarms[0]
-    assert data_alarm.data.get("date_time") == data_date_time
+    assert test_equal(data_alarm.data.get("date_time"), data_date_time)
 
     data_alarms = data_model.get_data(HomeDeviceEntity)
     assert len(data_alarms) == 1
     data_alarm = data_alarms[0]
-    assert data_alarm.data.get("device_name") == data_device
-    assert data_alarm.data.get("device_value") == data_device_value
-    assert data_alarm.data.get("date_time") == data_date_time2
+    assert test_equal(data_alarm.data.get("device_action"), data_home_device_action)
+    assert test_equal(data_alarm.data.get("device_name"), data_home_device_name)
+    assert test_equal(data_alarm.data.get("device_value"), data_home_device_value)
+    assert test_equal(data_alarm.data.get("start_date_time"), data_date_time2)
 
 
 def test22():
@@ -184,9 +190,13 @@ def test27():
     """
     # test data
     data_model = DataModel(reset=True)
+    data_home_device_action = HomeDeviceAction(text="Turn")
+    data_model.append(data_home_device_action)
     data_home_device_value = HomeDeviceValue(text="on", value="on")
     data_model.append(data_home_device_value)
-    data_home_device_name = HomeDeviceName(text="the living room lights", value="the living room lights")
+    data_home_device_name = HomeDeviceName(
+        text="the living room lights", value="the living room lights"
+    )
     data_model.append(data_home_device_name)
     data_destination = Location(text="Home", value="Home")
     data_model.append(data_destination)
@@ -196,13 +206,19 @@ def test27():
     data_home_devices = data_model.get_data(HomeDeviceEntity)
     assert len(data_home_devices) == 1
     data_home_device = data_home_devices[0]
-    assert data_home_device.data.get("device_name") == data_home_device_name
-    assert data_home_device.data.get("device_value") == data_home_device_value
+    assert test_equal(
+        data_home_device.data.get("device_action"), data_home_device_action
+    )
+    assert test_equal(data_home_device.data.get("device_name"), data_home_device_name)
+    assert test_equal(data_home_device.data.get("device_value"), data_home_device_value)
 
     data_navigation_directions_lists = data_model.get_data(NavigationDirectionEntity)
     assert len(data_navigation_directions_lists) == 1
     data_navigation_directions = data_navigation_directions_lists[0]
-    assert data_navigation_directions[0].data.get("destination") == data_destination
+    assert len(data_navigation_directions) == 1
+    assert test_equal(
+        data_navigation_directions[0].data.get("destination"), data_destination
+    )
 
 
 def test28():
@@ -560,6 +576,8 @@ def test35():
     """
     # test data
     data_model = DataModel(reset=True)
+    data_home_device_action = HomeDeviceAction(text="set")
+    data_model.append(data_home_device_action)
     data_home_device = HomeDeviceName(text="the A/C", value="A/C")
     data_model.append(data_home_device)
     data_home_device_value = HomeDeviceValue(text="72 degrees", value=72)
@@ -573,12 +591,15 @@ def test35():
     data_home_devices = data_model.get_data(HomeDeviceEntity)
     assert len(data_home_devices) == 1
     data_home_device = data_home_devices[0]
-    assert data_home_device.data.get("device_name") == data_home_device
-    assert data_home_device.data.get("device_value") == data_home_device_value
+    assert test_equal(
+        data_home_device.data.get("device_action"), data_home_device_action
+    )
+    assert test_equal(data_home_device.data.get("device_name"), data_home_device)
+    assert test_equal(data_home_device.data.get("device_value"), data_home_device_value)
     data_timers = data_model.get_data(TimerEntity)
     assert len(data_timers) == 1
     data_timer = data_timers[0]
-    assert data_timer.data.get("date_time") == data_date_time_30
+    assert test_equal(data_timer.data.get("date_time"), data_date_time_30)
 
 
 def test36():
@@ -690,7 +711,7 @@ def test39():
         text="turn up the temperature by 5 degrees", value=25
     )
     data_model.append(data_home_device_value)
-    
+
     # assertions
     data_timers = data_model.get_data(TimerEntity)
     assert len(data_timers) == 1
@@ -711,11 +732,11 @@ def test40():
     """
     # test data
     data_model = DataModel(reset=True)
-    data_home_device_value = HomeDeviceValue(
-        text="on", value="on"
-    )
+    data_home_device_value = HomeDeviceValue(text="on", value="on")
     data_model.append(data_home_device_value)
-    data_home_device_name = HomeDeviceName(text="the lights in the hallway", value="the lights in the hallway")
+    data_home_device_name = HomeDeviceName(
+        text="the lights in the hallway", value="the lights in the hallway"
+    )
     data_model.append(data_home_device_name)
     data_date_time_7pm = DateTime(
         text="7 pm", value=datetime.now().replace(hour=6, minute=0)
@@ -723,9 +744,11 @@ def test40():
     data_model.append(data_date_time_7pm)
     data_playlist = Playlist(text="my playlist", value="my playlist")
     data_model.append(data_playlist)
-    data_date_time_8pm = DateTime(text="8 pm", value=datetime.now().replace(hour=8, minute=0))
+    data_date_time_8pm = DateTime(
+        text="8 pm", value=datetime.now().replace(hour=8, minute=0)
+    )
     data_model.append(data_date_time_8pm)
-    
+
     # assertions
     data_home_devices = data_model.get_data(HomeDeviceValue)
     assert len(data_home_devices) == 1
@@ -738,4 +761,3 @@ def test40():
     data_music = data_musics[0]
     assert data_music.data.get("playlist") == data_playlist
     assert data_music.data.get("date_time") == data_date_time_8pm
-    

@@ -2,7 +2,7 @@ from __future__ import annotations
 from abc import abstractclassmethod
 from entities.generic import DateTime, Location, TimeDuration
 from entities.navigation import *
-from typing import Iterable, Optional
+from typing import List, Optional
 from providers.data_model import DataModel
 
 
@@ -19,7 +19,7 @@ class Navigation:
         departure_date_time: Optional[DateTime] = None,
         avoid_nav_road_condition: Optional[NavigationRoadCondition] = None,
         nav_travel_method: Optional[NavigationTravelMethod] = None,
-    ) -> Iterable[NavigationDirectionEntity]:
+    ) -> List[NavigationDirectionEntity]:
         data_model = DataModel()
         data = data_model.get_data(NavigationDirectionEntity)
         if destination:
@@ -57,8 +57,35 @@ class Navigation:
         departure_date_time: Optional[DateTime],
         avoid_nav_road_condition: Optional[NavigationRoadCondition],
         nav_travel_method: Optional[NavigationTravelMethod],
-    ) -> Iterable[NavigationDistanceEntity]:
-        raise NotImplementedError
+    ) -> List[NavigationDistanceEntity]:
+        data_model = DataModel()
+        data = data_model.get_data(NavigationDistanceEntity)
+        if origin:
+            data = [x for x in data if x.data.get("origin") == origin]
+
+        if destination:
+            data = [x for x in data if x.data.get("destination") == destination]
+
+        if departure_date_time:
+            data = [
+                x
+                for x in data
+                if x.data.get("departure_date_time") == departure_date_time
+            ]
+
+        if avoid_nav_road_condition:
+            data = [
+                x
+                for x in data
+                if x.data.get("avoid_nav_road_condition") == avoid_nav_road_condition
+            ]
+
+        if nav_travel_method:
+            data = [
+                x for x in data if x.data.get("nav_travel_method") == nav_travel_method
+            ]
+        
+        return data
 
     @abstractclassmethod
     def find_duration(
@@ -68,7 +95,7 @@ class Navigation:
         departure_date_time: Optional[DateTime],
         avoid_nav_road_condition: Optional[NavigationRoadCondition],
         nav_travel_method: Optional[NavigationTravelMethod],
-    ) -> Iterable[NavigationDistanceEntity]:
+    ) -> List[NavigationDurationEntity]:
         raise NotImplementedError
 
     @abstractclassmethod
@@ -79,7 +106,7 @@ class Navigation:
         arrival_date_time: Optional[DateTime] = None,
         avoid_nav_road_condition: Optional[NavigationRoadCondition] = None,
         nav_travel_method: Optional[NavigationTravelMethod] = None,
-    ) -> Iterable[NavigationEstimatedArrivalEntity]:
+    ) -> List[NavigationEstimatedArrivalEntity]:
         raise NotImplementedError
 
     @abstractclassmethod
@@ -91,7 +118,7 @@ class Navigation:
         arrival_date_Time: Optional[DateTime],
         avoid_nav_road_condition: Optional[NavigationRoadCondition],
         nav_travel_method: Optional[NavigationTravelMethod],
-    ) -> Iterable[NavigationEstimatedDepartureEntity]:
+    ) -> List[NavigationEstimatedDepartureEntity]:
         raise NotImplementedError
 
     @abstractclassmethod
@@ -104,7 +131,7 @@ class Navigation:
         departure_date_time: Optional[DateTime] = None,
         avoid_nav_road_condition: Optional[NavigationRoadCondition] = None,
         nav_travel_method: Optional[NavigationTravelMethod] = None,
-    ) -> Iterable[NavigationTrafficInfoEntity]:
+    ) -> List[NavigationTrafficInfoEntity]:
         data_model = DataModel()
         data = data_model.get_data(NavigationTrafficInfoEntity)
         if location:

@@ -1,15 +1,19 @@
 from entities.generic import *
 from entities.message import *
+from entities.music import *
 from entities.navigation import *
 from entities.reminder import *
 from entities.weather import *
 from actions.messages import Messages
+from actions.music import Music
 from actions.navigation import Navigation
 from actions.reminders import Reminders
 from actions.responder import Responder
 from actions.weather import Weather
 from providers.data_model import DataModel
 from datetime import datetime
+from events.events_listener import EventListener
+from events.event import Event
 
 
 def test1():
@@ -274,3 +278,40 @@ def test_get_started_complex4b():
     assert len(data_traffic_infos_lists) == 1
     data_traffic_infos = data_traffic_infos_lists[0]
     assert len(list(data_traffic_infos)) == 2
+
+
+def test_whenever():
+    """
+    Whenever I play a song, remind me to call my mom.
+    """
+    # test data
+    data_model = DataModel()
+    data_song = Song(text="a song")
+    data_model.append(data_song)
+    data_music = Music(song=data_song)
+    Event.dispatch_event("music_played", music=data_music)
+    Event.dispatch_event("music_played", music=data_music)
+    data_person_reminded = Contact(text="me")
+    data_model.append(data_person_reminded)
+    data_content = Content(text="call my mom")
+    data_model.append(data_content)
+
+    # code block to be tested
+    def event_callback(song=song):
+        person_reminded = Contact.resolve_from_text("me")
+        content = Content.resolve_from_text("call my mom")
+        reminder = Reminders.create_reminder(
+            person_reminded=person_reminded, content=content
+        )
+
+    song = Song.resolve_from_text("a song")
+    event_listener = EventListener()
+    event_listener.add_event_listener("music_played", event_callback, song=song)
+
+    # assertions
+    data_reminders = data_model.get_data(ReminderEntity)
+    assert len(data_reminders) == 2
+    assert data_reminders[0].data.get("person_reminded") == data_person_reminded
+    assert data_reminders[0].data.get("content") == data_content
+    assert data_reminders[1].data.get("person_reminded") == data_person_reminded
+    assert data_reminders[1].data.get("content") == data_content

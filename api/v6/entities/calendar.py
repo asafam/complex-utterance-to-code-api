@@ -6,7 +6,7 @@ from entities.resolvable import Resolvable
 from typing import Callable, Optional
 
 
-class CalendarEventCategory(Entity, Resolvable):
+class CalendarEventType(Entity, Resolvable):
     pass
 
 
@@ -22,7 +22,7 @@ class CalendarEvent(Entity):
     date_time: DateTime
     location: Location
     event_name: CalendarEventName
-    event_category: CalendarEventCategory
+    event_category: CalendarEventType
     calendar: CalendarName
 
     @abstractclassmethod
@@ -31,6 +31,6 @@ class CalendarEvent(Entity):
         date_time: Optional[DateTime] = None,
         location: Optional[Contact] = None,
         event_name: Optional[CalendarEventName] = None,
-        event_category: Optional[CalendarEventCategory] = None,
+        event_category: Optional[CalendarEventType] = None,
     ) -> Callable[[CalendarEvent], bool]:
         raise NotImplementedError

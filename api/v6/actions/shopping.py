@@ -1,5 +1,5 @@
 from abc import abstractclassmethod
-from typing import Iterable, Optional, List, Union
+from typing import List, Optional, List, Union
 from entities.generic import *
 from entities.shopping import *
 from providers.data_model import DataModel
@@ -12,7 +12,7 @@ class Shopping:
         product: Optional[Product] = None,
         date_time: Optional[Union[DateTime, List[DateTime]]] = None,
         location: Optional[Location] = None,
-    ) -> Iterable[ProductEntity]:
+    ) -> List[ProductEntity]:
         data_model = DataModel()
         data = data_model.get_data(ProductEntity)
         if date_time:
@@ -35,7 +35,7 @@ class Shopping:
         date_time: Optional[Union[DateTime, List[DateTime]]] = None,
         location: Optional[Location] = None,
         product: Optional[Product] = None,
-    ) -> Iterable[ShoppingListEntity]:
+    ) -> List[ShoppingListEntity]:
         data_model = DataModel()
         data = data_model.get_data(ShoppingListEntity)
         if date_time:
@@ -51,13 +51,13 @@ class Shopping:
             data = [x for x in data if x.data.get("product") == product]
 
         return data
-    
+
     @classmethod
     def add_product_to_shopping_list(
         cls,
         shopping_list: ShoppingListEntity,
         product: Optional[Product] = None,
-    ) -> Iterable[ShoppingListEntity]:
+    ) -> List[ShoppingListEntity]:
         data_model = DataModel()
         data = data_model.get_data(ShoppingListEntity)
         if shopping_list:

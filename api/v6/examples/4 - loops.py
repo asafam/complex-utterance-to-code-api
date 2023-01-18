@@ -1,7 +1,7 @@
 from itertools import groupby
 from typing.calendar import (
     CalendarEvent,
-    CalendarEventCategory,
+    CalendarEventType,
     CalendarEventName,
     CalendarName,
 )
@@ -38,7 +38,7 @@ ResponderCommand.default_responder(response=weather_forecasts)
 Example: "Tell me every stand up show tonight in the city at 8 pm"
 """
 
-event_category = CalendarEventCategory.resolve_from_text("stand up show")
+event_category = CalendarEventType.resolve_from_text("stand up show")
 date_time = DateTime.resolve_from_text("tonight in the city at 8 pm")
 location = Location.resolve_from_text("in the city")
 

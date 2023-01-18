@@ -1,6 +1,6 @@
 # Exercise writing tests
 
-Let's test your knowledge of the [Tests](/tests) tutorial. We will provide you with a user command and you will write the test to match it.
+Let's test your knowledge of the [Tests](tests.md) tutorial. We will provide you with a user command and you will write the test to match it.
 
 ## Exercise 1
 

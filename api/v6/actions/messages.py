@@ -1,5 +1,5 @@
 from abc import abstractclassmethod
-from typing import Iterable, Union, Optional
+from typing import List, Union, Optional
 from entities.resolvable import Resolvable
 from entities.generic import *
 from entities.message import *
@@ -22,26 +22,30 @@ class Messages(Resolvable):
         data_model = DataModel()
         data = data_model.get_data(MessageEntity)
         if date_time:
-            data = [x for x in data if x.data.get('date_time') == date_time]
-                
+            data = [x for x in data if x.data.get("date_time") == date_time]
+
         if sender:
-            data = [x for x in data if x.data.get('sender') == sender]
-            
+            data = [x for x in data if x.data.get("sender") == sender]
+
         if recipient:
-            data = [x for x in data if x.data.get('recipient') == recipient]
-            
+            data = [x for x in data if x.data.get("recipient") == recipient]
+
         if content:
-            data = [x for x in data if x.data.get('content') == content]
-            
+            data = [x for x in data if x.data.get("content") == content]
+
         if message_status:
-            data = [x for x in data if x.data.get('message_status') == message_status]
-            
+            data = [x for x in data if x.data.get("message_status") == message_status]
+
         if message_content_type:
-            data = [x for x in data if x.data.get('message_content_type') == message_content_type]
-            
+            data = [
+                x
+                for x in data
+                if x.data.get("message_content_type") == message_content_type
+            ]
+
         if app:
-            data = [x for x in data if x.data.get('app') == app]
-        
+            data = [x for x in data if x.data.get("app") == app]
+
         return data
 
     @classmethod
@@ -62,7 +66,7 @@ class Messages(Resolvable):
 
     @classmethod
     def delete_messages(
-        cls, messages: Union[MessageEntity, Iterable[MessageEntity]]
+        cls, messages: Union[MessageEntity, List[MessageEntity]]
     ) -> None:
         data_model = DataModel()
         for message in messages:

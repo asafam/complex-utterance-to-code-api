@@ -24,13 +24,13 @@ Get directions from Disneyland to my house.
 
 To match this user command we need to map it with the `Navigation.find_directions(origin: Optional[Location], destination: Location)` function in the [Navigation] API.
 
-[Navigation]: /reference/actions/navigation/
+[navigation]: reference/actions/navigation.md
 
-``` py
+```py
 origin = Location.resolve_from_text("Disneyland")
 destination = Location.resolve_from_text("my house")
 navigation_directions = Navigation.find_directions(
-    origin=origin, 
+    origin=origin,
     destination=destination
 )
 Responder.respond(response=navigation_directions)
@@ -58,13 +58,13 @@ Text Karen that I will be late.
 
 To match this user command we need to map it with the `Messages.send_message(recipient: Contact, content: Content)` API in the [Messaging] API.
 
-[Messaging]: /reference/actions/message/
+[messaging]: reference/actions/message.md
 
-``` py
+```py
 recipient = Contact.resolve_from_text("Karen")
 content = Content.resolve_from_text("I will be late")
 Messages.send_message(
-    recipient=recipient, 
+    recipient=recipient,
     content=content
 )
 ```
@@ -93,22 +93,22 @@ Get directions from Disneyland to my house and text them to Robert.
 
 We already went over the first part of the command ("Get directions from Disneyland to my house").
 
-``` py
+```py
 origin = Location.resolve_from_text("Disneyland")
 detination = Location.resolve_from_text("my house")
 navigation_directions = Navigation.find_directions(
-    origin=origin, 
+    origin=origin,
     destination=destination
 )
 ```
 
 Let's see the other part and put the code together. To match "text them to Robert" user command we need to map it with the `Messages.send_message` API.
 
-``` py
+```py
 recipient = Contact.resolve_from_text("Robert")
 content = Content.resolve_from_entity(navigation_directions)
 Messages.send_message(
-    recipient=recipient, 
+    recipient=recipient,
     content=content
 )
 ```
@@ -121,18 +121,18 @@ Last, we call the `Messages.send_message` function with its arguments.
 
 The final code should look like this:
 
-``` py
+```py
 origin = Location.resolve_from_text("Disneyland")
 destination = Location.resolve_from_text("my house")
 navigation_direction = Navigation.find_directions(
-    origin=origin, 
+    origin=origin,
     destination=destination
 )
 
 recipient = Location.resolve_from_text("Robert")
 content = Content.resolve_from_entity(navigation_direction)
 message = Messages.send_message(
-    recipient=recipient, 
+    recipient=recipient,
     content=content
 )
 ```
@@ -153,18 +153,19 @@ Conditions are another building blocks of complex commands.
 
 First, we get the weather forecasts by using the `Weather.find_weather_forecasts(date_time: Optional[DateTime], weather_attribute: Optional[WeatherAttribute])` in the [Weather] API.
 
-[Weather]: /reference/actions/weather/
+[weather]: reference/actions/weather.md
 
 ```py
 date_time = DateTime.resolve_from_text("tomorrow")
 weather_attribute = WeatherAttribute.resolve_from_text("rains")
 weather_forecasts = Weather.find_weather_forecasts(
-    date_time=date_time, 
+    date_time=date_time,
     weather_attribute=weather_attribute
 )
 ```
+
 !!! note
-    This API takes additional optional arguments, like a location, which we did not include in this example. In that case, the API assumes default values for the unspecified arguments (like the current location). Don't bother yourself with it and use only what is specified in the example.
+This API takes additional optional arguments, like a location, which we did not include in this example. In that case, the API assumes default values for the unspecified arguments (like the current location). Don't bother yourself with it and use only what is specified in the example.
 
 Then, we check for the truthness of the condition expression. It will be valid if the `Weather.find_weather_forecasts` returned any result. This function return a list of weather forecases that match the `DateTime` and `WeatherAttribute`.
 
@@ -179,7 +180,7 @@ The condition body should include the "Remind me to bring an umbrella" command.
 person_reminded = Contact.resolve_from_text("me")
 content = Content.resolve_from_text("Bring an umbrella").
 Reminder.create_reminder(
-    person_reminded=person_reminded, 
+    person_reminded=person_reminded,
     content=content
 )
 ```
@@ -187,7 +188,7 @@ Reminder.create_reminder(
 We follow the `Reminder.create_reminder(person_reminded: Optional[Contact], content: Content)` API spec.
 
 !!! note
-    Notice that in the `content` object we omit the word "to" and keep the content that should appear in the reminder ("bring an umbrella").
+Notice that in the `content` object we omit the word "to" and keep the content that should appear in the reminder ("bring an umbrella").
 
 Putting everything together:
 
@@ -195,7 +196,7 @@ Putting everything together:
 date_time = DateTime.resolve_from_text("tomorrow")
 weather_attribute = WeatherAttribute.resolve_from_text("rains")
 weather_forecasts = Weather.find_weather_forecasts(
-    date_time=date_time, 
+    date_time=date_time,
     weather_attribute=weather_attribute
 )
 expr = len(weather_forecasts) > 0
@@ -203,7 +204,7 @@ if expr:
     person_reminded = Contact.resolve_from_text("me")
     content = Content.resolve_from_text("bring an umbrella")
     reminder = Reminders.create_reminder(
-        person_reminded=person_reminded, 
+        person_reminded=person_reminded,
         content=content
     )
 ```

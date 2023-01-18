@@ -10,13 +10,13 @@ class HomeDeviceName(Entity, Resolvable):
     pass
 
 
+class HomeDeviceAction(Entity, Resolvable):
+    pass
+
+
 class HomeDeviceValue(Entity, Resolvable):
     pass
 
 
 class HomeDeviceEntity(Entity):
-    pass
-
-
-class HomeDeviceInfoEntity(Entity):
     pass

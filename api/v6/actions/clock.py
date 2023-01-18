@@ -1,7 +1,8 @@
 from abc import abstractclassmethod
-from typing import Iterable, Union, Optional
+from typing import List, Union, Optional
 from entities.generic import *
 from entities.clock import *
+from entities.music import *
 from providers.data_model import DataModel
 
 
@@ -44,10 +45,10 @@ class Timer:
 
 class Alarm:
     @classmethod
-    def create_alarm(cls, date_time: Optional[DateTime] = None) -> AlarmEntity:
-        alarm = AlarmEntity(
-            date_time=date_time,
-        )
+    def create_alarm(
+        cls, date_time: Optional[DateTime] = None, song: Optional[Song] = None
+    ) -> AlarmEntity:
+        alarm = AlarmEntity(date_time=date_time, song=song)
         data_model = DataModel()
         data_model.append(alarm)
         return alarm

@@ -1,5 +1,5 @@
 from abc import abstractclassmethod, abstractmethod
-from typing import Any, Iterable, Mapping, Union, Optional
+from typing import Any, List, Mapping, Union, Optional
 from entities.resolvable import Resolvable
 from entities.generic import *
 from entities.reminder import Content, ReminderEntity
@@ -47,12 +47,12 @@ class Reminders(Resolvable):
         person_reminded: Optional[Contact] = None,
         date_time: Optional[DateTime] = None,
         content: Optional[Content] = None,
-    ) -> Iterable[ReminderEntity]:
+    ) -> List[ReminderEntity]:
         raise NotImplementedError
 
     @abstractclassmethod
     def delete_reminders(
-        cls, reminders: Union[ReminderEntity, Iterable[ReminderEntity]]
+        cls, reminders: Union[ReminderEntity, List[ReminderEntity]]
     ) -> bool:
         data = []
 

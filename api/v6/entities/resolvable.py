@@ -62,7 +62,8 @@ class Resolvable(Generic[T]):
         items = [
             x
             for x in data
-            if x.data.get("value") == entity and x.data.get("text") == text
+            if x.data.get("value") == entity
+            and (not text or x.data.get("text") == text)
         ]
 
         if len(items) == 0:
