@@ -12,12 +12,12 @@ Check the weather for the 4th of July and send a text to Grandpa that he should 
 
 ==}
 
-!!! tip "Hint"
+??? tip "Hint"
 
     Required API references for this exercise:
 
     * [Message](reference/actions/message.md)
-    * [Weather] (reference/actions/weather.md)
+    * [Weather](reference/actions/weather.md)
 
 ??? question "Solution"
 
@@ -63,12 +63,12 @@ If it rains tomorrow message dad that I will be running late.
 
 ==}
 
-!!! tip "Hint"
+??? tip "Hint"
 
     Required API references for this exercise:
 
     * [Message](reference/actions/message.md)
-    * [Weather] (reference/actions/weather.md)
+    * [Weather](reference/actions/weather.md)
 
 ??? question "Solution"
 
@@ -143,7 +143,7 @@ Text Stacy and Amanda that dinner will be ready in one hour.
 
 ==}
 
-!!! tip "Hint"
+??? tip "Hint"
 
     Required API references for this exercise:
 
@@ -185,6 +185,12 @@ Write a test for the following user command:
 Send Tyler a text saying hi and send one to Susan too.
 
 ==}
+
+??? tip "Hint"
+
+    Required API references for this exercise:
+
+    * [Message](reference/actions/message.md)
 
 ??? question "Solution"
 
