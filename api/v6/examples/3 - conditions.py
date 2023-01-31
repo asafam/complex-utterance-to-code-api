@@ -3,7 +3,7 @@ from api.v6.commands.reminders import RemindersCommand
 from typing.apps import AppName
 from typing.calendar import CalendarEventName
 from entities.generic import Contact, DateTime, Location
-from typing.message import Content
+from entities.message import *
 from typing.navigation import TrafficCondition
 from typing.reminders import Content
 from entities.weather import WeatherAttribute, WeatherForecastEntity, WeatherTemperature
@@ -107,5 +107,9 @@ if reminder or message:
         destination = class_event.location
         estimated_departure = NavigationQuery.get_estimated_departure(destination=destination)
         ResponderCommand.default_responder(response=estimated_departure)
-    
-    
+
+"""
+Delete emails, but only the ones that are unstarred, and archive starred emails.
+"""
+message_status = MessageStatus.resolve_from_text("unstarred")
+

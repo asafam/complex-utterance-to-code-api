@@ -12,6 +12,13 @@ Check the weather for the 4th of July and send a text to Grandpa that he should 
 
 ==}
 
+!!! tip "Hint"
+
+    Required API references for this exercise:
+
+    * [Message](reference/actions/message.md)
+    * [Weather] (reference/actions/weather.md)
+
 ??? question "Solution"
 
     ```py
@@ -55,6 +62,13 @@ Write a test for the following user command:
 If it rains tomorrow message dad that I will be running late.
 
 ==}
+
+!!! tip "Hint"
+
+    Required API references for this exercise:
+
+    * [Message](reference/actions/message.md)
+    * [Weather] (reference/actions/weather.md)
 
 ??? question "Solution"
 
@@ -125,41 +139,41 @@ Write a test for the following user command:
 
 {==
 
-Set a timer for one hour and text Stacy that dinner will be ready in one hour.
+Text Stacy and Amanda that dinner will be ready in one hour.
 
 ==}
+
+!!! tip "Hint"
+
+    Required API references for this exercise:
+
+    * [Message](reference/actions/message.md)
 
 ??? question "Solution"
 
     ```py
     from providers.data_model import DataModel
-    from entities.generic import Contact, Content, DateTime
+    from entities.generic import Contact, Conten
     from entities.message import MessageEntity
-    from entities.timer import TimerEntity
 
     # test data
     data_model = DataModel(reset=True)
-    data_duration = DateTime(text="one hour")
-    data_model.append(data_duration)
-    data_contact = Contact(text="Stacy")
-    data_model.append(data_contact)
+    data_contact_stacy = Contact(text="Stacy")
+    data_model.append(data_contact_stacy)
+    data_contact_amanda = Contact(text="Amanda")
+    data_model.append(data_contact_amanda)
     data_content = Content(
-        text="dinner will be ready in one hour",
-        value="dinner will be ready in one hour",
+        text="dinner will be ready in one hour"
     )
     data_model.append(data_content)
 
     # assertions
-    data_timers = data_model.get_data(TimerEntity)
-    assert len(data_timers) == 1
-    data_timer = data_timers[0]
-    assert test_equal(data_timer.data.get("duration"), data_duration)
-
     data_messages = data_model.get_data(MessageEntity)
-    assert len(data_messages) == 1
-    data_message = data_messages[0]
-    assert test_equal(data_message.data.get("recipient"), data_contact)
-    assert test_equal(data_message.data.get("content"), data_content)
+    assert len(data_messages) == 2
+    assert test_equal(data_messages[0].data.get("recipient"), data_contact_stacy)
+    assert test_equal(data_messages[0].data.get("content"), data_content)
+    assert test_equal(data_messages[1].data.get("recipient"), data_contact_amanda)
+    assert test_equal(data_messages[1].data.get("content"), data_content)
     ```
 
 ## Exercise 4
@@ -197,97 +211,4 @@ Send Tyler a text saying hi and send one to Susan too.
     data_message2 = data_messages[1]
     assert test_equal(data_message2.data.get("recipient"), data_contact2)
     assert test_equal(data_message2.data.get("content"), data_content)
-    ```
-
-## Exercise 5
-
-Write a test for the following user command:
-
-{==
-
-If I don't have anything scheduled on the 20th of this month on my calendar, message Alice and ask if she wants to go dinner.
-
-==}
-
-??? question "Solution"
-
-    ```py
-    from providers.data_model import DataModel
-    from entities.event import EventCalendar, EventEntity, EventName
-    from entities.generic import Contact, Content, DateTime
-    from entities.message import MessageEntity
-
-    # test data
-    data_model = DataModel(reset=True)
-    data_date_time_20 = DateTime(
-        text="20th of this month", value=datetime.now().replace(day=20)
-    )
-    data_model.append(data_date_time_20)
-    data_date_time_19 = DateTime(
-        text="19th of this month", value=datetime.now().replace(day=19)
-    )
-    data_model.append(data_date_time_19)
-    data_calendar = EventCalendar(text="my calendar")
-    data_model.append(data_calendar)
-    data_event_name = EventName(text="dinner")
-    data_model.append(
-        EventEntity(
-            date_time=data_date_time_20,
-            calendar=data_calendar,
-            event_name=data_event_name,
-        )
-    )
-    data_recipient = Contact(text="Alice")
-    data_model.append(data_recipient)
-    data_content = Content(
-        text="she wants to go dinner"
-    )
-    data_model.append(data_content)
-
-    # assertions
-    data_messages = data_model.get_data(MessageEntity)
-    assert len(data_messages) == 1
-    data_message = data_messages[0]
-    assert test_equal(data_message.data.get("recipient"), data_recipient)
-    assert test_equal(data_message.data.get("content"), data_content)
-    ```
-
-    We write another test for the case the condition is not met:
-
-    ```py
-    from providers.data_model import DataModel
-    from entities.event import EventCalendar, EventEntity, EventName
-    from entities.generic import Contact, Content, DateTime
-    from entities.message import MessageEntity
-
-    # test data
-    data_model = DataModel(reset=True)
-    data_date_time_20 = DateTime(
-        text="20th of this month", value=datetime.now().replace(day=20)
-    )
-    data_model.append(data_date_time_20)
-    data_date_time_19 = DateTime(
-        text="19th of this month", value=datetime.now().replace(day=19)
-    )
-    data_model.append(data_date_time_19)
-    data_calendar = EventCalendar(text="my calendar")
-    data_model.append(data_calendar)
-    data_event_name = EventName(text="dinner")
-    data_model.append(
-        EventEntity(
-            date_time=data_date_time_20,
-            calendar=data_calendar,
-            event_name=data_event_name,
-        )
-    )
-    data_recipient = Contact(text="Alice")
-    data_model.append(data_recipient)
-    data_content = Content(
-        text="she wants to go dinner"
-    )
-    data_model.append(data_content)
-
-    # assertions
-    data_messages = data_model.get_data(MessageEntity)
-    assert len(data_messages) == 0
     ```
