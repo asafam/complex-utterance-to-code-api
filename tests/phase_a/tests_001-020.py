@@ -21,8 +21,8 @@ from datetime import datetime, timedelta
 import utils
 
 
-def test1():
-    """
+def test_0():
+    """ 
     Check the availability of Pepsi at Walmart and also check it at Walgreens.
     """
     # test data
@@ -60,7 +60,7 @@ def test1():
     assert data_products[1].data.get("location") == data_location2
 
 
-def test2_a():
+def test_1_a():
     """
     If it's raining tomorrow morning, set my alarm for 7:30, if it's not, set my alarm for 8.
     """
@@ -104,7 +104,7 @@ def test2_a():
     assert data_alarm.data.get("date_time") == data_date_time730
 
 
-def test2_b():
+def test_1_b():
     """
     If it's raining tomorrow morning, set my alarm for 7:30, if it's not, set my alarm for 8.
     """
@@ -150,7 +150,7 @@ def test2_b():
     assert data_alarm.data.get("date_time") == data_date_time800
 
 
-def test_3():
+def test_2():
     """
     Play the new Taylor Swift album and pull up my shopping list for today.
     """
@@ -191,7 +191,7 @@ def test_3():
     assert data_shopping_list[0].data.get("date_time") == data_date_time_today
 
 
-def test4_a():
+def test_3_a():
     """
     Send a message to dad if it rains tomorrow.
     """
@@ -227,7 +227,7 @@ def test4_a():
     assert data_message.data.get("recipient") == data_recipient
 
 
-def test4_b():
+def test_3_b():
     """
     Send a message to dad if it rains tomorrow.
     """
@@ -263,7 +263,7 @@ def test4_b():
     assert len(data_message_list) == 0
 
 
-def test5():
+def test_4():
     """
     Give me directions to Navy pier in Chicago and tell me what the current traffic is looking like.
     """
@@ -293,7 +293,7 @@ def test5():
     assert data_navigation_traffic_info[0].data.get("destination") == data_location
 
 
-def test6():
+def test_5():
     """
     Check the next time Blink 182 will be in Chicago and tell me the ticket prices.
     """
@@ -328,7 +328,7 @@ def test6():
     assert data_tickets[0].data.get("event") == data_event
 
 
-def test7():
+def test_6():
     """
     Remind me tomorrow to email Jim about lunch and schedule a reservation for noon at the cafe.
     """
@@ -372,7 +372,7 @@ def test7():
     assert data_events[0].data.get("location") == data_location
 
 
-def test8():
+def test_7():
     """
     Can you place an order for two turkeys to arrive the 22nd, and remind me about it on the 21st?
     """
@@ -413,7 +413,7 @@ def test8():
     assert data_reminder.data.get("content") == data_orders[0]
 
 
-def test9():
+def test_8():
     """
     How long will it take to get to AMC theater at 8pm tonight and tell me what tonight's weather outlook is.
     """
@@ -465,7 +465,7 @@ def test9():
     assert data_weather_forecasts[0].data.get("date_time") == data_date_time_tonight
 
 
-def test10():
+def test_9():
     """
     Check the weather for the 4th of July and send a text to Grandpa to invite him over and tell him the weather.
     """
@@ -511,7 +511,7 @@ def test10():
     assert data_message.data.get("content") == data_weather_forecasts
 
 
-def test11():
+def test_10():
     """
     Set a timer for one hour and text Stacy that dinner will be ready in one hour.
     """
@@ -550,7 +550,7 @@ def test11():
     assert data_message.data.get("content") == data_content
 
 
-def test12_a():
+def test_13_a():
     """
     If the weather is cold tomorrow please remind me to grab my winter jacket.
     """
@@ -596,7 +596,7 @@ def test12_a():
     assert data_reminder.data.get("content") == data_content
 
 
-def test12_b():
+def test_13_b():
     """
     If the weather is cold tomorrow please remind me to grab my winter jacket.
     """
@@ -641,7 +641,7 @@ def test12_b():
     assert len(data_reminder_list) == 0
 
 
-def test13():
+def test_14():
     """
     What is the weather going to be at 5:00 PM today and navigate destination set to home after 5:00 PM.
     """
@@ -696,7 +696,7 @@ def test13():
     assert data_navigation_directions[0].data.get("destination") == data_destination
 
 
-def test14_a():
+def test_15_a():
     """
     If it's snowing in Boulder, Colorado by 6pm, text Lauren to tell her to let the dog inside.
     """
@@ -748,7 +748,7 @@ def test14_a():
     assert data_message.data.get("content") == data_content
 
 
-def test14_b():
+def test_15_b():
     """
     If it's snowing in Boulder, Colorado by 6pm, text Lauren to tell her to let the dog inside.
     """
@@ -799,7 +799,7 @@ def test14_b():
     assert len(data_messages) == 0
 
 
-def test15():
+def test_16():
     """
     Text my brother I am on my way and also tell me the current traffic conditions.
     """
@@ -829,7 +829,7 @@ def test15():
     assert data_traffic_infos[0].data.get("date_time") == data_date_time
 
 
-def test16():
+def test_17():
     """
     Start my shower playlist and text Lucas that I'm just now getting in the shower and it will be 15 or 20 minutes until I'm out.
     """
@@ -858,7 +858,7 @@ def test16():
     assert data_message.data.get("content") == data_content
 
 
-def test17():
+def test_18():
     """
     Tell Abe to pick up bread on his way home and set a timer for 60 minutes.
     """
@@ -889,7 +889,7 @@ def test17():
     assert data_music.data.get("duration") == data_duration
 
 
-def test18_a():
+def test_19_a():
     """
     Check the weather in Indianapolis, and if it's sunny, text Bob to remind him about the concert today.
     """
@@ -922,7 +922,7 @@ def test18_a():
     assert data_message.data.get("content") == data_content
 
 
-def test18_b():
+def test_19_b():
     """
     Check the weather in Indianapolis, and if it's sunny, text Bob to remind him about the concert today.
     """
@@ -954,7 +954,7 @@ def test18_b():
     assert len(data_messages) == 0
 
 
-def test19():
+def test_20():
     """
     Give me directions to the nearest movie theater and text Mike to meet me there in a half hour.
     """
@@ -1015,7 +1015,7 @@ def test19():
     assert data_message.data.get("content") == data_content
 
 
-def test20():
+def test_21():
     """
     Check my calendar for when my aunt's birthday is this month and then set a reminder for three days before, so I can remember to buy a gift.
     """
@@ -1055,35 +1055,3 @@ def test20():
     data_reminder = data_reminder_list[0]
     assert data_reminder.data.get("content") == data_content
     assert data_reminder.data.get("date_time") == data_date_time
-
-
-def test_y():
-    """
-    Send Tyler a text saying hi and send one to Susan too.
-    """
-    # test data
-    data_model = DataModel(reset=True)
-    data_contact1 = Contact(text="Tyler", value="Tyler")
-    data_model.append(data_contact1)
-    data_contact2 = Contact(text="Susan", value="Susan")
-    data_model.append(data_contact2)
-    data_content = Content(text="hi", value="hi")
-    data_model.append(data_content)
-
-    # code block to test
-    recipient = Contact.resolve_from_text("Tyler")
-    content = Content.resolve_from_text("hi")
-    Messages.send_message(recipient=recipient, content=content)
-
-    recipient = Contact.resolve_from_text("Susan")
-    Messages.send_message(recipient=recipient, content=content)
-
-    # assertions
-    data_messages_lists = data_model.get_response([MessageEntity])
-    assert len(data_messages_lists) == 2
-    data_message1 = data_messages_lists[0]
-    assert data_message1.data.get("recipient") == data_contact1
-    assert data_message1.data.get("content") == data_content
-    data_message2 = data_messages_lists[1]
-    assert data_message2.data.get("recipient") == data_contact2
-    assert data_message2.data.get("content") == data_content

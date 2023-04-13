@@ -123,8 +123,8 @@ def test_get_started_complex3a():
     weather_forecasts = Weather.find_weather_forecasts(
         date_time=date_time, weather_attribute=weather_attribute
     )
-    expr = len(list(weather_forecasts)) > 0
-    if expr:
+    test = len(list(weather_forecasts)) > 0
+    if test:
         person_reminded = Contact.resolve_from_text("me")
         content = Content.resolve_from_text("bring an umbrella")
         reminder = Reminders.create_reminder(
@@ -258,8 +258,7 @@ def test_get_started_complex4b():
     response = []
     for destination in destinations:
         traffic_info = Navigation.find_traffic_info(destination=destination)
-        if traffic_info:
-            response += traffic_info
+        response += traffic_info
     Responder.respond(response=response)
 
     # assertions

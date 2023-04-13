@@ -26,7 +26,7 @@ import utils
 from tests.test_utils import *
 
 
-def test21():
+def test_22():
     """
     Set alarm for 6 AM and set the bedroom lights to turn on at 6 AM.
     """
@@ -620,6 +620,8 @@ def test36():
     )
     data_model.append(data_date_time)
     data_model.append(WeatherForecastEntity(date_time=data_date_time))
+    
+    # code block to test
 
     # assertions
     data_event_tickets = data_model.get_data(EventTicketEntity)
@@ -650,6 +652,8 @@ def test37():
         text="I am finished with the job", value="I am finished with the job"
     )
     data_model.append(data_content)
+    
+    # code block to test
 
     # assertions
     data_timers = data_model.get_data(TimerEntity)
@@ -681,6 +685,8 @@ def test38():
     data_model.append(data_recipient)
     data_content = Content(text="his order", value="what is your order")
     data_model.append(data_content)
+    
+    # code block to test
 
     # assertions
     data_map_entities = data_model.get_data(MapEntity)
@@ -711,6 +717,8 @@ def test39():
         text="turn up the temperature by 5 degrees", value=25
     )
     data_model.append(data_home_device_value)
+    
+    # code block to test
 
     # assertions
     data_timers = data_model.get_data(TimerEntity)
@@ -748,6 +756,8 @@ def test40():
         text="8 pm", value=datetime.now().replace(hour=8, minute=0)
     )
     data_model.append(data_date_time_8pm)
+    
+    # code block to test
 
     # assertions
     data_home_devices = data_model.get_data(HomeDeviceValue)

@@ -45,6 +45,8 @@ def test41():
         text="meet me at the store at 2:50 PM", value="meet me at the store at 2:50 PM"
     )
     data_model.append(data_content_message)
+    
+    # code block to test
 
     # assertions
     data_reminders = data_model.get_data(ReminderEntity)
@@ -82,6 +84,8 @@ def test42():
         value="we will be meeting at 3 PM for lunch",
     )
     data_model.append(data_content_message)
+    
+    # code block to test
 
     # assertions
     data_events = data_model.get_data(EventEntity)
@@ -111,6 +115,8 @@ def test43():
     data_model.append(data_home_device_value)
     data_playlist = Playlist(text="my romantic playlist", value="my romantic playlist")
     data_model.append(data_playlist)
+    
+    # code block to test
 
     # assertions
     data_home_devices = data_model.get_data(HomeDeviceEntity)
@@ -149,6 +155,8 @@ def test44():
     data_calendar = EventCalendar(text="my calendar", value="my calendar")
     data_model.append(data_calendar)
     data_model.append(EventEntity(date_time=data_date_time))
+    
+    # code block to test
 
     # assertions
     data_reminders = data_model.get_data(ReminderEntity)
@@ -174,6 +182,8 @@ def test45_a():
     )
     data_model.append(data_product)
     data_model.append(ProductEntity(location=data_store, product=data_product))
+    
+    # code block to test
 
     # assertions
     data_orders = data_model.get_data(OrderEntity)
@@ -195,6 +205,8 @@ def test45_b():
         text="Jurassic World on bluray", value="Jurassic World on bluray"
     )
     data_model.append(data_product)
+    
+    # code block to test
 
     # assertions
     data_orders = data_model.get_data(OrderEntity)
@@ -227,6 +239,8 @@ def test46():
             date_time=data_date_time,
         )
     )
+    
+    # code block to test
 
     # assertions
     data_navigation_directions = data_model.get_data(NavigationDirectionEntity)
@@ -260,6 +274,8 @@ def test47_a():
         text="I will meet them later", value="I will meet them later"
     )
     data_model.append(data_content)
+    
+    # code block to test
 
     # assertions
     data_messages = data_model.get_data(MessageEntity)
@@ -284,6 +300,8 @@ def test47_b():
         text="I will meet them later", value="I will meet them later"
     )
     data_model.append(data_content)
+    
+    # code block to test
 
     # assertions
     data_messages = data_model.get_data(MessageEntity)
