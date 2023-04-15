@@ -14,3 +14,6 @@ class Entity:
     @abstractmethod
     def __gt__(self, other) -> bool:
         raise NotImplementedError()
+    
+    def __str__(self) -> str:
+        return self.data.get('text')

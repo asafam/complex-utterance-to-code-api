@@ -1,11 +1,9 @@
 from __future__ import annotations
+from typing import Callable, Optional
 from abc import abstractclassmethod
-from generic import Contact, Content, DateTime, Location
+from entities.generic import Contact, Content, DateTime, Location
 from entities.entity import Entity
 from entities.resolvable import Resolvable
-from resolvable import Resolvable
-
-from typing import Callable, Optional
 
 
 class EventName(Entity, Resolvable):

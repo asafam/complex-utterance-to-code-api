@@ -9,26 +9,23 @@ class Music:
     @classmethod
     def play_music(
         cls,
-        album: Optional[Album],
-        artist: Optional[Artist],
-        genre: Optional[Genre],
-        playlist: Optional[Playlist],
-        music_type: Optional[MusicType],
-        song: Optional[Song],
+        album: Optional[Album] = None,
+        artist: Optional[Artist] = None,
+        genre: Optional[Genre] = None,
+        playlist: Optional[Playlist] = None,
+        music_type: Optional[MusicType] = None,
+        song: Optional[Song] = None,
     ) -> List[MusicEntity]:
         music = MusicEntity(
             album=album,
-            artist=artist
+            artist=artist,
             genre=genre,
             playlist=playlist,
             music_type=music_type,
             song=song,
-        )        
-        event = Event(music);
-        
-        return music
+        )
 
-        return data
+        return music
 
     # @classmethod
     # def like_music(

@@ -40,12 +40,12 @@ class Events:
     @classmethod
     def find_events_tickets(cls, events: List[EventEntity]) -> List[EventTicketEntity]:
         data_model = DataModel()
-        data = data_model.get_data(EventEntity)
+        data = data_model.get_data(EventTicketEntity)
         if events:
             if type(events) == list:
-                data = [x for x in data if x in events]
+                data = [x for x in data if x.data.get("event") in events]
             else:
-                data = [x for x in data if x == events]
+                data = [x for x in data if x.data.get("event") == events]
 
         return data
 

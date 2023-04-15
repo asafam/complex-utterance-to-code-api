@@ -22,7 +22,7 @@ import utils
 
 
 def test_0():
-    """ 
+    """
     Check the availability of Pepsi at Walmart and also check it at Walgreens.
     """
     # test data
@@ -36,7 +36,7 @@ def test_0():
     data_model.append(ProductEntity(product=data_product, location=data_location1))
     data_model.append(ProductEntity(product=data_product, location=data_location2))
 
-    # code block to test
+    # start code block to test
     results = []
 
     product = Product.resolve_from_text("Pepsi")
@@ -49,11 +49,12 @@ def test_0():
     results += products
 
     Responder.respond(response=results)
+    # end code block to test
 
     # assertions
     data_products_list = data_model.get_data(ProductEntity)
-    assert len(data_products_list) == 1
-    data_products = data_products_list[0]
+    assert len(data_products_list) == 2
+    data_products = data_products_list
     assert data_products[0].data.get("product") == data_product
     assert data_products[0].data.get("location") == data_location1
     assert data_products[1].data.get("product") == data_product
@@ -77,13 +78,13 @@ def test_1_a():
             weather_attribute=data_weather_attribute, date_time=data_date_time
         )
     )
-    data_date_time730 = DateTime(text="7:30", value=datetime(20022, 11, 13, 7, 30))
+    data_date_time730 = DateTime(text="7:30", value=datetime(2022, 11, 13, 7, 30))
     data_model.append(data_date_time730)
-    data_date_time800 = DateTime(text="8", value=datetime(20022, 11, 13, 8, 00))
+    data_date_time800 = DateTime(text="8", value=datetime(2022, 11, 13, 8, 00))
     data_model.append(data_date_time800)
     data_model.append(AlarmEntity(date_time=data_date_time730))
 
-    # code block to test
+    # start code block to test
     date_time = DateTime.resolve_from_text("tomorrow morning")
     weather_attribute = WeatherAttribute.resolve_from_text("raining")
     weather_forecasts = Weather.find_weather_forecasts(
@@ -96,6 +97,7 @@ def test_1_a():
     else:
         date_time = DateTime.resolve_from_text("8")
         alarm = Alarm.create_alarm(date_time=date_time)
+    # end code block to test
 
     # assertions
     data_alarms_list = data_model.get_data(AlarmEntity)
@@ -123,13 +125,13 @@ def test_1_b():
             weather_attribute=data_weather_attribute_neg, date_time=data_date_time
         )
     )
-    data_date_time730 = DateTime(text="7:30", value=datetime(20022, 11, 13, 7, 30))
+    data_date_time730 = DateTime(text="7:30", value=datetime(2022, 11, 13, 7, 30))
     data_model.append(data_date_time730)
-    data_date_time800 = DateTime(text="8", value=datetime(20022, 11, 13, 8, 00))
+    data_date_time800 = DateTime(text="8", value=datetime(2022, 11, 13, 8, 00))
     data_model.append(data_date_time800)
     data_model.append(AlarmEntity(date_time=data_date_time800))
 
-    # code block to test
+    # start code block to test
     date_time = DateTime.resolve_from_text("tomorrow morning")
     weather_attribute = WeatherAttribute.resolve_from_text("raining")
     weather_forecasts = Weather.find_weather_forecasts(
@@ -142,6 +144,7 @@ def test_1_b():
     else:
         date_time = DateTime.resolve_from_text("8")
         alarm = Alarm.create_alarm(date_time=date_time)
+    # end code block to test
 
     # assertions
     data_alarms_list = data_model.get_data(AlarmEntity)
@@ -156,9 +159,9 @@ def test_2():
     """
     # test data
     data_model = DataModel(reset=True)
-    data_artist = DateTime(text="Taylor Swift", value="Taylor Swift")
+    data_artist = Artist(text="Taylor Swift", value="Taylor Swift")
     data_model.append(data_artist)
-    data_music_type = DateTime(text="album", value="album")
+    data_music_type = MusicType(text="album", value="album")
     data_model.append(data_music_type)
     data_model.append(MusicEntity(artist=data_artist, music_type=data_music_type))
     data_date_time_today = DateTime(text="today", value=datetime.now())
@@ -170,13 +173,14 @@ def test_2():
     data_model.append(data_date_time_tomorrow)
     data_model.append(ShoppingListEntity(date_time=data_date_time_tomorrow))
 
-    # code block to test
+    # start code block to test
     artist = Artist.resolve_from_text("Taylor Swift")
     music_type = DateTime.resolve_from_text("album")
     music = Music.play_music(artist=artist, music_type=music_type)
     date_time = DateTime.resolve_from_text("today")
     shopping_lists = Shopping.find_shopping_lists(date_time=date_time)
     Responder.respond(response=shopping_lists)
+    # end code block to test
 
     # assertions
     data_music_list = data_model.get_data(MusicEntity)
@@ -209,7 +213,7 @@ def test_3_a():
         )
     )
 
-    # code block to test
+    # start code block to test
     date_time = DateTime.resolve_from_text("tomorrow")
     weather_attribute = WeatherAttribute.resolve_from_text("rains")
     weather_forecasts = Weather.find_weather_forecasts(
@@ -219,6 +223,7 @@ def test_3_a():
     if expr:
         recipient = Contact.resolve_from_text("dad")
         message = Messages.send_message(recipient=recipient)
+    # end code block to test
 
     # assertions
     data_message_list = data_model.get_data(MessageEntity)
@@ -247,7 +252,7 @@ def test_3_b():
         )
     )
 
-    # code block to test
+    # start code block to test
     date_time = DateTime.resolve_from_text("tomorrow")
     weather_attribute = WeatherAttribute.resolve_from_text("rains")
     weather_forecasts = Weather.find_weather_forecasts(
@@ -257,6 +262,7 @@ def test_3_b():
     if expr:
         recipient = Contact.resolve_from_text("dad")
         message = Messages.send_message(recipient=recipient)
+    # end code block to test
 
     # assertions
     data_message_list = data_model.get_data(MessageEntity)
@@ -271,15 +277,16 @@ def test_4():
     data_model = DataModel(reset=True)
     data_location = Location(text="Navy pier in Chicago", value="Navy pier in Chicago")
     data_model.append(data_location)
-    data_model.append(NavigationDirectionEntity(location=data_location))
+    data_model.append(NavigationDirectionEntity(destination=data_location))
     data_model.append(NavigationTrafficInfoEntity(destination=data_location))
 
-    # code block to test
+    # start code block to test
     destination = Location.resolve_from_text("Navy pier in Chicago")
     navigation_directions = Navigation.find_directions(destination=destination)
     Responder.respond(response=navigation_directions)
     traffic_info = Navigation.find_traffic_info(destination=destination)
-    Responder.respond(response=navigation_directions)
+    Responder.respond(response=traffic_info)
+    # end code block to test
 
     # assertions
     data_navigation_directions_list = data_model.get_data(NavigationDirectionEntity)
@@ -307,7 +314,7 @@ def test_5():
     data_model.append(data_event)
     data_model.append(EventTicketEntity(event=data_event))
 
-    # code block to test
+    # start code block to test
     event_name = EventName.resolve_from_text("Blink 182")
     location = Location.resolve_from_text("Chicago")
     events = Events.find_events(event_name=event_name, location=location)
@@ -315,6 +322,7 @@ def test_5():
 
     tickets = Events.find_events_tickets(events=events)
     Responder.respond(response=tickets)
+    # end code block to test
 
     # assertions
     data_events_list = data_model.get_data(EventEntity)
@@ -340,14 +348,14 @@ def test_6():
     data_model.append(data_date_time_tomorrow)
     data_contact = Contact(text="me", value="Asaf")
     data_model.append(data_contact)
-    data_content = Contact(text="email Jim about lunch", value="email Jim about lunch")
+    data_content = Content(text="email Jim about lunch", value="email Jim about lunch")
     data_model.append(data_content)
     data_date_time_noon = DateTime(text="noon", value=datetime(2022, 11, 13, 12, 00))
     data_model.append(data_date_time_noon)
     data_location = Location(text="the cafe", value="the cafe")
     data_model.append(data_location)
 
-    # code block to test
+    # start code block to test
     date_time = DateTime.resolve_from_text("tomorrow")
     person_reminded = Contact.resolve_from_text("me")
     content = Content.resolve_from_text("email Jim about lunch")
@@ -357,6 +365,7 @@ def test_6():
     date_time = DateTime.resolve_from_text("noon")
     location = Location.resolve_from_text("the cafe")
     Events.schedule_event(date_time=date_time, location=location)
+    # end code block to test
 
     # assertions
     data_reminders_list = data_model.get_data(ReminderEntity)
@@ -387,7 +396,7 @@ def test_7():
     data_date_time_21 = DateTime(text="21st", value=datetime(2022, 11, 21))
     data_model.append(data_date_time_22)
 
-    # code block to test
+    # start code block to test
     product = Product.resolve_from_text("two turkeys")
     date_time = DateTime.resolve_from_text("22nd")
     order = Shopping.create_order(products=product, date_time=date_time)
@@ -397,6 +406,7 @@ def test_7():
     Reminders.create_reminder(
         date_time=date_time, person_reminded=person_reminded, content=content
     )
+    # end code block to test
 
     # assertions
     data_orders_list = data_model.get_data(OrderEntity)
@@ -436,7 +446,7 @@ def test_8():
     data_model.append(data_date_time_tonight)
     data_model.append(WeatherForecastEntity(date_time=data_date_time_tonight))
 
-    # code block to test
+    # start code block to test
     destination = Location.resolve_from_text("AMC theater")
     arrival_date_time = DateTime.resolve_from_text("at 8pm tonight")
     navigation_arrival = Navigation.find_estimated_arrival(
@@ -449,6 +459,7 @@ def test_8():
         date_time=date_time,
     )
     Responder.respond(response=weather_forecasts)
+    # end code block to test
 
     # assertions
     data_estimated_arrivals_list = data_model.get_data(NavigationEstimatedArrivalEntity)
@@ -482,7 +493,7 @@ def test_9():
     data_content2 = Content(text="tell him the weather", value=data_weather_forecasts)
     data_model.append(data_content2)
 
-    # code block to test
+    # start code block to test
     date_time = DateTime.resolve_from_text("tonight")
     weather_forecasts = Weather.find_weather_forecasts(
         date_time=date_time,
@@ -494,6 +505,7 @@ def test_9():
     message = Messages.send_message(recipient=recipient, content=content)
     content = Content.resolve_from_entity(weather_forecasts)
     message = Messages.send_message(recipient=recipient, content=content)
+    # end code block to test
 
     # assertions
     data_weather_forecasts_list = data_model.get_data(WeatherForecastEntity)
@@ -527,7 +539,7 @@ def test_10():
     )
     data_model.append(data_content)
 
-    # code block to test
+    # start code block to test
     duration = DateTime.resolve_from_text("one hour")
     Timer.create_timer(
         duration=duration,
@@ -536,6 +548,7 @@ def test_10():
     recipient = Contact.resolve_from_text("Stacy")
     content = Content.resolve_from_text("dinner will be ready in one hour.")
     Messages.send_message(recipient=recipient, content=content)
+    # end code block to test
 
     # assertions
     data_timer_list = data_model.get_data(TimerEntity)
@@ -572,8 +585,9 @@ def test_13_a():
         value="grab my winter jacket.",
     )
     data_model.append(data_content)
+    # end code block to test
 
-    # code block to test
+    # start code block to test
     weather_attribute = WeatherAttribute.resolve_from_text("cold")
     date_time = DateTime.resolve_from_text("tomorrow")
     weather_forecasts = Weather.find_weather_forecasts(
@@ -621,7 +635,7 @@ def test_13_b():
     )
     data_model.append(data_content)
 
-    # code block to test
+    # start code block to test
     weather_attribute = WeatherAttribute.resolve_from_text("cold")
     date_time = DateTime.resolve_from_text("tomorrow")
     weather_forecasts = Weather.find_weather_forecasts(
@@ -635,6 +649,7 @@ def test_13_b():
             person_reminded=person_reminded,
             content=content,
         )
+    # end code block to test
 
     # assertions
     data_reminder_list = data_model.get_data(ReminderEntity)
@@ -666,7 +681,7 @@ def test_14():
         )
     )
 
-    # code block to test
+    # start code block to test
     date_time = DateTime.resolve_from_text("5:00 PM today")
     weather_forecasts = Weather.find_weather_forecasts(date_time=date_time)
     Responder.respond(response=weather_forecasts)
@@ -678,6 +693,7 @@ def test_14():
         date_time=date_time,
     )
     Responder.respond(response=navigation_directions)
+    # end code block to test
 
     # assertions
     data_weather_forecasts_list = data_model.get_data(WeatherForecastEntity)
@@ -724,7 +740,7 @@ def test_15_a():
     )
     data_model.append(data_content)
 
-    # code block to test
+    # start code block to test
     weather_attribute = WeatherAttribute.resolve_from_text("snowing")
     location = Location.resolve_from_text("Boulder, Colorado")
     date_time = DateTime.resolve_from_text("by 6pm")
@@ -739,6 +755,7 @@ def test_15_a():
             recipient=recipient,
             content=content,
         )
+    # end code block to test
 
     # assertions
     data_messages = data_model.get_data(MessageEntity)
@@ -778,7 +795,7 @@ def test_15_b():
     )
     data_model.append(data_content)
 
-    # code block to test
+    # start code block to test
     weather_attribute = WeatherAttribute.resolve_from_text("snowing")
     location = Location.resolve_from_text("Boulder, Colorado")
     date_time = DateTime.resolve_from_text("by 6pm")
@@ -793,6 +810,7 @@ def test_15_b():
             recipient=recipient,
             content=content,
         )
+    # end code block to test
 
     # assertions
     data_messages = data_model.get_data(MessageEntity)
@@ -815,6 +833,9 @@ def test_16():
     data_date_time = DateTime(text="current", value=datetime.now())
     data_model.append(data_date_time)
     data_model.append(NavigationTrafficInfoEntity(date_time=data_date_time))
+
+    # start code block to test
+    # end code block to test
 
     # assertions
     data_messages = data_model.get_data(MessageEntity)
@@ -844,6 +865,9 @@ def test_17():
         value="I'm just now getting in the shower and it will be 15 or 20 minutes until I'm out",
     )
     data_model.append(data_content)
+
+    # start code block to test
+    # end code block to test
 
     # assertions
     data_music_list = data_model.get_data(MusicEntity)
@@ -875,6 +899,9 @@ def test_18():
         text="60 minutes", value=datetime.now() + timedelta(minutes=60)
     )
     data_model.append(data_duration)
+
+    # start code block to test
+    # end code block to test
 
     # assertions
     data_messages = data_model.get_data(MessageEntity)
@@ -914,6 +941,9 @@ def test_19_a():
     )
     data_model.append(data_content)
 
+    # start code block to test
+    # end code block to test
+
     # assertions
     data_messages = data_model.get_data(MessageEntity)
     assert len(data_messages) == 1
@@ -948,6 +978,9 @@ def test_19_b():
         value="remind him about the concert today",
     )
     data_model.append(data_content)
+
+    # start code block to test
+    # end code block to test
 
     # assertions
     data_messages = data_model.get_data(MessageEntity)
@@ -986,7 +1019,7 @@ def test_20():
     )
     data_model.append(data_content)
 
-    # code block to test
+    # start code block to test
     destinations = Location.resolve_from_text("movie theater")
     destinations = utils.sort(destinations, "nearest")
     destination = utils.first(destinations)
@@ -994,6 +1027,7 @@ def test_20():
         destination=destination,
     )
     Responder.respond(response=navigation_directions)
+    # end code block to test
 
     recipient = Contact.resolve_from_text("Mike")
     content = Content.resolve_from_text("meet me there in a half hour")
@@ -1037,7 +1071,7 @@ def test_21():
     )
     data_model.append(data_content)
 
-    # code block to test
+    # start code block to test
     event_name = EventName.resolve_from_text("my aunt's birthday")
     date_time = DateTime.resolve_from_text("this month")
     calendar_events = Calendar.find_calendar_events(
@@ -1048,6 +1082,7 @@ def test_21():
     content = Content.resolve_from_text("go running")
     date_time = DateTime.resolve_from_entity(calendar_event, "three days before")
     Reminders.create_reminder(content=content, date_time=date_time)
+    # end code block to test
 
     # assertions
     data_reminder_list = data_model.get_data(ReminderEntity)

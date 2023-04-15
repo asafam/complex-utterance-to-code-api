@@ -1,6 +1,7 @@
 from __future__ import annotations
 from abc import abstractclassmethod, abstractmethod
 from typing import TypeVar, Generic, Optional, Union, List
+from entities.entity import Entity
 from exceptions.exceptions import exception_handler
 from providers.data_model import DataModel
 
@@ -50,9 +51,9 @@ class Resolvable(Generic[T]):
     @classmethod
     def resolve_from_entity(
         T,
-        entity: Union[T, List[T]],
+        entity: Union[Entity, List[Entity]],
         text: Optional[str] = None,
-        recovered_entity: Optional[Union[T, List[T]]] = None,
+        recovered_entity: Optional[Union[Entity, List[Entity]]] = None,
     ) -> T:
         data_model = DataModel()
         data = data_model.get_data(T)

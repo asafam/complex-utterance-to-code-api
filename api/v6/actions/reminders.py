@@ -1,4 +1,3 @@
-from abc import abstractclassmethod, abstractmethod
 from typing import Any, List, Mapping, Union, Optional
 from entities.resolvable import Resolvable
 from entities.generic import *
@@ -41,19 +40,39 @@ class Reminders(Resolvable):
         return reminder
 
     # @exception_handler
-    @abstractclassmethod
+    @classmethod
     def find_reminders(
         cls,
         person_reminded: Optional[Contact] = None,
         date_time: Optional[DateTime] = None,
         content: Optional[Content] = None,
     ) -> List[ReminderEntity]:
-        raise NotImplementedError
+        data_model = DataModel()
+        data = data_model.get_data(ReminderEntity)
+        if date_time:
+            if type(date_time) == list:
+                data = [x for x in data if x.data.get("date_time") in date_time]
+            else:
+                data = [x for x in data if x.data.get("date_time") == date_time]
 
-    @abstractclassmethod
+        if person_reminded:
+            data = [x for x in data if x.data.get("person_reminded") == person_reminded]
+
+        if content:
+            data = [x for x in data if x.data.get("content") == content]
+
+        return data
+
+    @classmethod
     def delete_reminders(
         cls, reminders: Union[ReminderEntity, List[ReminderEntity]]
     ) -> bool:
-        data = []
+        data_model = DataModel()
+        data = data_model.get_data(ReminderEntity)
+        if reminders:
+            if type(reminders) == list:
+                data = [x for x in data if x not in reminders]
+            else:
+                data = [x for x in data if x != reminders]
 
-        raise NotImplementedError
+        return data

@@ -84,7 +84,7 @@ class Navigation:
             data = [
                 x for x in data if x.data.get("nav_travel_method") == nav_travel_method
             ]
-        
+
         return data
 
     @abstractclassmethod
@@ -107,7 +107,32 @@ class Navigation:
         avoid_nav_road_condition: Optional[NavigationRoadCondition] = None,
         nav_travel_method: Optional[NavigationTravelMethod] = None,
     ) -> List[NavigationEstimatedArrivalEntity]:
-        raise NotImplementedError
+        data_model = DataModel()
+        data = data_model.get_data(NavigationEstimatedArrivalEntity)
+        if origin:
+            data = [x for x in data if x.data.get("origin") == origin]
+
+        if destination:
+            data = [x for x in data if x.data.get("destination") == destination]
+
+        if arrival_date_time:
+            data = [
+                x for x in data if x.data.get("arrival_date_time") == arrival_date_time
+            ]
+
+        if avoid_nav_road_condition:
+            data = [
+                x
+                for x in data
+                if x.data.get("avoid_nav_road_condition") == avoid_nav_road_condition
+            ]
+
+        if nav_travel_method:
+            data = [
+                x for x in data if x.data.get("nav_travel_method") == nav_travel_method
+            ]
+
+        return data
 
     @abstractclassmethod
     def find_estimated_departure(

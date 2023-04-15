@@ -1,4 +1,5 @@
 from entities.generic import *
+from entities.clock import *
 from entities.events import *
 from entities.home import *
 from entities.message import *
@@ -24,7 +25,7 @@ from tests.test_utils import *
 import utils
 
 
-def test41():
+def test_52():
     """
     Set a reminder at 3:00 PM that I will need to pick up my items from the store, and text Jason to meet me at the store at 2:50 PM.
     """
@@ -45,7 +46,7 @@ def test41():
         text="meet me at the store at 2:50 PM", value="meet me at the store at 2:50 PM"
     )
     data_model.append(data_content_message)
-    
+
     # code block to test
 
     # assertions
@@ -62,46 +63,7 @@ def test41():
     assert data_message.data.get("content") == data_content_message
 
 
-def test42():
-    """
-    Add entry in the calendar for a lunch meeting with Jack tomorrow at 3 PM, also text Jack that we will be meeting at 3 PM for lunch.
-    """
-    # test data
-    data_model = DataModel(reset=True)
-    data_date_time = DateTime(
-        text="tomorrow at 3 PM",
-        value=(datetime.now() + timedelta(days=1)).replace(hour=15, minute=0),
-    )
-    data_model.append(data_date_time)
-    data_event_name = EventName(
-        text="lunch meeting with Jack", value="lunch meeting with Jack"
-    )
-    data_model.append(data_event_name)
-    data_recipient = Contact(text="Jack", value="Jack Smith")
-    data_model.append(data_recipient)
-    data_content_message = Content(
-        text="we will be meeting at 3 PM for lunch",
-        value="we will be meeting at 3 PM for lunch",
-    )
-    data_model.append(data_content_message)
-    
-    # code block to test
-
-    # assertions
-    data_events = data_model.get_data(EventEntity)
-    assert len(data_events) == 1
-    data_event = data_events[0]
-    assert data_event.data.get("date_time") == data_date_time
-    assert data_event.data.get("event_name") == data_event_name
-
-    data_messages = data_model.get_data(MessageEntity)
-    assert len(data_messages) == 1
-    data_message = data_messages[0]
-    assert data_message.data.get("recipient") == data_recipient
-    assert data_message.data.get("content") == data_content_message
-
-
-def test43():
+def test_54():
     """
     Set the thermostat to 70 degrees and play my romantic playlist.
     """
@@ -115,14 +77,17 @@ def test43():
     data_model.append(data_home_device_value)
     data_playlist = Playlist(text="my romantic playlist", value="my romantic playlist")
     data_model.append(data_playlist)
-    
-    # code block to test
+
+    # start code block to test
+    # end code block to test
 
     # assertions
     data_home_devices = data_model.get_data(HomeDeviceEntity)
     assert len(data_home_devices) == 1
     data_home_device = data_home_devices[0]
-    assert test_equal(data_home_device.data.get("device_action"), data_home_device_action)
+    assert test_equal(
+        data_home_device.data.get("device_action"), data_home_device_action
+    )
     assert test_equal(data_home_device.data.get("device_name"), data_home_device_name)
     assert test_equal(data_home_device.data.get("device_value"), data_home_device_value)
 
@@ -132,7 +97,7 @@ def test43():
     assert test_equal(data_music.data.get("playlist"), data_playlist)
 
 
-def test44():
+def test_55():
     """
     Remind me to send an email to Mom and Dad tomorrow and delete the appointment in my calendar for Tuesday.
     """
@@ -155,8 +120,9 @@ def test44():
     data_calendar = EventCalendar(text="my calendar", value="my calendar")
     data_model.append(data_calendar)
     data_model.append(EventEntity(date_time=data_date_time))
-    
-    # code block to test
+
+    # start code block to test
+    # end code block to test
 
     # assertions
     data_reminders = data_model.get_data(ReminderEntity)
@@ -169,7 +135,7 @@ def test44():
     assert len(data_events) == 0
 
 
-def test45_a():
+def test_58_a():
     """
     If Walmart has Jurassic World on bluray, buy it so I can pick it up tomorrow morning.
     """
@@ -182,8 +148,9 @@ def test45_a():
     )
     data_model.append(data_product)
     data_model.append(ProductEntity(location=data_store, product=data_product))
-    
-    # code block to test
+
+    # start code block to test
+    # end code block to test
 
     # assertions
     data_orders = data_model.get_data(OrderEntity)
@@ -193,7 +160,7 @@ def test45_a():
     assert data_order.data.get("product") == data_product
 
 
-def test45_b():
+def test_58_b():
     """
     If Walmart has Jurassic World on bluray, buy it so I can pick it up tomorrow morning.
     """
@@ -205,15 +172,16 @@ def test45_b():
         text="Jurassic World on bluray", value="Jurassic World on bluray"
     )
     data_model.append(data_product)
-    
-    # code block to test
+
+    # start code block to test
+    # end code block to test
 
     # assertions
     data_orders = data_model.get_data(OrderEntity)
     assert len(data_orders) == 0
 
 
-def test46():
+def test_59():
     """
     Get directions to Portland, and tell me if it will snow along the route in the next hour
     """
@@ -239,8 +207,9 @@ def test46():
             date_time=data_date_time,
         )
     )
-    
-    # code block to test
+
+    # start code block to test
+    # end code block to test
 
     # assertions
     data_navigation_directions = data_model.get_data(NavigationDirectionEntity)
@@ -259,7 +228,7 @@ def test46():
     assert data_weather_forecasts[0].data.get("date_time") == data_date_time
 
 
-def test47_a():
+def test_60_a():
     """
     Check the weather and text Mike that I will meet them later if it's hot.
     """
@@ -274,8 +243,9 @@ def test47_a():
         text="I will meet them later", value="I will meet them later"
     )
     data_model.append(data_content)
-    
-    # code block to test
+
+    # start code block to test
+    # end code block to test
 
     # assertions
     data_messages = data_model.get_data(MessageEntity)
@@ -285,7 +255,7 @@ def test47_a():
     assert data_message.data.get("content") == data_content
 
 
-def test47_b():
+def test_60_b():
     """
     Check the weather and text Mike that I will meet them later if it's hot.
     """
@@ -300,28 +270,16 @@ def test47_b():
         text="I will meet them later", value="I will meet them later"
     )
     data_model.append(data_content)
-    
-    # code block to test
+
+    # start code block to test
+    # end code block to test
 
     # assertions
     data_messages = data_model.get_data(MessageEntity)
     assert len(data_messages) == 0
 
 
-def test48():
-    """
-    Add milk to the shopping list and text my brother that he needs to look at the updated shopping list.
-    """
-    pass
-
-
-def test49():
-    """
-    Add toilet paper to my Amazon weekend shopping list and text a link of the list to Diana.
-    """
-
-
-def test50_a():
+def test_63_a():
     """
     If the weather is going to be sunny Saturday morning, send an email to Ashley asking if she wants to go for a hike.
     """
@@ -347,6 +305,9 @@ def test50_a():
     data_content = Content(text="she wants to go for a hike")
     data_model.append(data_content)
 
+    # start code block to test
+    # end code block to test
+
     # assertions
     data_messages = data_model.get_data(MessageEntity)
     assert len(data_messages) == 1
@@ -358,7 +319,7 @@ def test50_a():
     assert test_equal(data_message.data.get("content"), data_content)
 
 
-def test50_b():
+def test_63_b():
     """
     If the weather is going to be sunny Saturday morning, send an email to Ashley asking if she wants to go for a hike.
     """
@@ -384,12 +345,15 @@ def test50_b():
     data_content = Content(text="she wants to go for a hike")
     data_model.append(data_content)
 
+    # start code block to test
+    # end code block to test
+
     # assertions
     data_messages = data_model.get_data(MessageEntity)
     assert len(data_messages) == 0
 
 
-def test51():
+def test_65():
     """
     Send a message to my friends list on Monday telling them to remember to vote and set a reminder to me to remember to vote.
     """
@@ -410,6 +374,9 @@ def test51():
     data_message_content_type = MessageContentType(text="message")
     data_model.append(data_message_content_type)
 
+    # start code block to test
+    # end code block to test
+
     # assertions
     data_messages = data_model.get_data(MessageEntity)
     assert len(data_messages) == 4
@@ -424,7 +391,7 @@ def test51():
         )
 
 
-def test52():
+def test_66():
     """
     Show me all of the musical events within 10 miles of me.
     """
@@ -444,6 +411,9 @@ def test52():
             )
         )
 
+    # start code block to test
+    # end code block to test
+
     # assertions
     data_events = data_model.get_data(EventEntity)
     assert len(data_events) == 3
@@ -457,7 +427,7 @@ def test52():
         )
 
 
-def test53():
+def test_68():
     """
     Play my favorite music playlist and tell John I am running late and will be there soon.
     """
@@ -469,6 +439,9 @@ def test53():
     data_model.append(data_recipient)
     data_content = Content(text="I am running late and will be there soon")
     data_model.append(data_content)
+
+    # start code block to test
+    # end code block to test
 
     # assertions
     data_musics = data_model.get_data(MusicEntity)
@@ -483,7 +456,7 @@ def test53():
     assert test_equal(data_message.data.get("content"), data_content)
 
 
-def test54():
+def test_70():
     """
     Look up current prices for Chicago Blackhawks tickets for tomorrow's game and tell me what the traffic conditions will be like around 5 PM
     """
@@ -500,6 +473,9 @@ def test54():
     data_date_time_5pm = DateTime(text="5 PM", value=datetime.now().replace(hour=17))
     data_model.append(data_date_time_5pm)
     data_model.append(NavigationTrafficInfoEntity(date_time=data_date_time_5pm))
+
+    # start code block to test
+    # end code block to test
 
     # assertions
     data_event_tickets = data_model.get_data(EventTicketEntity)
@@ -524,7 +500,7 @@ def test54():
     assert test_equal(data_nav_traffic_infos.data.get("date_time"), data_date_time_5pm)
 
 
-def test55():
+def test_71():
     """
     Set timer to 30 mins and remind me to take the fish out of the oven.
     """
@@ -539,6 +515,9 @@ def test55():
     data_content = Content(text="take the fish out of the oven")
     data_model.append(data_content)
 
+    # start code block to test
+    # end code block to test
+
     # assertions
     data_timers = data_model.get_data(TimerEntity)
     assert len(data_timers) == 1
@@ -552,7 +531,7 @@ def test55():
     assert test_equal(data_reminder.data.get("content"), data_content)
 
 
-def test56_a():
+def test_72_a():
     """
     Check the weather and if it's above 80 degrees, set a reminder on my calendar for "Go to the park later"
     """
@@ -568,6 +547,9 @@ def test56_a():
     data_content = Content(text="Go to the park later")
     data_model.append(data_content)
 
+    # start code block to test
+    # end code block to test
+
     # assertions
     data_reminders = data_model.get_data(ReminderEntity)
     assert len(data_reminders) == 1
@@ -576,7 +558,7 @@ def test56_a():
     assert test_equal(len(data_reminder.data.get("content")), data_content)
 
 
-def test56_b():
+def test_72_b():
     """
     Check the weather and if it's above 80 degrees, set a reminder on my calendar for "Go to the park later"
     """
@@ -593,6 +575,9 @@ def test56_b():
     data_content = Content(text="Go to the park later")
     data_model.append(data_content)
 
+    # start code block to test
+    # end code block to test
+
     # assertions
     data_reminders = data_model.get_data(ReminderEntity)
     assert len(data_reminders) == 1
@@ -601,7 +586,7 @@ def test56_b():
     assert test_equal(len(data_reminder.data.get("content")), data_content)
 
 
-def test57():
+def test_73():
     """
     Remind me on Sunday about my doctor's appointment next Monday and give me directions to the doctor's office.
     """
@@ -619,6 +604,9 @@ def test57():
     data_destination = Location(text="doctor's office")
     data_model.append(data_destination)
     data_model.append(NavigationDirectionEntity(destination=data_destination))
+
+    # start code block to test
+    # end code block to test
 
     # assertions
     data_reminders = data_model.get_data(Reminders)
@@ -639,7 +627,7 @@ def test57():
     )
 
 
-def test59():
+def test_75():
     """
     For Shakey Graves' upcoming summer tour, what will be the closest show to me and how many miles away is the venue?
     """
@@ -657,7 +645,7 @@ def test59():
             NavigationDistanceEntity(destination=data_location, closest=10 + i)
         )
 
-    # code block to test
+    # start code block to test
     event_name = EventName.resolve_from_text("Shakey Graves' upcoming summer tour")
     events = Events.find_events(event_name=event_name)
     nav_distances = []
@@ -666,6 +654,7 @@ def test59():
         nav_distances += Navigation.find_distance(destination=destination)
     closest_event = utils.first(utils.sort(nav_distances, "closet"))
     Responder.respond(response=closest_event)
+    # end code block to test
 
     # assertions
     navigation_distances = data_model.get_data(NavigationDistanceEntity)
@@ -683,7 +672,7 @@ def test59():
     )
 
 
-def test60_a():
+def test_76_a():
     """
     If is is raining at 8pm turn the heat up 5 degrees.
     """
@@ -708,6 +697,9 @@ def test60_a():
     data_home_device_value = HomeDeviceValue(text="5 degrees")
     data_model.append(data_home_device_value)
 
+    # start code block to test
+    # end code block to test
+
     # assertions
     data_home_devices = data_model.get_data(HomeDeviceEntity)
     assert len(data_home_devices) == 1
@@ -723,7 +715,7 @@ def test60_a():
     )
 
 
-def test60_b():
+def test_76_b():
     """
     If is is raining at 8pm turn the heat up 5 degrees.
     """
@@ -748,6 +740,9 @@ def test60_b():
     data_model.append(data_home_device_action)
     data_home_device_value = HomeDeviceValue(text="5 degrees")
     data_model.append(data_home_device_value)
+
+    # start code block to test
+    # end code block to test
 
     # assertions
     data_home_devices = data_model.get_data(HomeDeviceEntity)

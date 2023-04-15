@@ -26,7 +26,7 @@ import utils
 from tests.test_utils import *
 
 
-def test61_a():
+def test_78_a():
     """
     If I get a text message from my boss Tony, then check my mail to see if I have any emails from work.
     """
@@ -61,6 +61,9 @@ def test61_a():
             content_type=data_message_content_type_email,
         )
     )
+    
+    # start code block to test
+    # end code block to test
 
     # assertions
     data_messages = data_model.get_data(MessageEntity)
@@ -73,7 +76,7 @@ def test61_a():
         )
 
 
-def test61_a():
+def test_78_a():
     """
     If I get a text message from my boss Tony, then check my mail to see if I have any emails from work.
     """
@@ -109,13 +112,16 @@ def test61_a():
             content_type=data_message_content_type_email,
         )
     )
+    
+    # start code block to test
+    # end code block to test
 
     # assertions
     data_messages = data_model.get_data(MessageEntity)
     assert len(data_messages) == 0
 
 
-def test62_a():
+def test_79_a():
     """
     Check the weather for next tuesday and create a beach day event on my calendar if the temperature is above 90 degrees.
     """
@@ -137,6 +143,9 @@ def test62_a():
     data_model.append(data_content)
     data_event_calendar = EventCalendar(text="my calendar")
     data_model.append(data_event_calendar)
+    
+    # start code block to test
+    # end code block to test
 
     # assertions
     data_events = data_model.get_data(EventEntity)
@@ -146,7 +155,7 @@ def test62_a():
     assert test_equal(data_event.data.get("calendar"), data_event_calendar)
 
 
-def test62_b():
+def test_79_b():
     """
     Check the weather for next tuesday and create a beach day event on my calendar if the temperature is above 90 degrees.
     """
@@ -168,13 +177,16 @@ def test62_b():
     data_model.append(data_content)
     data_event_calendar = EventCalendar(text="my calendar")
     data_model.append(data_event_calendar)
+    
+    # start code block to test
+    # end code block to test
 
     # assertions
     data_events = data_model.get_data(EventEntity)
     assert len(data_events) == 0
 
 
-def test63():
+def test_80():
     """
     Message my brother I will not be able to make it to his house for dinner because of a flat tire, also look up tire repair places nearby.
     """
@@ -190,6 +202,9 @@ def test63():
     data_model.append(data_location)
 
     data_model.append(MapEntity(location=data_location, nearby=1))
+    
+    # start code block to test
+    # end code block to test
 
     # assertions
     data_messages = data_model.get_data(MessageEntity)
@@ -199,7 +214,7 @@ def test63():
     assert test_equal(data_message.data.get("content"), data_content)
 
 
-def test64():
+def test_81():
     """
     Set a timer for 3:00 PM then enable home security alarm system to stay on until 8:00 PM
     """
@@ -221,6 +236,9 @@ def test64():
         value=datetime.now().replace(hour=20, minute=0, second=0, microsecond=0),
     )
     data_model.append(data_date_time_8pm)
+    
+    # start code block to test
+    # end code block to test
 
     # assertions
     data_timers = data_model.get_data(TimerEntity)
@@ -239,14 +257,7 @@ def test64():
     assert test_equal(data_home_device.data.get("end_date_time"), data_date_time_8pm)
 
 
-def test65():
-    """
-    Order all of the items on my shopping list and text Steve that I ordered dinner for tonight.
-    """
-    pass
-
-
-def test66_a():
+def test_85_a():
     """
     If it starts raining between 3pm-5pm, turn the thermostat up to 73 degrees.
     """
@@ -270,6 +281,9 @@ def test66_a():
     data_model.append(data_home_device_name)
     data_home_device_value = HomeDeviceValue(text="73 degrees")
     data_model.append(data_home_device_value)
+    
+    # start code block to test
+    # end code block to test
 
     # assertions
     data_home_devices = data_model.get_data(HomeDeviceEntity)
@@ -282,7 +296,7 @@ def test66_a():
     assert test_equal(data_home_device.data.get("device_value"), data_home_device_value)
 
 
-def test66_b():
+def test_85_b():
     """
     If it starts raining between 3pm-5pm, turn the thermostat up to 73 degrees.
     """
@@ -310,13 +324,16 @@ def test66_b():
     data_model.append(data_home_device_name)
     data_home_device_value = HomeDeviceValue(text="73 degrees")
     data_model.append(data_home_device_value)
+    
+    # start code block to test
+    # end code block to test
 
     # assertions
     data_home_devices = data_model.get_data(HomeDeviceEntity)
     assert len(data_home_devices) == 0
 
 
-def test67():
+def test_86():
     """
     Show me a map of downtown Phoenix and give me directions to the airport.
     """
@@ -328,6 +345,9 @@ def test67():
     data_destination = Location(text="airport")
     data_model.append(data_destination)
     data_model.append(NavigationDirectionEntity(destination=data_destination))
+    
+    # start code block to test
+    # end code block to test
 
     # assertions
     data_map_locations_lists = data_model.get_data(MapEntity)
@@ -344,7 +364,7 @@ def test67():
     )
 
 
-def test68():
+def test_87():
     """
     Play my lofi Spotify playlist and buy tickets to the upcoming Joji show.
     """
@@ -362,6 +382,9 @@ def test68():
         data_events.append(data_event)
         data_model.append(EventTicketEntity(event=data_event))
     data_event_upcoming = sorted(data_events, key=lambda x: x.data.get("upcoming"))[0]
+    
+    # start code block to test
+    # end code block to test
 
     # assertions
     data_musics = data_model.get_data(NavigationDirectionEntity)
@@ -379,7 +402,7 @@ def test68():
     )
 
 
-def test69_a():
+def test_88_a():
     """
     Check if it's supposed to rain tonight and if it's not text Brian that I want to go out tonight
     """
@@ -395,6 +418,9 @@ def test69_a():
     data_model.append(data_contact_brian)
     data_content = Content(text="I want to go out tonight")
     data_model.append(data_content)
+    
+    # start code block to test
+    # end code block to test
 
     # assertions
     data_messages = data_model.get_data(MessageEntity)
@@ -403,7 +429,7 @@ def test69_a():
     assert test_equal(data_message.data.get("contact"), data_contact_brian)
     
     
-def test69_b():
+def test_88_b():
     """
     Check if it's supposed to rain tonight and if it's not text Brian that I want to go out tonight
     """
@@ -419,13 +445,16 @@ def test69_b():
     data_model.append(data_contact_brian)
     data_content = Content(text="I want to go out tonight")
     data_model.append(data_content)
+    
+    # start code block to test
+    # end code block to test
 
     # assertions
     data_messages = data_model.get_data(MessageEntity)
     assert len(data_messages) == 0
 
 
-def test70():
+def test_92():
     """
     Look up free events for this weekend and let me know what the weather will be.
     """
@@ -443,6 +472,9 @@ def test70():
     data_model.append(EventEntity(event_name=data_event_name, date_time=data_date_time2))
     data_model.append(WeatherForecastEntity(date_time=data_date_time1))
     data_model.append(WeatherForecastEntity(date_time=data_date_time2))
+    
+    # start code block to test
+    # end code block to test
     
     # assertions
     data_events = data_model.get_data(EventEntity)
@@ -465,7 +497,7 @@ def test70():
           
 
 
-def test71_a():
+def test_94_a():
     """
     When rain is forecasted for tomorrow? remind me at 9pm the night before to put out Quinten's boots by the front door.
     """
@@ -489,6 +521,9 @@ def test71_a():
     data_content = Content(text="put out Quinten's boots by the front door")
     data_model.append(data_content)
     
+    # start code block to test
+    # end code block to test
+    
     # assertions
     data_reminders = data_model.get_data(ReminderEntity)
     assert len(data_reminders) == 1
@@ -497,7 +532,7 @@ def test71_a():
     assert test_equal(data_reminder.data.get("content"), data_content)
     
     
-def test71_b():
+def test_94_b():
     """
     When rain is forecasted for tomorrow? remind me at 9pm the night before to put out Quinten's boots by the front door.
     """
@@ -519,6 +554,9 @@ def test71_b():
     data_model.append(data_date_time_9pm)
     data_content = Content(text="put out Quinten's boots by the front door")
     data_model.append(data_content)
+    
+    # start code block to test
+    # end code block to test
     
     # assertions
     data_reminders = data_model.get_data(ReminderEntity)

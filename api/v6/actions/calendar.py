@@ -1,6 +1,6 @@
 from abc import abstractclassmethod
 from typing import List, Union, Optional
-from api.v6.entities.resolvable import Resolvable
+from entities.resolvable import Resolvable
 from entities.generic import *
 from entities.calendar import *
 

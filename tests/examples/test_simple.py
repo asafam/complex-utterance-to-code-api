@@ -1,7 +1,9 @@
 from entities.reminder import ReminderEntity
+from entities.shopping import *
 from entities.weather import WeatherAttribute, WeatherForecastEntity
 from actions.reminders import Reminders
 from actions.responder import Responder
+from actions.shopping import Shopping
 from actions.weather import Weather
 from providers.data_model import DataModel
 from entities.generic import *
@@ -69,7 +71,8 @@ def test_simple2():
     """
     # test data
     data_model = DataModel(reset=True)
-    data_content = Content.resolve_from_text("return library books")
+    data_content = Content(text="return library books", value="return library books")
+    data_model.append(data_content)
     data_model.append(ReminderEntity(content=data_content))
 
     # code block to test
@@ -78,5 +81,45 @@ def test_simple2():
     Reminders.delete_reminders(reminders=reminders)
 
     #  assertion tests
-    data_reminders = data_model.get_response([ReminderEntity])
-    assert len(data_reminders)
+    data_reminders = data_model.get_response(ReminderEntity)
+    assert len(data_reminders) == 0
+
+
+def test_simple0():
+    """
+    Check the availability of Pepsi at Walmart and also check it at Walgreens.
+    """
+    # test data
+    data_model = DataModel(reset=True)
+    data_product = Product(text="Pepsi", value="Pepsi")
+    data_model.append(data_product)
+    data_location1 = DateTime(text="Walmart", value="Walmart")
+    data_model.append(data_location1)
+    data_location2 = DateTime(text="Walgreens", value="Walgreens")
+    data_model.append(data_location2)
+    data_model.append(ProductEntity(product=data_product, location=data_location1))
+    data_model.append(ProductEntity(product=data_product, location=data_location2))
+
+    # start code block to test
+    results = []
+
+    product = Product.resolve_from_text("Pepsi")
+    location = DateTime.resolve_from_text("Walmart")
+    products = Shopping.find_products(product=product, location=location)
+    results += products
+
+    location = DateTime.resolve_from_text("Walgreens")
+    products = Shopping.find_products(product=product, location=location)
+    results += products
+
+    Responder.respond(response=results)
+    # end code block to test
+
+    # assertions
+    data_products_list = data_model.get_data(ProductEntity)
+    assert len(data_products_list) == 2
+    data_products = data_products_list
+    assert data_products[0].data.get("product") == data_product
+    assert data_products[0].data.get("location") == data_location1
+    assert data_products[1].data.get("product") == data_product
+    assert data_products[1].data.get("location") == data_location2
